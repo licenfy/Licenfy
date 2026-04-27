@@ -222,6 +222,35 @@ footer{background:#0a1628;padding:48px 24px 24px;color:rgba(255,255,255,.6)}
 .modal-error{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px;font-size:.78rem;color:#dc2626;margin-bottom:12px;display:none}
 .modal-success{background:#ecfdf5;border:1px solid #6ee7b7;border-radius:8px;padding:10px;font-size:.78rem;color:#059669;margin-bottom:12px;display:none}
 
+
+@media(max-width:640px){
+  .lang-text{display:none}
+  #langBtn{padding:7px 10px}
+  #mainNav .nav-actions{display:flex!important;gap:6px}
+  #mainNav .nav-actions a{font-size:.78rem;padding:6px 10px}
+}
+
+#scrollTop{
+  position:fixed;
+  bottom:80px;
+  right:20px;
+  width:44px;
+  height:44px;
+  background:#1a3a6d;
+  color:white;
+  border:none;
+  border-radius:50%;
+  font-size:1.2rem;
+  cursor:pointer;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 12px rgba(0,0,0,.2);
+  z-index:999;
+  transition:all .2s;
+}
+#scrollTop:hover{background:#008bff;transform:translateY(-2px)}
+#scrollTop.visible{display:flex}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -236,7 +265,7 @@ footer{background:#0a1628;padding:48px 24px 24px;color:rgba(255,255,255,.6)}
     <a href="#features">Características</a>
     <a href="#pricing">Precios</a>
     <a href="#faq">FAQ</a>
-    <button onclick="toggleLang()" id="langBtn" style="background:#f1f5f9;border:1.5px solid #e2e8f0;color:#1a2f5a;font-size:.78rem;font-weight:700;padding:7px 14px;border-radius:8px;cursor:pointer;font-family:inherit">🌐 English</button>
+    <button onclick="toggleLang()" id="langBtn" style="background:#f1f5f9;border:1.5px solid #e2e8f0;color:#1a2f5a;font-size:.78rem;font-weight:700;padding:7px 14px;border-radius:8px;cursor:pointer;font-family:inherit"><span class="lang-text"> English</span><span>🌐</span></button>
     <a href="#" onclick="openSignup('login')" style="color:#1a3a6d;font-weight:600;font-size:.85rem;text-decoration:none;padding:7px 14px;border-radius:8px;border:1.5px solid #1a3a6d">Iniciar sesión</a>
     <a href="#" class="nav-cta" onclick="scrollToPricing()" id="navCta">Comenzar ahora</a>
   </div>
@@ -526,9 +555,8 @@ footer{background:#0a1628;padding:48px 24px 24px;color:rgba(255,255,255,.6)}
       </div>
       <div class="footer-col">
         <h4>Legal</h4>
-        <a href="#">Términos de uso</a>
-        <a href="#">Política de privacidad</a>
-        <a href="#">Aviso legal</a>
+        <a href="/terms.html">Términos de servicio</a>
+        <a href="/privacy.html">Política de privacidad</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -925,5 +953,12 @@ if(!localStorage.getItem('licenfy_cookies')){
   </div>
 </div>
 
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Volver arriba">↑</button>
+<script>
+window.addEventListener('scroll', function(){
+  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+});
+</script>
 </body>
 </html>
