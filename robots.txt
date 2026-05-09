@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /licenfy-app.html
+
+Sitemap: https://licenfy.com/sitemap.xml
