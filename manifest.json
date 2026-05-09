@@ -1,0 +1,21 @@
+{
+  "name": "Licenfy",
+  "short_name": "Licenfy",
+  "description": "Tu entrenador de licencias de seguros CDI California",
+  "start_url": "/licenfy-app.html",
+  "display": "standalone",
+  "background_color": "#1a3a6d",
+  "theme_color": "#008bff",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}
