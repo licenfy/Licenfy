@@ -79,7 +79,7 @@
   --shadow-lg:0 12px 48px rgba(26,47,90,.14);
 }
 html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',sans-serif;color:#0f172a;background:#fff;overflow-x:hidden}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:#0f172a;background:#fff;overflow-x:hidden;max-width:100vw}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(226,232,240,.6);transition:box-shadow .3s}
@@ -255,9 +255,9 @@ footer{background:#0a1628;padding:48px 24px 24px;color:rgba(255,255,255,.6)}
 .lic-chat-send{background:#008bff;color:#fff;border:none;border-radius:10px;padding:8px 14px;cursor:pointer;font-size:.9rem}
 @media(max-width:480px){
   .lic-chat-panel{right:8px;left:8px;width:auto;bottom:150px;max-height:55vh}
-  .lic-chat-btn{right:16px;padding:0 14px;font-size:.76rem;height:44px}
+  .lic-chat-btn{right:16px;width:56px;height:56px}
 }
-width:54px;height:54px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:99;text-decoration:none;transition:transform .2s}
+.wa-btn{position:fixed;bottom:24px;right:24px;width:54px;height:54px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:99;text-decoration:none;transition:transform .2s}
 .wa-btn:hover{transform:scale(1.1)}
 .wa-btn svg{width:28px;height:28px;fill:#fff}
 
@@ -1049,19 +1049,20 @@ async function licSend(preset){
   const loadDiv = document.createElement('div');
   loadDiv.className = 'lic-chat-msg bot';
   loadDiv.id = 'licLoading';
-  loadDiv.innerHTML = '<span style="color:#94a3b8;font-size:.78rem">✍️ Lic está pensando...</span>';
+  loadDiv.innerHTML = '<div style="display:flex;align-items:center;gap:8px;color:#94a3b8;font-size:.78rem"><img src="/lic-btn-icon.png" style="width:24px;height:24px;border-radius:50%;animation:licSpin 1s linear infinite"> Lic está pensando...</div>';
   document.getElementById('licMsgs').appendChild(loadDiv);
   document.getElementById('licMsgs').scrollTop = 99999;
 
-  const system = `Eres Lic, el tutor de IA de Licenfy — una plataforma de preparación para el examen Personal Lines del CDI de California en español. Estás en la landing page de Licenfy hablando con visitantes que aún no se han registrado.
+  const system = `Eres Lic, el asistente virtual de Licenfy. Ayudas a los visitantes con cualquier duda antes de registrarse o después.
 
-Tu rol: resolver dudas sobre el examen CDI y el proceso de licencia, y motivar al visitante a probar Licenfy con 7 días de prueba desde $29.99/mes.
+Responde sobre:
+- Examen CDI California: 90 preguntas, 135 minutos, 60% para aprobar, administrado por PSI Services. Temas: auto (PAP), propietarios (HO), vivienda (DP), regulaciones CA (Prop 103), conceptos generales, incendios CA (Plan FAIR), marina interior, paraguas personal.
+- Licenfy: preguntas reales del CDI, simulacros cronometrados, tutor IA 24/7 en español e inglés, glosario bilingüe, modo repaso de errores (Trimestral), simulacro de entrevista con IA (Semestral).
+- Planes: Mensual $29.99/mes, Trimestral $69.99/3 meses, Semestral $89.99/6 meses. Todos incluyen 7 días de prueba con tarjeta. Se puede cancelar antes del día 8 sin costo.
+- Proceso de licencia en California: cómo obtener la licencia, requisitos del CDI, cómo agendar el examen con PSI Services, costo del examen.
+- Soporte: registro, pagos, cancelaciones, cómo funciona la plataforma, problemas técnicos.
 
-Datos del examen: 90 preguntas, 135 minutos, 60% para aprobar, administrado por PSI Services. Temas: auto (PAP), propietarios (HO), vivienda (DP), regulaciones CA (Prop 103), conceptos generales, incendios CA (Plan FAIR), marina interior, paraguas personal.
-
-Licenfy ofrece: preguntas reales del CDI, simulacros cronometrados, tutor IA 24/7, glosario bilingüe, desde $29.99/mes con 7 días de prueba.
-
-Responde de forma breve, amigable y en español. Máximo 3-4 oraciones. Sin markdown. Si el visitante parece listo para probar, menciona el período de prueba de 7 días.`;
+Sé amigable, breve y en español. Máximo 3-4 oraciones. Sin asteriscos ni markdown. Si conviene, menciona los 7 días de prueba.`;
 
   try {
     const res = await fetch('https://qmqianheahkqetrevveh.supabase.co/functions/v1/anthropic-proxy',{
