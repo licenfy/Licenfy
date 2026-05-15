@@ -908,6 +908,8 @@ async function loadUserDataREST(){
   } catch(e){ console.error('sub error:', e); _activeSub = null; }
 
   updateSubNav();
+  // Sincronizar progreso desde Supabase al cargar sesión
+  await syncProgressFromSupabase();
 }
 
 async function signUp(email, password, fullName){
@@ -1760,8 +1762,84 @@ function loadState(){
   const s=lsGet('stats');if(s)stats=s;
   const sd=lsGet('studied');if(sd)studiedDays=new Set(sd);else studiedDays=new Set();
 }
-function saveStats(){lsSet('stats',stats);}
-function saveStudied(){lsSet('studied',[...studiedDays]);}
+function saveStats(){
+  lsSet('stats',stats);
+  syncProgressToSupabase();
+}
+function saveStudied(){
+  lsSet('studied',[...studiedDays]);
+  syncProgressToSupabase();
+}
+
+// ── SUPABASE PROGRESS SYNC ──
+const _SUPA_BASE = 'https://qmqianheahkqetrevveh.supabase.co';
+const _SUPA_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFtcWlhbmhlYWhrcWV0cmV2dmVoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0OTY0MzYsImV4cCI6MjA5MjA3MjQzNn0.SCYFX41o1p_rueWIjbmQ4QDdYaY2PVAF_idqiBqB14k';
+
+function _getToken(){
+  try{
+    const raw=localStorage.getItem('sb-qmqianheahkqetrevveh-auth-token');
+    if(!raw)return null;
+    return JSON.parse(raw)?.access_token||null;
+  }catch(e){return null;}
+}
+
+async function syncProgressFromSupabase(){
+  try{
+    const token=_getToken();
+    const uid=_user?.id;
+    if(!token||!uid)return;
+    const res=await fetch(`${_SUPA_BASE}/rest/v1/user_progress?user_id=eq.${uid}&select=stats,studied_days`,{
+      headers:{'Authorization':`Bearer ${token}`,'apikey':_SUPA_KEY}
+    });
+    const data=await res.json();
+    if(!data||!data[0])return;
+    const remote=data[0];
+    // Merge stats: tomar el mayor total por tema
+    if(remote.stats&&typeof remote.stats==='object'){
+      const merged={...stats};
+      for(const[tid,rs]of Object.entries(remote.stats)){
+        const ls=stats[tid]||{c:0,t:0,w:[]};
+        if((rs.t||0)>(ls.t||0)) merged[tid]=rs;
+      }
+      stats=merged;
+      lsSet('stats',stats);
+    }
+    // Merge studied_days: unión de ambos sets
+    if(Array.isArray(remote.studied_days)){
+      studiedDays=new Set([...studiedDays,...remote.studied_days]);
+      lsSet('studied',[...studiedDays]);
+    }
+    console.log('✅ Progreso sincronizado desde Supabase');
+  }catch(e){console.log('Sync remoto falló:',e);}
+}
+
+let _syncTimer=null;
+function syncProgressToSupabase(){
+  // Debounce: esperar 2s antes de guardar para no saturar con cada pregunta
+  clearTimeout(_syncTimer);
+  _syncTimer=setTimeout(async()=>{
+    try{
+      const token=_getToken();
+      const uid=_user?.id;
+      if(!token||!uid)return;
+      await fetch(`${_SUPA_BASE}/rest/v1/user_progress`,{
+        method:'POST',
+        headers:{
+          'Authorization':`Bearer ${token}`,
+          'apikey':_SUPA_KEY,
+          'Content-Type':'application/json',
+          'Prefer':'resolution=merge-duplicates'
+        },
+        body:JSON.stringify({
+          user_id:uid,
+          stats:stats,
+          studied_days:[...studiedDays],
+          updated_at:new Date().toISOString()
+        })
+      });
+    }catch(e){console.log('Push remoto falló:',e);}
+  },2000);
+}
 
 let studiedDays=new Set();
 
