@@ -1822,7 +1822,7 @@ function syncProgressToSupabase(){
       const token=_getToken();
       const uid=_user?.id;
       if(!token||!uid)return;
-      await fetch(`${_SUPA_BASE}/rest/v1/user_progress`,{
+      const res=await fetch(`${_SUPA_BASE}/rest/v1/user_progress?on_conflict=user_id`,{
         method:'POST',
         headers:{
           'Authorization':`Bearer ${token}`,
@@ -1837,7 +1837,11 @@ function syncProgressToSupabase(){
           updated_at:new Date().toISOString()
         })
       });
-    }catch(e){console.log('Push remoto falló:',e);}
+      if(!res.ok){
+        const err=await res.text().catch(()=>'');
+        console.warn('syncProgressToSupabase HTTP',res.status,err);
+      }
+    }catch(e){console.warn('syncProgressToSupabase error:',e);}
   },2000);
 }
 
