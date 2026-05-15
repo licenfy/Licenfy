@@ -3149,6 +3149,19 @@ async function dashSignOut(){
 
 // ── INIT ──
 loadState();
+
+// Sincronizar progreso cuando el usuario vuelve al tab
+let _lastSync = 0;
+document.addEventListener('visibilitychange', async function(){
+  if(document.visibilityState === 'visible' && _user){
+    const now = Date.now();
+    if(now - _lastSync > 30000){ // Solo si han pasado más de 30s desde la última sync
+      _lastSync = now;
+      await syncProgressFromSupabase();
+      render();
+    }
+  }
+});
 updateBnav();
 render();
 
