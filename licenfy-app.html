@@ -733,7 +733,7 @@ async function supaInit(){
     // Si viene de confirmación de email con plan seleccionado → redirigir a Stripe
     if(pendingPlan && !comingFromPayment){
       const stripeLinks = {
-        mensual:    'https://buy.stripe.com/test_8x2aEQ3n0cBUcAIdOIf7i0b',
+        mensual:    'https://buy.stripe.com/test_8x2bIU3n09pIeIQ7qkf7i0c',
         trimestral: 'https://buy.stripe.com/test_bJe5kw7Dg45obwE7qkf7i0a',
         semestral:  'https://buy.stripe.com/test_9B6aEQf5I31kcAI5icf7i09',
       };
@@ -816,10 +816,10 @@ function showPaywall(){
           ${isExpired ? (es?'Renueva tu plan para continuar estudiando.':'Renew your plan to continue studying.') : (es?'Accede a todo el contenido para prepararte para el examen CDI de California.':'Access all content to prepare for the California CDI exam.')}
         </p>
 
-        <a href="https://buy.stripe.com/test_8x2aEQ3n0cBUcAIdOIf7i0b" style="display:block;background:#ffffff;border:1.5px solid #e2e8f0;border-radius:16px;padding:18px 20px;margin-bottom:10px;text-decoration:none;text-align:left;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.06)" onmouseover="this.style.borderColor='#008bff';this.style.boxShadow='0 4px 16px rgba(0,139,255,.15)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='0 2px 8px rgba(0,0,0,.06)'">
+        <a href="https://buy.stripe.com/test_8x2bIU3n09pIeIQ7qkf7i0c" style="display:block;background:#ffffff;border:1.5px solid #e2e8f0;border-radius:16px;padding:18px 20px;margin-bottom:10px;text-decoration:none;text-align:left;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.06)" onmouseover="this.style.borderColor='#008bff';this.style.boxShadow='0 4px 16px rgba(0,139,255,.15)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='0 2px 8px rgba(0,0,0,.06)'">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
             <span style="color:#0f172a;font-weight:700;font-size:.95rem">📅 ${es?'Plan Mensual':'Monthly Plan'}</span>
-            <span style="color:#008bff;font-weight:800;font-size:1.1rem;font-family:'Outfit',sans-serif">$29.99<span style="font-size:.72rem;color:#94a3b8;font-weight:500">/mes</span></span>
+            <span style="color:#008bff;font-weight:800;font-size:1.1rem;font-family:'Outfit',sans-serif">$39.99<span style="font-size:.72rem;color:#94a3b8;font-weight:500">/mes</span></span>
           </div>
           <div style="color:#64748b;font-size:.78rem">${es?'Acceso completo · Tutor IA · 1 simulacro/semana':'Full access · AI tutor · 1 exam/week'}</div>
         </a>
@@ -1113,11 +1113,11 @@ function hasEmailUsedTrial(email){
 }
 
 const wStripeLinks = {
-  monthly:  'https://buy.stripe.com/test_8x2aEQ3n0cBUcAIdOIf7i0b',
+  monthly:  'https://buy.stripe.com/test_8x2bIU3n09pIeIQ7qkf7i0c',
   quarterly:'https://buy.stripe.com/test_bJe5kw7Dg45obwE7qkf7i0a',
   annual:   'https://buy.stripe.com/test_9B6aEQf5I31kcAI5icf7i09',
 };
-function wGoStripe(plan){ window.open({monthly:"https://buy.stripe.com/test_8x2aEQ3n0cBUcAIdOIf7i0b",quarterly:"https://buy.stripe.com/test_bJe5kw7Dg45obwE7qkf7i0a",annual:"https://buy.stripe.com/test_9B6aEQf5I31kcAI5icf7i09"}[plan],"_blank"); }
+function wGoStripe(plan){ window.open({monthly:"https://buy.stripe.com/test_8x2bIU3n09pIeIQ7qkf7i0c",quarterly:"https://buy.stripe.com/test_bJe5kw7Dg45obwE7qkf7i0a",annual:"https://buy.stripe.com/test_9B6aEQf5I31kcAI5icf7i09"}[plan],"_blank"); }
 function wHide(){ var ws=document.getElementById('welcomeScreen'); if(ws) ws.style.display='none'; }
 function wStartFree(){ showAuthScreen("signup"); }
 function wActivate(){
@@ -3124,7 +3124,7 @@ function dashUpgrade(){
   closeDashboard();
   // Show plan selection
   const plans = [
-    {name:'Plan Mensual — $29.99/mes', url:'https://buy.stripe.com/test_8x2aEQ3n0cBUcAIdOIf7i0b'},
+    {name:'Plan Mensual — $39.99/mes', url:'https://buy.stripe.com/test_8x2bIU3n09pIeIQ7qkf7i0c'},
     {name:'Plan Trimestral — $69.99/3 meses', url:'https://buy.stripe.com/test_bJe5kw7Dg45obwE7qkf7i0a'},
     {name:'Plan Semestral — $89.99/6 meses', url:'https://buy.stripe.com/test_9B6aEQf5I31kcAI5icf7i09'},
   ];
@@ -3372,9 +3372,9 @@ const PLANS = [
     id: 'monthly',
     days: 30,
     examLimit: 999,
-    stripeUrl: 'https://buy.stripe.com/test_8x2aEQ3n0cBUcAIdOIf7i0b',
-    es: { name: 'Plan Mensual', desc: '30 días de acceso completo', price: '$29.99', period: '/mes' },
-    en: { name: 'Monthly Plan', desc: '30 days full access', price: '$29.99', period: '/month' }
+    stripeUrl: 'https://buy.stripe.com/test_8x2bIU3n09pIeIQ7qkf7i0c',
+    es: { name: 'Plan Mensual', desc: '30 días de acceso completo', price: '$39.99', period: '/mes' },
+    en: { name: 'Monthly Plan', desc: '30 days full access', price: '$39.99', period: '/month' }
   },
   {
     id: 'quarterly',
@@ -3409,7 +3409,7 @@ function getPlanId(){
   // Match by Stripe price IDs
   if(pid === 'price_1TTVAu2KlpDAd2ldUcaFaEo5') return 'semestral';
   if(pid === 'price_1TTVAJ2KlpDAd2ldfgbOAPd1') return 'quarterly';
-  if(pid === 'price_1TTV8h2KlpDAd2lddS572luG') return 'monthly';
+  if(pid === 'price_1TXnz82KlpDAd2ldCUoIh8ns') return 'monthly';
   // Fallback by name
   if(pid.includes('semestral') || pid.includes('biannual')) return 'semestral';
   if(pid.includes('quarterly') || pid.includes('trimestral')) return 'quarterly';
