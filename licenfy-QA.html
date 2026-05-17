@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Licenfy QA — Checklist de Pruebas</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #008bff;
+    --navy: #1a3a6d;
+    --green: #059669;
+    --red: #ef4444;
+    --yellow: #d97706;
+    --bg: #f1f5f9;
+    --white: #ffffff;
+    --border: #e2e8f0;
+    --text: #0f172a;
+    --muted: #64748b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+  }
+  .header {
+    max-width: 720px;
+    margin: 0 auto 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .header-left h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--navy);
+  }
+  .header-left p {
+    font-size: .82rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .progress-badge {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 10px 18px;
+    text-align: center;
+    min-width: 120px;
+  }
+  .progress-badge .num {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .progress-badge .label {
+    font-size: .7rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .progress-bar-wrap {
+    max-width: 720px;
+    margin: 0 auto 28px;
+    background: var(--white);
+    border-radius: 100px;
+    height: 8px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--green));
+    border-radius: 100px;
+    transition: width .4s ease;
+  }
+  .section {
+    max-width: 720px;
+    margin: 0 auto 20px;
+    background: var(--white);
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 16px 20px;
+    background: var(--navy);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .section-title {
+    font-size: .95rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-count {
+    font-size: .75rem;
+    background: rgba(255,255,255,.2);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-weight: 600;
+  }
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    transition: background .15s;
+    cursor: pointer;
+  }
+  .item:last-child { border-bottom: none; }
+  .item:hover { background: #f8fafc; }
+  .item.done { background: #f0fdf4; }
+  .item.failed { background: #fef2f2; }
+  .item.skipped { background: #fffbeb; }
+  .checkbox {
+    width: 22px;
+    height: 22px;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .85rem;
+    margin-top: 1px;
+    transition: all .2s;
+    background: var(--white);
+  }
+  .item.done .checkbox { background: var(--green); border-color: var(--green); }
+  .item.failed .checkbox { background: var(--red); border-color: var(--red); }
+  .item.skipped .checkbox { background: var(--yellow); border-color: var(--yellow); }
+  .item-content { flex: 1; }
+  .item-title {
+    font-size: .88rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .item.done .item-title { color: var(--green); }
+  .item.failed .item-title { color: var(--red); }
+  .item.skipped .item-title { color: var(--yellow); }
+  .item-hint {
+    font-size: .75rem;
+    color: var(--muted);
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+  .item-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .btn-status {
+    border: none;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: .7rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all .15s;
+  }
+  .btn-pass { background: #dcfce7; color: var(--green); }
+  .btn-pass:hover { background: var(--green); color: #fff; }
+  .btn-fail { background: #fee2e2; color: var(--red); }
+  .btn-fail:hover { background: var(--red); color: #fff; }
+  .btn-skip { background: #fef9c3; color: var(--yellow); }
+  .btn-skip:hover { background: var(--yellow); color: #fff; }
+  .note-input {
+    width: 100%;
+    margin-top: 8px;
+    padding: 8px 10px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: .78rem;
+    font-family: inherit;
+    color: var(--text);
+    resize: none;
+    outline: none;
+    transition: border-color .2s;
+    display: none;
+  }
+  .note-input:focus { border-color: var(--blue); }
+  .item.failed .note-input { display: block; }
+  .reset-btn {
+    max-width: 720px;
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: none;
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    color: var(--muted);
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all .2s;
+  }
+  .reset-btn:hover { border-color: var(--red); color: var(--red); background: #fef2f2; }
+  .summary {
+    max-width: 720px;
+    margin: 0 auto 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .summary-card {
+    background: var(--white);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .summary-card .num { font-size: 1.6rem; font-weight: 800; }
+  .summary-card .lbl { font-size: .72rem; color: var(--muted); margin-top: 2px; }
+  .summary-card.green .num { color: var(--green); }
+  .summary-card.red .num { color: var(--red); }
+  .summary-card.yellow .num { color: var(--yellow); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>🧪 Licenfy QA</h1>
+    <p>Checklist de pruebas pre-lanzamiento</p>
+  </div>
+  <div class="progress-badge">
+    <div class="num" id="progressNum">0%</div>
+    <div class="label">completado</div>
+  </div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-bar" id="progressBar" style="width:0%"></div>
+</div>
+
+<div class="summary">
+  <div class="summary-card green"><div class="num" id="countPass">0</div><div class="lbl">✅ Pasaron</div></div>
+  <div class="summary-card red"><div class="num" id="countFail">0</div><div class="lbl">❌ Fallaron</div></div>
+  <div class="summary-card yellow"><div class="num" id="countSkip">0</div><div class="lbl">⏭️ Saltadas</div></div>
+</div>
+
+<div id="qaContainer"></div>
+
+<button class="reset-btn" onclick="resetAll()">🔄 Reiniciar checklist</button>
+
+<script>
+const sections = [
+  {
+    title: '🔐 Registro y Autenticación',
+    items: [
+      { id:'r1', title:'Registro con email nuevo', hint:'Crea una cuenta nueva en licenfy.com con un email que no hayas usado.' },
+      { id:'r2', title:'Email de confirmación llega', hint:'Verifica que el email llegue a la bandeja de entrada, no a spam.' },
+      { id:'r3', title:'Email viene de hola@licenfy.com', hint:'Revisa el remitente en el email recibido.' },
+      { id:'r4', title:'Email de confirmación se ve bien', hint:'Verifica que el isotipo y el botón "Confirmar mi cuenta" se ven correctamente.' },
+      { id:'r5', title:'Confirmación de email activa la cuenta', hint:'Haz clic en el botón del email y verifica que puedes iniciar sesión.' },
+      { id:'r6', title:'Login correcto', hint:'Inicia sesión con email y contraseña válidos.' },
+      { id:'r7', title:'Login con contraseña incorrecta muestra error', hint:'Intenta iniciar sesión con una contraseña incorrecta.' },
+      { id:'r8', title:'Google OAuth funciona', hint:'Intenta registrarte / iniciar sesión con Google.' },
+    ]
+  },
+  {
+    title: '💳 Pagos y Suscripción',
+    items: [
+      { id:'p1', title:'Flujo de pago Mensual ($39.99)', hint:'Usa la tarjeta de prueba Stripe: 4242 4242 4242 4242, cualquier fecha futura, CVC 123.' },
+      { id:'p2', title:'Flujo de pago Trimestral ($69.99)', hint:'Mismo proceso con el plan trimestral.' },
+      { id:'p3', title:'Flujo de pago Semestral ($89.99)', hint:'Mismo proceso con el plan semestral.' },
+      { id:'p4', title:'Webhook activa la suscripción', hint:'Después de pagar, verifica en Supabase → subscriptions que hay un registro activo.' },
+      { id:'p5', title:'Usuario obtiene acceso después de pagar', hint:'Después del pago, verifica que la app carga sin paywall.' },
+      { id:'p6', title:'Pago fallido muestra error', hint:'Usa la tarjeta 4000 0000 0000 0002 (siempre falla) y verifica el mensaje de error.' },
+    ]
+  },
+  {
+    title: '📚 Funcionalidades de la App',
+    items: [
+      { id:'a1', title:'Estudiar preguntas CDI funciona', hint:'Entra a cualquier tema y responde preguntas.' },
+      { id:'a2', title:'Respuesta correcta/incorrecta se muestra bien', hint:'Verifica que la explicación aparece después de responder.' },
+      { id:'a3', title:'Simulacro de examen funciona', hint:'Inicia un simulacro y complétalo.' },
+      { id:'a4', title:'Resultados del simulacro se muestran', hint:'Al terminar el simulacro verifica que aparece el resumen de resultados.' },
+      { id:'a5', title:'Preguntas guardadas (🔖) funcionan', hint:'Guarda una pregunta y verifica que aparece en la sección de guardadas.' },
+      { id:'a6', title:'Progreso se guarda localmente', hint:'Responde preguntas, recarga la página y verifica que el progreso persiste.' },
+      { id:'a7', title:'Sync cross-device funciona', hint:'Responde preguntas en un dispositivo, inicia sesión en otro y verifica que el progreso coincide.' },
+      { id:'a8', title:'Tutor Lic responde', hint:'Abre el chat del tutor Lic y haz una pregunta.' },
+      { id:'a9', title:'Modo repaso de errores (Trimestral+)', hint:'Después de un simulacro, verifica que el modo repaso está disponible.' },
+      { id:'a10', title:'Simulacro entrevista IA (Semestral)', hint:'Verifica que el simulacro de entrevista está disponible solo en plan semestral.' },
+    ]
+  },
+  {
+    title: '👤 Portal de Suscripción',
+    items: [
+      { id:'s1', title:'Modal de cuenta abre correctamente', hint:'Haz clic en el ícono de perfil y verifica que abre el modal.' },
+      { id:'s2', title:'Nombre del usuario se muestra', hint:'Verifica que aparece el nombre completo.' },
+      { id:'s3', title:'Plan actual se muestra correctamente', hint:'Verifica que aparece el nombre del plan y la fecha de vencimiento.' },
+      { id:'s4', title:'Editar nombre funciona', hint:'Haz clic en ✏️, edita el nombre y guarda. Verifica que se actualiza.' },
+      { id:'s5', title:'Botón "Cambiar de plan" abre los planes', hint:'Verifica que al hacer clic se abre el overlay de planes.' },
+      { id:'s6', title:'Cancelar suscripción muestra confirmación', hint:'Verifica que aparece el mensaje de confirmación antes de cancelar.' },
+      { id:'s7', title:'Cerrar sesión funciona', hint:'Haz clic en "Cerrar sesión" y verifica que regresa al login.' },
+    ]
+  },
+  {
+    title: '🔒 Seguridad y Paywall',
+    items: [
+      { id:'sec1', title:'Usuario sin suscripción ve paywall', hint:'Inicia sesión con una cuenta sin suscripción y verifica que no puede acceder al contenido.' },
+      { id:'sec2', title:'Plan mensual tiene límite de simulacros', hint:'Verifica que el plan mensual muestra 1 simulacro por semana.' },
+      { id:'sec3', title:'Plan trimestral/semestral tiene simulacros ilimitados', hint:'Verifica que no hay límite de simulacros en estos planes.' },
+      { id:'sec4', title:'Módulos adicionales bloqueados en plan mensual', hint:'Verifica que los módulos premium muestran candado en plan mensual.' },
+      { id:'sec5', title:'Entrevista IA solo en semestral', hint:'Verifica que el simulacro de entrevista está bloqueado en mensual y trimestral.' },
+    ]
+  },
+  {
+    title: '📱 UI/UX y Responsive',
+    items: [
+      { id:'u1', title:'Landing se ve bien en móvil', hint:'Abre licenfy.com desde tu celular y verifica el diseño.' },
+      { id:'u2', title:'App se ve bien en móvil', hint:'Usa la app desde el celular y verifica que todo es usable.' },
+      { id:'u3', title:'Landing se ve bien en desktop', hint:'Verifica en computadora con pantalla grande.' },
+      { id:'u4', title:'Menú hamburguesa funciona en móvil', hint:'Verifica que el menú se abre y cierra correctamente.' },
+      { id:'u5', title:'Cambio de idioma ES/EN funciona', hint:'Cambia el idioma en la app y verifica que las preguntas cambian.' },
+      { id:'u6', title:'Botón Lic flotante funciona en landing', hint:'Verifica que el chat del tutor Lic abre correctamente.' },
+      { id:'u7', title:'Botón WhatsApp flotante funciona', hint:'Verifica que abre WhatsApp al número correcto.' },
+    ]
+  },
+  {
+    title: '⚙️ SEO y Técnico',
+    items: [
+      { id:'t1', title:'Favicon aparece en la pestaña del navegador', hint:'Verifica el ícono en la pestaña al abrir licenfy.com.' },
+      { id:'t2', title:'Página carga en menos de 3 segundos', hint:'Abre licenfy.com y mide el tiempo de carga visual.' },
+      { id:'t3', title:'Sin errores en consola del navegador', hint:'Abre DevTools (F12) → Console y verifica que no hay errores en rojo.' },
+      { id:'t4', title:'Meta description aparece al compartir el link', hint:'Comparte el link de licenfy.com en WhatsApp y verifica que aparece la descripción.' },
+      { id:'t5', title:'SSL activo (candado verde en el navegador)', hint:'Verifica que la URL muestra https:// y el candado.' },
+    ]
+  },
+];
+
+// Estado
+let state = JSON.parse(localStorage.getItem('licenfy_qa') || '{}');
+
+function saveState(){ localStorage.setItem('licenfy_qa', JSON.stringify(state)); }
+
+function setStatus(id, status){
+  state[id] = state[id] === status ? null : status;
+  saveState();
+  render();
+}
+
+function saveNote(id, val){
+  state[id+'_note'] = val;
+  saveState();
+}
+
+function resetAll(){
+  if(confirm('¿Reiniciar todo el checklist?')){ state = {}; saveState(); render(); }
+}
+
+function render(){
+  const container = document.getElementById('qaContainer');
+  let html = '';
+  let total = 0, pass = 0, fail = 0, skip = 0;
+
+  sections.forEach(sec => {
+    const secPass = sec.items.filter(i => state[i.id] === 'pass').length;
+    html += `<div class="section">
+      <div class="section-header">
+        <div class="section-title">${sec.title}</div>
+        <div class="section-count">${secPass}/${sec.items.length}</div>
+      </div>`;
+    sec.items.forEach(item => {
+      total++;
+      const s = state[item.id];
+      if(s === 'pass') pass++;
+      if(s === 'fail') fail++;
+      if(s === 'skip') skip++;
+      const cls = s === 'pass' ? 'done' : s === 'fail' ? 'failed' : s === 'skip' ? 'skipped' : '';
+      const icon = s === 'pass' ? '✓' : s === 'fail' ? '✗' : s === 'skip' ? '→' : '';
+      const noteVal = state[item.id+'_note'] || '';
+      html += `<div class="item ${cls}" id="item_${item.id}">
+        <div class="checkbox">${icon ? `<span style="color:#fff;font-weight:700">${icon}</span>` : ''}</div>
+        <div class="item-content">
+          <div class="item-title">${item.title}</div>
+          <div class="item-hint">${item.hint}</div>
+          <textarea class="note-input" placeholder="¿Qué falló? Agrega una nota..." rows="2" onchange="saveNote('${item.id}',this.value)">${noteVal}</textarea>
+        </div>
+        <div class="item-actions">
+          <button class="btn-status btn-pass" onclick="event.stopPropagation();setStatus('${item.id}','pass')">✅ OK</button>
+          <button class="btn-status btn-fail" onclick="event.stopPropagation();setStatus('${item.id}','fail')">❌ Falla</button>
+          <button class="btn-status btn-skip" onclick="event.stopPropagation();setStatus('${item.id}','skip')">⏭️ Skip</button>
+        </div>
+      </div>`;
+    });
+    html += '</div>';
+  });
+
+  container.innerHTML = html;
+
+  // Progress
+  const done = pass + fail + skip;
+  const pct = total > 0 ? Math.round(done/total*100) : 0;
+  document.getElementById('progressNum').textContent = pct + '%';
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('countPass').textContent = pass;
+  document.getElementById('countFail').textContent = fail;
+  document.getElementById('countSkip').textContent = skip;
+}
+
+render();
+</script>
+</body>
+</html>
