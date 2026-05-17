@@ -965,28 +965,142 @@ async function signIn(email, password){
 function showAccountModal(){
   const modal = document.getElementById('accountModal');
   if(!modal) return;
-  document.getElementById('accName').textContent = (_profile && _profile.full_name) || (_user && _user.email ? _user.email.split('@')[0] : '—');
+  // Nombre
+  const name = (_profile && _profile.full_name) || (_user && _user.email ? _user.email.split('@')[0] : '—');
+  document.getElementById('accName').textContent = name;
   document.getElementById('accEmail').textContent = (_user && _user.email) || '—';
+  // Fecha registro
   if(_profile && _profile.created_at){
     const d = new Date(_profile.created_at);
     document.getElementById('accCreated').textContent = d.toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric',timeZone:'America/Los_Angeles'});
   }
+  // Suscripción
+  const subActions = document.getElementById('accSubActions');
+  const planExpiry = document.getElementById('accPlanExpiry');
   if(_activeSub && _activeSub.expires_at && new Date(_activeSub.expires_at) > new Date()){
     const days = Math.ceil((new Date(_activeSub.expires_at)-new Date())/(1000*60*60*24));
     const expDate = new Date(_activeSub.expires_at).toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'});
     document.getElementById('accPlanName').textContent = _activeSub.plan_name || 'Plan activo';
-    document.getElementById('accPlanName').style.color = '#34d399';
-    document.getElementById('accPlanStatus').textContent = '✅ Activo · Vence el ' + expDate + ' (' + days + ' días)';
+    document.getElementById('accPlanName').style.color = '#059669';
+    document.getElementById('accPlanStatus').textContent = '✅ Activa';
+    planExpiry.textContent = 'Vence el ' + expDate + ' · ' + days + ' días restantes';
+    if(subActions) subActions.style.display = 'block';
   } else {
     document.getElementById('accPlanName').textContent = 'Sin suscripción activa';
     document.getElementById('accPlanName').style.color = '#f87171';
     document.getElementById('accPlanStatus').textContent = '⏰ Elige un plan para continuar';
+    planExpiry.textContent = '';
+    if(subActions) subActions.style.display = 'none';
   }
+  // Reset estados
+  hideCancelConfirm();
+  cancelEditName();
   modal.classList.add('open');
 }
 function closeAccountModal(){
   const modal = document.getElementById('accountModal');
   if(modal) modal.classList.remove('open');
+}
+
+// ── Editar nombre ──────────────────────────────────────────────
+function startEditName(){
+  document.getElementById('accNameDisplay').style.display = 'none';
+  document.getElementById('accNameEdit').style.display = 'block';
+  const input = document.getElementById('accNameInput');
+  input.value = document.getElementById('accName').textContent !== '—' ? document.getElementById('accName').textContent : '';
+  input.focus();
+}
+function cancelEditName(){
+  document.getElementById('accNameDisplay').style.display = 'flex';
+  document.getElementById('accNameEdit').style.display = 'none';
+  document.getElementById('accNameMsg').textContent = '';
+}
+async function saveEditName(){
+  const input = document.getElementById('accNameInput');
+  const name = input.value.trim();
+  if(!name){ document.getElementById('accNameMsg').textContent = 'Escribe tu nombre.'; return; }
+  const msg = document.getElementById('accNameMsg');
+  msg.style.color = '#94a3b8';
+  msg.textContent = 'Guardando...';
+  const btn = document.querySelector('#accNameEdit button');
+  try{
+    const token = _getToken();
+    const uid = _user?.id;
+    if(!token || !uid) throw new Error('Sin sesión');
+    const res = await fetch(`${_SUPA_BASE}/rest/v1/profiles?id=eq.${uid}`,{
+      method:'PATCH',
+      headers:{'Authorization':`Bearer ${token}`,'apikey':_SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify({full_name:name})
+    });
+    if(!res.ok) throw new Error('Error al guardar');
+    if(_profile) _profile.full_name = name;
+    document.getElementById('accName').textContent = name;
+    msg.style.color = '#059669';
+    msg.textContent = '✅ Nombre actualizado';
+    setTimeout(()=>cancelEditName(), 1200);
+  }catch(e){
+    msg.style.color = '#ef4444';
+    msg.textContent = 'Error al guardar. Intenta de nuevo.';
+  }
+}
+
+// ── Cancelar suscripción ───────────────────────────────────────
+function showCancelConfirm(){
+  const expDate = _activeSub && _activeSub.expires_at
+    ? new Date(_activeSub.expires_at).toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'})
+    : '';
+  const msg = document.getElementById('accCancelMsg');
+  msg.textContent = expDate
+    ? `Tu acceso se mantendrá activo hasta el ${expDate}.`
+    : 'Tu acceso se mantendrá activo hasta la fecha de vencimiento.';
+  document.getElementById('accCancelResult').textContent = '';
+  document.getElementById('accCancelConfirm').style.display = 'block';
+  document.getElementById('btnCancelSub').style.display = 'none';
+}
+function hideCancelConfirm(){
+  const cc = document.getElementById('accCancelConfirm');
+  if(cc) cc.style.display = 'none';
+  const btn = document.getElementById('btnCancelSub');
+  if(btn) btn.style.display = 'block';
+}
+async function confirmCancel(){
+  const btn = document.getElementById('btnConfirmCancel');
+  const result = document.getElementById('accCancelResult');
+  btn.disabled = true;
+  btn.textContent = 'Cancelando...';
+  result.style.color = '#94a3b8';
+  result.textContent = '';
+  try{
+    const token = _getToken();
+    const uid = _user?.id;
+    if(!token || !uid) throw new Error('Sin sesión');
+    // Llamar Edge Function cancel-subscription
+    const res = await fetch(`${_SUPA_BASE}/functions/v1/cancel-subscription`,{
+      method:'POST',
+      headers:{'Authorization':`Bearer ${token}`,'Content-Type':'application/json'},
+      body:JSON.stringify({user_id:uid})
+    });
+    if(!res.ok){
+      const err = await res.json().catch(()=>({}));
+      throw new Error(err.error || 'Error al cancelar');
+    }
+    // Éxito
+    const expDate = _activeSub && _activeSub.expires_at
+      ? new Date(_activeSub.expires_at).toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'})
+      : '';
+    result.style.color = '#059669';
+    result.textContent = expDate
+      ? `✅ Cancelada. Acceso activo hasta el ${expDate}.`
+      : '✅ Suscripción cancelada.';
+    document.getElementById('accSubActions').style.display = 'none';
+    btn.textContent = 'Sí, cancelar';
+    btn.disabled = false;
+  }catch(e){
+    result.style.color = '#ef4444';
+    result.textContent = '❌ ' + (e.message || 'Error. Escríbenos a hola@licenfy.com');
+    btn.textContent = 'Sí, cancelar';
+    btn.disabled = false;
+  }
 }
 
 async function signOut(){
@@ -3766,20 +3880,63 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 <div id="accountModal">
-  <div class="acc-box" style="position:relative">
-    <button style="position:absolute;top:14px;right:14px;background:none;border:none;color:#94a3b8;font-size:1.1rem;cursor:pointer;line-height:1" onclick="closeAccountModal()">✕</button>
+  <div class="acc-box" style="position:relative;max-height:90vh;overflow-y:auto">
+    <button style="position:absolute;top:14px;right:14px;background:none;border:none;color:#94a3b8;font-size:1.1rem;cursor:pointer;line-height:1;z-index:1" onclick="closeAccountModal()">✕</button>
+
+    <!-- Avatar + nombre editable -->
     <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#008bff,#1a3a6d);display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 16px;box-shadow:0 4px 16px rgba(0,139,255,.3)">👤</div>
-    <div style="font-size:1.1rem;font-weight:700;color:#0f172a;text-align:center;margin-bottom:4px;font-family:'Outfit',sans-serif" id="accName">—</div>
+
+    <!-- Nombre display -->
+    <div id="accNameDisplay" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px">
+      <div style="font-size:1.1rem;font-weight:700;color:#0f172a;font-family:'Outfit',sans-serif" id="accName">—</div>
+      <button onclick="startEditName()" style="background:none;border:none;cursor:pointer;color:#94a3b8;font-size:.9rem;padding:2px;line-height:1;transition:color .2s" onmouseover="this.style.color='#008bff'" onmouseout="this.style.color='#94a3b8'" title="Editar nombre">✏️</button>
+    </div>
+
+    <!-- Nombre editar inline -->
+    <div id="accNameEdit" style="display:none;margin-bottom:4px">
+      <div style="display:flex;gap:8px;align-items:center;justify-content:center">
+        <input id="accNameInput" type="text" style="border:1.5px solid #008bff;border-radius:10px;padding:8px 12px;font-size:.95rem;font-family:'Outfit',sans-serif;color:#0f172a;outline:none;width:200px;text-align:center" placeholder="Tu nombre completo" onkeydown="if(event.key==='Enter')saveEditName();if(event.key==='Escape')cancelEditName()">
+      </div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:8px">
+        <button onclick="saveEditName()" style="background:#008bff;color:#fff;border:none;border-radius:10px;padding:7px 18px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit">Guardar</button>
+        <button onclick="cancelEditName()" style="background:none;border:1.5px solid #e2e8f0;border-radius:10px;padding:7px 14px;font-size:.8rem;color:#64748b;cursor:pointer;font-family:inherit">Cancelar</button>
+      </div>
+      <div id="accNameMsg" style="font-size:.72rem;text-align:center;margin-top:6px;min-height:16px"></div>
+    </div>
+
     <div style="font-size:.8rem;color:#64748b;text-align:center;margin-bottom:24px" id="accEmail">—</div>
+
+    <!-- Suscripción -->
     <div style="background:#f8fafc;border-radius:14px;padding:16px 18px;margin-bottom:10px;border:1px solid #e2e8f0">
-      <div style="font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-weight:600">Suscripción</div>
+      <div style="font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-weight:600">Mi Suscripción</div>
       <div style="font-size:.95rem;font-weight:700;font-family:'Outfit',sans-serif" id="accPlanName">—</div>
       <div style="font-size:.75rem;color:#64748b;margin-top:4px" id="accPlanStatus">—</div>
+      <div style="font-size:.75rem;color:#64748b;margin-top:2px" id="accPlanExpiry"></div>
     </div>
+
+    <!-- Acciones suscripción — solo si tiene plan activo -->
+    <div id="accSubActions" style="display:none;margin-bottom:10px">
+      <button onclick="closeAccountModal();openPlansOverlay()" style="width:100%;padding:11px;background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;color:#0369a1;font-size:.85rem;cursor:pointer;font-family:inherit;font-weight:600;margin-bottom:8px;transition:all .2s" onmouseover="this.style.background='#e0f2fe'" onmouseout="this.style.background='#f0f9ff'">🔄 Cambiar de plan</button>
+      <button onclick="showCancelConfirm()" id="btnCancelSub" style="width:100%;padding:11px;background:none;border:1.5px solid #e2e8f0;border-radius:12px;color:#64748b;font-size:.85rem;cursor:pointer;font-family:inherit;font-weight:500;transition:all .2s" onmouseover="this.style.borderColor='#f87171';this.style.color='#ef4444';this.style.background='#fef2f2'" onmouseout="this.style.borderColor='#e2e8f0';this.style.color='#64748b';this.style.background='none'">❌ Cancelar suscripción</button>
+    </div>
+
+    <!-- Confirmación de cancelación -->
+    <div id="accCancelConfirm" style="display:none;background:#fef2f2;border:1.5px solid #fca5a5;border-radius:14px;padding:16px 18px;margin-bottom:10px">
+      <div style="font-size:.88rem;font-weight:700;color:#dc2626;margin-bottom:6px">¿Cancelar suscripción?</div>
+      <div style="font-size:.78rem;color:#64748b;margin-bottom:14px;line-height:1.5" id="accCancelMsg">Tu acceso se mantendrá activo hasta la fecha de vencimiento.</div>
+      <div style="display:flex;gap:8px">
+        <button onclick="confirmCancel()" id="btnConfirmCancel" style="flex:1;padding:10px;background:#ef4444;color:#fff;border:none;border-radius:10px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s">Sí, cancelar</button>
+        <button onclick="hideCancelConfirm()" style="flex:1;padding:10px;background:none;border:1.5px solid #e2e8f0;border-radius:10px;font-size:.82rem;color:#64748b;cursor:pointer;font-family:inherit">Mantener</button>
+      </div>
+      <div id="accCancelResult" style="font-size:.75rem;text-align:center;margin-top:8px;min-height:16px"></div>
+    </div>
+
+    <!-- Miembro desde -->
     <div style="background:#f8fafc;border-radius:14px;padding:16px 18px;margin-bottom:20px;border:1px solid #e2e8f0">
       <div style="font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-weight:600">Miembro desde</div>
       <div style="font-size:.95rem;font-weight:700;color:#0f172a;font-family:'Outfit',sans-serif" id="accCreated">—</div>
     </div>
+
     <button onclick="signOut()" style="width:100%;padding:13px;background:none;border:1.5px solid #e2e8f0;border-radius:12px;color:#64748b;font-size:.85rem;cursor:pointer;transition:all .2s;font-family:inherit;font-weight:500" onmouseover="this.style.borderColor='#f87171';this.style.color='#ef4444';this.style.background='#fef2f2'" onmouseout="this.style.borderColor='#e2e8f0';this.style.color='#64748b';this.style.background='none'">🚪 Cerrar sesión</button>
   </div>
 </div>
