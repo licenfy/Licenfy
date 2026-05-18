@@ -423,8 +423,8 @@ button:not(.ham-btn):not(.lic-chat-btn):not(.wa-btn):not(.faq-q):not([class*="mo
           <div class="mockup-score">
             <div class="score-circle">78%</div>
             <div>
-              <div style="font-size:.82rem;font-weight:700;color:#065f46">¡Buen progreso!</div>
-              <div style="font-size:.74rem;color:#059669;margin-top:2px">Regulaciones CA — 14 preguntas</div>
+              <div style="font-size:.82rem;font-weight:700;color:#065f46" data-es="¡Buen progreso!" data-en="Great progress!">¡Buen progreso!</div>
+              <div style="font-size:.74rem;color:#059669;margin-top:2px" data-es="Regulaciones CA — 14 preguntas" data-en="CA Regulations — 14 questions">Regulaciones CA — 14 preguntas</div>
             </div>
           </div>
           <div class="mockup-q">¿Cuál es el período de gracia estándar para el pago de primas en una póliza de vida en California?</div>
@@ -439,15 +439,15 @@ button:not(.ham-btn):not(.lic-chat-btn):not(.wa-btn):not(.faq-q):not([class*="mo
       <div class="float-badge float-badge-1">
         <span style="font-size:1.2rem">🏆</span>
         <div>
-          <div style="font-size:.72rem;font-weight:700;color:#1a2f5a">Simulacro aprobado</div>
+          <div style="font-size:.72rem;font-weight:700;color:#1a2f5a" data-es="Simulacro aprobado" data-en="Exam passed">Simulacro aprobado</div>
           <div style="font-size:.68rem;color:#64748b">Score: 82% · 135 min</div>
         </div>
       </div>
       <div class="float-badge float-badge-2">
         <span style="font-size:1.2rem">🧠</span>
         <div>
-          <div style="font-size:.72rem;font-weight:700;color:#1a2f5a">Tutor IA activo</div>
-          <div style="font-size:.68rem;color:#64748b">Responde en español</div>
+          <div style="font-size:.72rem;font-weight:700;color:#1a2f5a" data-es="Tutor IA activo" data-en="AI Tutor active">Tutor IA activo</div>
+          <div style="font-size:.68rem;color:#64748b" data-es="Responde en español" data-en="Responds in Spanish">Responde en español</div>
         </div>
       </div>
     </div>
@@ -462,13 +462,13 @@ button:not(.ham-btn):not(.lic-chat-btn):not(.wa-btn):not(.faq-q):not([class*="mo
     <p style="color:#64748b;font-size:.95rem;margin-bottom:40px;line-height:1.7" data-es="Esta es una pregunta real del examen CDI de California. Intenta responderla:" data-en="This is a real question from the California CDI exam. Try to answer it:">Esta es una pregunta real del examen CDI de California. Intenta responderla:</p>
     <div id="demoQ" style="background:#f8fafc;border-radius:20px;padding:32px;border:1.5px solid #e2e8f0;text-align:left">
       <div style="font-size:.95rem;font-weight:600;color:#0f172a;line-height:1.6;margin-bottom:24px" id="demoQText">
-        ¿Cuántas preguntas tiene el examen de Personal Lines del CDI de California y cuál es el porcentaje mínimo para aprobar?
+        <span data-es="¿Cuántas preguntas tiene el examen de Personal Lines del CDI de California y cuál es el porcentaje mínimo para aprobar?" data-en="How many questions does the California CDI Personal Lines exam have and what is the minimum passing percentage?">¿Cuántas preguntas tiene el examen de Personal Lines del CDI de California y cuál es el porcentaje mínimo para aprobar?</span>
       </div>
       <div id="demoOpts" style="display:flex;flex-direction:column;gap:10px">
-        <button onclick="checkDemo(this,'wrong')" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'">A. 100 preguntas · 70% para aprobar</button>
-        <button onclick="checkDemo(this,'wrong')" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'">B. 80 preguntas · 75% para aprobar</button>
-        <button onclick="checkDemo(this,'correct')" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'">C. 90 preguntas · 60% para aprobar</button>
-        <button onclick="checkDemo(this,'wrong')" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'">D. 120 preguntas · 65% para aprobar</button>
+        <button onclick="checkDemo(this,'wrong')" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'" data-es="A. 100 preguntas · 70% para aprobar" data-en="A. 100 questions · 70% to pass">A. 100 preguntas · 70% para aprobar</button>
+        <button onclick="checkDemo(this,'wrong')" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'" data-es="B. 80 preguntas · 75% para aprobar" data-en="B. 80 questions · 75% to pass">B. 80 preguntas · 75% para aprobar</button>
+        <button onclick="checkDemo(this,'correct')" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'" data-es="C. 90 preguntas · 60% para aprobar" data-en="C. 90 questions · 60% to pass">C. 90 preguntas · 60% para aprobar</button>
+        <button onclick="checkDemo(this,'wrong')" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'" data-es="D. 120 preguntas · 65% para aprobar" data-en="D. 120 questions · 65% to pass">D. 120 preguntas · 65% para aprobar</button>
       </div>
       <div id="demoFeedback" style="display:none;margin-top:20px;padding:16px 20px;border-radius:12px;font-size:.88rem;line-height:1.6"></div>
       <div id="demoCta" style="display:none;margin-top:20px;text-align:center">
@@ -490,12 +490,12 @@ function checkDemo(btn, result) {
   if(result === 'correct') {
     btn.style.background='#ecfdf5'; btn.style.borderColor='#6ee7b7'; btn.style.color='#065f46'; btn.style.fontWeight='700';
     fb.style.background='#ecfdf5'; fb.style.border='1px solid #6ee7b7'; fb.style.color='#065f46';
-    fb.innerHTML = '✅ <strong>¡Correcto!</strong> El examen CDI de California tiene 90 preguntas, 135 minutos y necesitas el 60% para aprobar (54 preguntas correctas). Muchos candidatos creen que es el 70% — ese es uno de los errores más comunes.';
+    fb.innerHTML = currentLang === 'en' ? '✅ <strong>Correct!</strong> The California CDI exam has 90 questions, 135 minutes and you need 60% to pass (54 correct answers). Many candidates think it\'s 70% — that is one of the most common mistakes.' : '✅ <strong>¡Correcto!</strong> El examen CDI de California tiene 90 preguntas, 135 minutos y necesitas el 60% para aprobar (54 preguntas correctas). Muchos candidatos creen que es el 70% — ese es uno de los errores más comunes.';
   } else {
     btn.style.background='#fef2f2'; btn.style.borderColor='#fca5a5'; btn.style.color='#991b1b';
     opts[2].style.background='#ecfdf5'; opts[2].style.borderColor='#6ee7b7'; opts[2].style.color='#065f46'; opts[2].style.fontWeight='700';
     fb.style.background='#fef2f2'; fb.style.border='1px solid #fca5a5'; fb.style.color='#991b1b';
-    fb.innerHTML = '❌ <strong>Incorrecto.</strong> La respuesta es C: 90 preguntas, 60% para aprobar. Este es uno de los conceptos básicos que debes dominar. Licenfy te entrena con preguntas como esta hasta que las domines completamente.';
+    fb.innerHTML = currentLang === 'en' ? '❌ <strong>Incorrect.</strong> The answer is C: 90 questions, 60% to pass. This is one of the basic concepts you must master. Licenfy trains you with questions like this until you fully master them.' : '❌ <strong>Incorrecto.</strong> La respuesta es C: 90 preguntas, 60% para aprobar. Este es uno de los conceptos básicos que debes dominar. Licenfy te entrena con preguntas como esta hasta que las domines completamente.';
   }
   fb.style.display='block';
   cta.style.display='block';
@@ -808,58 +808,58 @@ function checkDemo(btn, result) {
         <tbody>
           <!-- FILA HELPER -->
           <tr style="background:#f8fafc">
-            <td colspan="4" style="padding:10px 24px 6px;font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;background:#fafbfc;border-top:1px solid #e2e8f0">Contenido CDI</td>
+            <td colspan="4" style="padding:10px 24px 6px;font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;background:#fafbfc;border-top:1px solid #e2e8f0" data-es="Contenido CDI" data-en="CDI Content">Contenido CDI</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem">8 temas CDI — 96 preguntas con explicaciones</td>
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="8 temas CDI — 96 preguntas con explicaciones" data-en="8 CDI topics — 96 questions with explanations">8 temas CDI — 96 preguntas con explicaciones</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;background:#f8fafc">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem">Glosario bilingüe — 57 términos clave</td>
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="Glosario bilingüe — 57 términos clave" data-en="Bilingual glossary — 57 key terms">Glosario bilingüe — 57 términos clave</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;background:#f8fafc">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem">Flashcards de vocabulario</td>
-            <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
-            <td style="padding:10px 12px;text-align:center;font-size:1.1rem;background:#f8fafc">✅</td>
-            <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
-          </tr>
-          <tr style="background:#f8fafc">
-            <td colspan="4" style="padding:10px 24px 6px;font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;background:#fafbfc;border-top:1px solid #e2e8f0">Simulacros y exámenes</td>
-          </tr>
-          <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem">Simulacros del examen CDI</td>
-            <td style="padding:10px 12px;text-align:center;color:#64748b;font-size:.8rem;font-weight:600">1 / semana</td>
-            <td style="padding:10px 12px;text-align:center;color:#008bff;font-size:.8rem;font-weight:700;background:#f8fafc">Ilimitados</td>
-            <td style="padding:10px 12px;text-align:center;color:#008bff;font-size:.8rem;font-weight:700">Ilimitados</td>
-          </tr>
-          <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem">Historial y análisis de errores</td>
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="Flashcards de vocabulario" data-en="Vocabulary flashcards">Flashcards de vocabulario</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;background:#f8fafc">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
           </tr>
           <tr style="background:#f8fafc">
-            <td colspan="4" style="padding:10px 24px 6px;font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;background:#fafbfc;border-top:1px solid #e2e8f0">Herramientas de estudio</td>
+            <td colspan="4" style="padding:10px 24px 6px;font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;background:#fafbfc;border-top:1px solid #e2e8f0" data-es="Simulacros y exámenes" data-en="Exams & Practice Tests">Simulacros y exámenes</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem">Tutor IA 24/7 en español e inglés</td>
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="Simulacros del examen CDI" data-en="CDI exam practice tests">Simulacros del examen CDI</td>
+            <td style="padding:10px 12px;text-align:center;color:#64748b;font-size:.8rem;font-weight:600" data-es="1 / semana" data-en="1 / week">1 / semana</td>
+            <td style="padding:10px 12px;text-align:center;color:#008bff;font-size:.8rem;font-weight:700;background:#f8fafc" data-es="Ilimitados" data-en="Unlimited">Ilimitados</td>
+            <td style="padding:10px 12px;text-align:center;color:#008bff;font-size:.8rem;font-weight:700" data-es="Ilimitados" data-en="Unlimited">Ilimitados</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f1f5f9">
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="Historial y análisis de errores" data-en="Error history and analysis">Historial y análisis de errores</td>
+            <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
+            <td style="padding:10px 12px;text-align:center;font-size:1.1rem;background:#f8fafc">✅</td>
+            <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
+          </tr>
+          <tr style="background:#f8fafc">
+            <td colspan="4" style="padding:10px 24px 6px;font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;background:#fafbfc;border-top:1px solid #e2e8f0" data-es="Herramientas de estudio" data-en="Study Tools">Herramientas de estudio</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f1f5f9">
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="Tutor IA 24/7 en español e inglés" data-en="AI Tutor 24/7 in Spanish and English">Tutor IA 24/7 en español e inglés</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;background:#f8fafc">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem">Calendario de estudio y racha diaria</td>
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="Calendario de estudio y racha diaria" data-en="Study calendar and daily streak">Calendario de estudio y racha diaria</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;background:#f8fafc">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem">Dashboard de progreso por tema</td>
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="Dashboard de progreso por tema" data-en="Topic-based progress dashboard">Dashboard de progreso por tema</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;background:#f8fafc">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
@@ -868,34 +868,34 @@ function checkDemo(btn, result) {
             <td colspan="4" style="padding:10px 24px 6px;font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;border-top:1px solid #e2e8f0">Soporte</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem">Soporte por WhatsApp</td>
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="Soporte por WhatsApp" data-en="WhatsApp Support">Soporte por WhatsApp</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;background:#f8fafc">✅</td>
-            <td style="padding:10px 12px;text-align:center;color:#008bff;font-size:.8rem;font-weight:700">✅ Prioritario</td>
+            <td style="padding:10px 12px;text-align:center;color:#008bff;font-size:.8rem;font-weight:700" data-es="✅ Prioritario" data-en="✅ Priority">✅ Prioritario</td>
           </tr>
           <tr style="background:#fafbfc">
-            <td colspan="4" style="padding:10px 24px 6px;font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;border-top:1px solid #e2e8f0">Módulos adicionales</td>
+            <td colspan="4" style="padding:10px 24px 6px;font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;border-top:1px solid #e2e8f0" data-es="Módulos adicionales" data-en="Additional Modules">Módulos adicionales</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem">🔁 Practica las preguntas que fallaste</td>
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="🔁 Practica las preguntas que fallaste" data-en="🔁 Practice the questions you failed">🔁 Practica las preguntas que fallaste</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;color:#94a3b8">—</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;background:#f8fafc">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem">Módulo: Servicio al cliente en seguros</td>
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="Módulo: Servicio al cliente en seguros" data-en="Module: Customer service in insurance">Módulo: Servicio al cliente en seguros</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;color:#94a3b8">—</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;background:#f8fafc">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem">Módulo: Técnicas de ventas en seguros</td>
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="Módulo: Técnicas de ventas en seguros" data-en="Module: Sales techniques in insurance">Módulo: Técnicas de ventas en seguros</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;color:#94a3b8">—</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;color:#94a3b8;background:#f8fafc">—</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem">🎙️ Simulacro de entrevista con IA</td>
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="🎙️ Simulacro de entrevista con IA" data-en="🎙️ AI interview practice simulator">🎙️ Simulacro de entrevista con IA</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;color:#94a3b8">—</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;color:#94a3b8;background:#f8fafc">—</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
@@ -904,20 +904,20 @@ function checkDemo(btn, result) {
           <tr>
             <td style="padding:20px 24px;border-top:1.5px solid #e2e8f0;background:#fafbfc"></td>
             <td style="padding:20px 12px;text-align:center;border-top:1.5px solid #e2e8f0;background:#fafbfc">
-              <button onclick="selectPlan('mensual')" style="background:#1a3a6d;color:#fff;border:none;padding:11px 20px;border-radius:10px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;width:100%">Comenzar</button>
+              <button onclick="selectPlan('mensual')" style="background:#1a3a6d;color:#fff;border:none;padding:11px 20px;border-radius:10px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;width:100%" data-es="Comenzar" data-en="Get started">Comenzar</button>
             </td>
             <td style="padding:20px 12px;text-align:center;background:linear-gradient(180deg,#dbeffe,#f0f9ff);border-top:2px solid #008bff">
-              <button onclick="selectPlan('trimestral')" style="background:linear-gradient(135deg,#008bff,#1a3a6d);color:#fff;border:none;padding:11px 20px;border-radius:10px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;width:100%;box-shadow:0 4px 14px rgba(0,139,255,.35)">Comenzar →</button>
+              <button onclick="selectPlan('trimestral')" style="background:linear-gradient(135deg,#008bff,#1a3a6d);color:#fff;border:none;padding:11px 20px;border-radius:10px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;width:100%;box-shadow:0 4px 14px rgba(0,139,255,.35)" data-es="Comenzar →" data-en="Get started →">Comenzar →</button>
             </td>
             <td style="padding:20px 12px;text-align:center;border-top:1.5px solid #e2e8f0;background:#fafbfc">
-              <button onclick="selectPlan('semestral')" style="background:#1a3a6d;color:#fff;border:none;padding:11px 20px;border-radius:10px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;width:100%">Comenzar</button>
+              <button onclick="selectPlan('semestral')" style="background:#1a3a6d;color:#fff;border:none;padding:11px 20px;border-radius:10px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;width:100%" data-es="Comenzar" data-en="Get started">Comenzar</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div style="text-align:center;margin-top:20px;font-size:.78rem;color:#94a3b8">
-      🔒 7 días de prueba · Requiere tarjeta · Cancela cuando quieras
+      <span data-es="🔒 7 días de prueba · Requiere tarjeta · Cancela cuando quieras" data-en="🔒 7-day trial · Card required · Cancel anytime">🔒 7 días de prueba · Requiere tarjeta · Cancela cuando quieras</span>
     </div>
   </div>
 </section>
