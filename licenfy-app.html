@@ -3210,7 +3210,7 @@ function rProgreso(){
   <div style="font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;margin:16px 0 8px">📄 ${es?'Licencia Personal Lines — CDI':'Personal Lines License — CDI'}</div>
   <div style="background:#fff;border:1.5px solid #E2E8F0;border-radius:14px;padding:16px">
     ${cdiTopics.map(tp=>topicRow(tp)).join('')}
-    ${totT===0?`<div class="info">👆 ${es?'Empieza a estudiar para ver tu progreso':'Start studying to see your progress'}</div>`:''}
+    ${cdiT===0?`<div class="info">👆 ${es?'Empieza a estudiar para ver tu progreso':'Start studying to see your progress'}</div>`:''}
   </div>
   <div style="font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;margin:16px 0 8px">✨ ${es?'Módulos Adicionales':'Additional Modules'}</div>
   <div style="background:#fff;border:1.5px solid #E2E8F0;border-radius:14px;padding:16px">
