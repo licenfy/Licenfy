@@ -2303,10 +2303,13 @@ function rDash(){
       </div>
       ${!locked&&s.t>0?`<div class="tmini" style="margin-bottom:6px"><div class="tmf" style="width:${p}%;background:${tp.color}"></div></div>`:''}
       <div style="display:flex;align-items:center;justify-content:space-between">
-        ${locked?`<span style="font-size:.68rem;color:#94a3b8">🔒 ${es?'Plan requerido':'Plan required'}</span>`:`<span class="tpct ${pcls(p)}" style="font-size:.72rem">${p!==null?p+'%':cnt+' Q'}</span>`}
-        <button class="tbtn" style="background:${locked?'#94a3b8':tp.color};font-size:.68rem;padding:4px 10px;border-radius:20px" onclick="${onclickBtn}">
-          ${locked?(es?'↑ Plan':'↑ Plan'):(es?'Estudiar →':'Study →')}
-        </button>
+        ${locked?`<span style="font-size:.68rem;color:#94a3b8">🔒 ${es?'Plan requerido':'Plan required'}</span>`:`<span class="tpct ${pcls(p)}" style="font-size:.72rem">${p!==null?s.t+'/'+cnt+' · '+p+'%':'0/'+cnt+(L==='es'?' pregs':' qs')}</span>`}
+        <div style="display:flex;gap:4px;align-items:center">
+          <button class="tbtn" style="background:${locked?'#94a3b8':tp.color};font-size:.68rem;padding:4px 10px;border-radius:20px" onclick="${onclickBtn}">
+            ${locked?(es?'↑ Plan':'↑ Plan'):(es?'Estudiar →':'Study →')}
+          </button>
+          ${!locked&&s.w&&s.w.length>0?`<button class="tbtn" style="background:#ef444415;color:#ef4444;border:1.5px solid #ef444440;font-size:.65rem;padding:3px 8px;border-radius:20px" onclick="event.stopPropagation();startTopicReview('${tp.id}')" title="${es?'Repasar errores':'Review mistakes'}">❌ ${s.w.length}</button>`:''}
+        </div>
       </div>
     </div>`;}).join('')}</div>
 
@@ -2358,7 +2361,7 @@ function rStudy(){
   <div class="shdr">
     <button class="btn-back" onclick="SMode=null;goTo('dash')">← ${L==='es'?'Inicio':'Home'}</button>
     <div style="text-align:center;font-size:.72rem;color:#64748B">${tp[L].n}<br><span class="sctr">${SI+1}/${SQ.length}</span></div>
-    <button onclick="toggleBookmark('${q.id}')" id="bmBtn" style="background:${saved?'#fff7ed':'#fff'};border:1.5px solid ${saved?'#f59e0b':'#e2e8f0'};color:${saved?'#f59e0b':'#94a3b8'};border-radius:10px;padding:5px 10px;cursor:pointer;font-size:.85rem;transition:all .2s" title="${L==='es'?'Guardar pregunta':'Save question'}">${saved?'🔖':'🔖'}</button>
+    <button onclick="toggleBookmark('${q.id}')" id="bmBtn" style="background:${saved?'#fff7ed':'#fff'};border:1.5px solid ${saved?'#f59e0b':'#e2e8f0'};color:${saved?'#f59e0b':'#94a3b8'};border-radius:10px;padding:5px 10px;cursor:pointer;font-size:.75rem;font-weight:600;transition:all .2s;display:flex;align-items:center;gap:4px;font-family:inherit">${saved?(L==='es'?'🔖 Guardada':'🔖 Saved'):(L==='es'?'🔖 Guardar':'🔖 Save')}</button>
   </div>
   <div class="sprog"><div class="spf" style="width:${Math.round(SI/SQ.length*100)}%;background:${SMode==='review'?'#f59e0b':tp.color}"></div></div>
   <div class="qcard">
@@ -2923,6 +2926,22 @@ function startBookmarked(){
 }
 
 // ── REVIEW MODE ──
+function startTopicReview(id){
+  // Repaso solo de preguntas falladas de un tema específico
+  const s=gst(id);
+  if(!s.w||!s.w.length){
+    alert(L==='es'?'No tienes preguntas falladas en este tema aún.':'No missed questions in this topic yet.');
+    return;
+  }
+  const wrongQs=QS.filter(q=>q.t===id&&s.w.includes(q.id));
+  if(!wrongQs.length){
+    alert(L==='es'?'No tienes preguntas falladas en este tema.':'No missed questions in this topic.');
+    return;
+  }
+  AT=id;
+  SQ=sh([...wrongQs]);
+  SI=0;SA=null;SMode='review';SC=0;ST=0;TAB=0;V='study';render();
+}
 function startReview(){
   const plan=getPlanId();
   if(!['quarterly','semestral'].includes(plan)){showPlans();return;}
@@ -3144,28 +3163,42 @@ function rProgreso(){
   const es=L==='es';
   const cdiTopics = TOPICS.filter(tp=>!tp.plan);
   const modTopics = TOPICS.filter(tp=>tp.plan);
-  const totT=Object.values(stats).reduce((a,v)=>a+v.t,0);
-  const totC=Object.values(stats).reduce((a,v)=>a+v.c,0);
-  const ov=totT>0?Math.round(totC/totT*100):0;
+  // Stats separados CDI vs Módulos
+  const cdiT=cdiTopics.reduce((a,tp)=>{const s=gst(tp.id);return a+s.t;},0);
+  const cdiC=cdiTopics.reduce((a,tp)=>{const s=gst(tp.id);return a+s.c;},0);
+  const cdiOv=cdiT>0?Math.round(cdiC/cdiT*100):0;
+  const modT=modTopics.reduce((a,tp)=>{const s=gst(tp.id);return a+s.t;},0);
+  const modC=modTopics.reduce((a,tp)=>{const s=gst(tp.id);return a+s.c;},0);
+  const modOv=modT>0?Math.round(modC/modT*100):0;
   const streak=getStreak();
   const totalDays=[...studiedDays].length;
   const d=document.createElement('div');
   const topicRow=(tp)=>{
     const p=pct(tp.id);
+    const s2=gst(tp.id);
+    const cnt=QS.filter(q=>q.t===tp.id).length;
     return `<div class="dash-topic">
       <span style="font-size:.9rem">${tp.icon}</span>
       <div class="dash-tn">${tp[L].n}</div>
       <div class="dash-bar"><div class="dash-barf" style="width:${p||0}%;background:${p===null?'#E2E8F0':p>=70?'#059669':p>=50?'#D97706':'#DC2626'}"></div></div>
-      <span class="dash-pct" style="color:${p===null?'#94A3B8':p>=70?'#059669':p>=50?'#D97706':'#DC2626'}">${p!==null?p+'%':'—'}</span>
+      <span class="dash-pct" style="color:${p===null?'#94A3B8':p>=70?'#059669':p>=50?'#D97706':'#DC2626'};font-size:.68rem">${p!==null?s2.t+'/'+cnt+' · '+p+'%':'0/'+cnt}</span>
     </div>`;
   };
   d.innerHTML=`
   <div class="sec" style="margin-top:4px">📊 ${es?'Tu Progreso':'Your Progress'}</div>
-  <div class="dash-grid">
-    <div class="dash-card"><div class="dash-v">${ov}%</div><div class="dash-l">${es?'Precisión general':'Overall accuracy'}</div></div>
+
+  <div style="font-size:.68rem;font-weight:700;color:#028bfd;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">📄 ${es?'Licencia CDI':'CDI License'}</div>
+  <div class="dash-grid" style="margin-bottom:16px">
+    <div class="dash-card"><div class="dash-v">${cdiOv}%</div><div class="dash-l">${es?'Precisión CDI':'CDI accuracy'}</div></div>
     <div class="dash-card"><div class="dash-v">🔥 ${streak}</div><div class="dash-l">${es?'Días de racha':'Day streak'}</div></div>
-    <div class="dash-card"><div class="dash-v">${totT}</div><div class="dash-l">${es?'Preguntas respondidas':'Questions answered'}</div></div>
+    <div class="dash-card"><div class="dash-v">${cdiT}</div><div class="dash-l">${es?'Preguntas CDI':'CDI questions'}</div></div>
     <div class="dash-card"><div class="dash-v">${totalDays}</div><div class="dash-l">${es?'Días estudiados':'Days studied'}</div></div>
+  </div>
+
+  <div style="font-size:.68rem;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">✨ ${es?'Módulos Adicionales':'Additional Modules'}</div>
+  <div class="dash-grid" style="margin-bottom:16px">
+    <div class="dash-card"><div class="dash-v">${modOv>0?modOv+'%':'—'}</div><div class="dash-l">${es?'Precisión módulos':'Modules accuracy'}</div></div>
+    <div class="dash-card"><div class="dash-v">${modT>0?modT:'—'}</div><div class="dash-l">${es?'Preguntas módulos':'Module questions'}</div></div>
   </div>
   <div style="font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;margin:16px 0 8px">📄 ${es?'Licencia Personal Lines — CDI':'Personal Lines License — CDI'}</div>
   <div style="background:#fff;border:1.5px solid #E2E8F0;border-radius:14px;padding:16px">
