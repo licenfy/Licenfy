@@ -731,6 +731,7 @@ async function supaInit(){
     const pendingPlan = urlParams.get('plan') || localStorage.getItem('pendingPlan') || metaPlan || '';
 
     // Si viene de confirmación de email con plan seleccionado → redirigir a Stripe
+    // PERO solo si NO tiene ya una suscripción activa
     if(pendingPlan && !comingFromPayment){
       const stripeLinks = {
         mensual:    'https://buy.stripe.com/test_8x2bIU3n09pIeIQ7qkf7i0c',
@@ -743,6 +744,12 @@ async function supaInit(){
         history.replaceState(null, '', window.location.pathname);
         // Esperar que Supabase procese la sesión del email de confirmación
         await loadUserDataREST();
+        // Si ya tiene suscripción activa, entrar a la app sin pasar por Stripe
+        if(_activeSub && _activeSub.expires_at && new Date(_activeSub.expires_at) > new Date()){
+          checkAccessAndShow();
+          hideGate();
+          return;
+        }
         checkAccessAndShow();
         hideGate();
         window.location.href = stripeUrl;
