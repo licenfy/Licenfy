@@ -3069,21 +3069,58 @@ function rHistorial(){
 }
 
 // ── PERSISTENCIA DE SESIÓN DE ESTUDIO ──────────────────────
+const _ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFtcWlhbmhlYWhrcWV0cmV2dmVoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0OTY0MzYsImV4cCI6MjA5MjA3MjQzNn0.SCYFX41o1p_rueWIjbmQ4QDdYaY2PVAF_idqiBqB14k';
+let _sesTimer=null;
+
 function saveStudySession(){
   if(!AT||SMode==='review'||SMode==='bookmarks') return;
-  try{ lsSet('session',{topicId:AT,qIds:SQ.map(q=>q.id),index:SI,sc:SC,st:ST}); }catch(e){}
+  const ses={topicId:AT,qIds:SQ.map(q=>q.id),index:SI,sc:SC,st:ST};
+  try{ lsSet('session',ses); }catch(e){}
+  // Sincronizar con Supabase user_metadata para persistir entre sesiones/incógnito
+  clearTimeout(_sesTimer);
+  _sesTimer=setTimeout(async()=>{
+    try{
+      const tok=_getToken();if(!tok)return;
+      await fetch('https://qmqianheahkqetrevveh.supabase.co/auth/v1/user',{
+        method:'PUT',
+        headers:{'Content-Type':'application/json','apikey':_ANON,'Authorization':'Bearer '+tok},
+        body:JSON.stringify({data:{study_session:ses}})
+      });
+      if(_user)_user.user_metadata={...(_user.user_metadata||{}),study_session:ses};
+    }catch(e){}
+  },3000);
 }
+
 function loadStudySession(id){
+  // 1. localStorage (mismo dispositivo/sesión)
   try{
     const s=lsGet('session');
     if(s&&s.topicId===id&&s.index>0&&s.qIds&&s.qIds.length>0) return s;
   }catch(e){}
+  // 2. Supabase user_metadata (funciona después de cerrar incógnito o cambiar dispositivo)
+  try{
+    const s=_user?.user_metadata?.study_session;
+    if(s&&s.topicId===id&&s.index>0&&s.qIds&&s.qIds.length>0) return s;
+  }catch(e){}
   return null;
 }
+
 function clearStudySession(id){
   const s=lsGet('session');
-  if(s&&(!id||s.topicId===id)) lsSet('session',null);
+  if(s&&(!id||s.topicId===id)){
+    lsSet('session',null);
+    try{
+      const tok=_getToken();if(!tok)return;
+      fetch('https://qmqianheahkqetrevveh.supabase.co/auth/v1/user',{
+        method:'PUT',
+        headers:{'Content-Type':'application/json','apikey':_ANON,'Authorization':'Bearer '+tok},
+        body:JSON.stringify({data:{study_session:null}})
+      }).catch(()=>{});
+      if(_user&&_user.user_metadata) delete _user.user_metadata.study_session;
+    }catch(e){}
+  }
 }
+
 function restartTopic(id){ clearStudySession(id);startS(id); }
 // ────────────────────────────────────────────────────────────
 
