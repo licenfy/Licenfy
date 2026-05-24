@@ -82,8 +82,7 @@ function hlText(text){
       const e=p+pat.length;
       const b=p===0||WB.test(text[p-1]);
       const a=e>=text.length||WB.test(text[e]);
-      const inParens=p>0&&text[p-1]==='('&&e<text.length&&text[e]===')';
-      if(b&&a&&!inParens){
+      if(b&&a){
         let ov=false;
         for(let i=p;i<e;i++) if(used[i]){ov=true;break;}
         if(!ov){
