@@ -598,6 +598,8 @@ async function authSubmit(){
   try {
     if(mode==='login'){
       await signIn(email, pass);
+      // Esperar a que localStorage escriba el token antes de recargar
+      await new Promise(r => setTimeout(r, 200));
       window.location.reload();
       return;
     } else if(mode==='signup'){
@@ -713,6 +715,16 @@ async function supaInit(){
       if(s.expires_at && s.expires_at > Math.floor(Date.now()/1000)){
         session = s;
         _user = s.user;
+        // Aislamiento: si el uid cambió (otro usuario en mismo dispositivo), limpiar datos
+        const storedUid = localStorage.getItem('licenfy_uid');
+        if(storedUid && storedUid !== _user.id){
+          localStorage.removeItem('licenfy_stats');
+          localStorage.removeItem('licenfy_studied');
+          localStorage.removeItem('licenfy_bm');
+          localStorage.removeItem('licenfy_interview');
+          localStorage.removeItem('licenfy_interview_done');
+        }
+        localStorage.setItem('licenfy_uid', _user.id);
       } else {
         localStorage.removeItem(sessionKey);
       }
@@ -741,8 +753,14 @@ async function supaInit(){
       if(stripeUrl){
         localStorage.removeItem('pendingPlan');
         history.replaceState(null, '', window.location.pathname);
-        // Esperar que Supabase procese la sesión del email de confirmación
+        // Cargar datos del usuario — si ya tiene suscripción activa, ir a la app
         await loadUserDataREST();
+        if(_activeSub && _activeSub.expires_at && new Date(_activeSub.expires_at) > new Date()){
+          // Ya pagó — entrar a la app directamente sin pasar por Stripe
+          checkAccessAndShow();
+          hideGate();
+          return;
+        }
         checkAccessAndShow();
         hideGate();
         window.location.href = stripeUrl;
@@ -1104,7 +1122,16 @@ async function confirmCancel(){
 }
 
 async function signOut(){
+  // Limpiar token de sesión
   localStorage.removeItem('sb-qmqianheahkqetrevveh-auth-token');
+  // Limpiar progreso — cada usuario empieza desde cero
+  localStorage.removeItem('licenfy_stats');
+  localStorage.removeItem('licenfy_studied');
+  localStorage.removeItem('licenfy_bm');
+  localStorage.removeItem('licenfy_interview');
+  localStorage.removeItem('licenfy_interview_done');
+  localStorage.removeItem('licenfy_sub');
+  localStorage.removeItem('licenfy_uid');
   _user = null; _profile = null; _activeSub = null;
   window.location.href = 'https://licenfy.com';
 }
@@ -3956,7 +3983,7 @@ async function sendChat(){
   setTimeout(()=>{const el=document.getElementById('chatMsgs');if(el)el.scrollTop=el.scrollHeight;},50);
 
   const systemPrompt = L==='es'
-    ? `Eres Lic, el tutor de IA de Licenfy, una plataforma de preparaci\u00f3n para el examen de Personal Lines del CDI de California. Tu rol es explicar conceptos de seguros de forma clara, concisa y amigable en espa\u00f1ol. Contexto del examen: 90 preguntas, 135 minutos, 60% para aprobar. Cubre: auto (PAP), propietarios (HO-2 a HO-8), p\u00f3liza de vivienda (DP), regulaciones CA (Prop 103, CDI), conceptos generales, incendios CA (Plan FAIR, CEA), marina interior, paraguas personal. Responde de forma directa y pedag\u00f3gica. Usa ejemplos pr\u00e1cticos cuando ayude. M\u00e1ximo 3-4 p\u00e1rrafos por respuesta.`
+    ? `Eres Lic, el tutor de IA de Licenfy, una plataforma de preparaci\u00f3n para el examen de Personal Lines del CDI de California. Tu rol es explicar conceptos de seguros de forma clara, concisa y amigable en espa\u00f1ol. Contexto del examen (SIEMPRE CORRECTO): 90 preguntas, 135 minutos, 60% para aprobar (NO 70%, NO 75 preguntas, NO 50 preguntas). Si alguien pregunta sobre el examen, da SIEMPRE estos datos exactos. Cubre: auto (PAP), propietarios (HO-2 a HO-8), p\u00f3liza de vivienda (DP), regulaciones CA (Prop 103, CDI), conceptos generales, incendios CA (Plan FAIR, CEA), marina interior, paraguas personal. Responde de forma directa y pedag\u00f3gica. Usa ejemplos pr\u00e1cticos cuando ayude. M\u00e1ximo 3-4 p\u00e1rrafos por respuesta.`
     : `You are Lic, the AI tutor for Licenfy, a California CDI Personal Lines exam prep platform. Explain insurance concepts clearly and in a friendly way. Exam context: 90 questions, 135 minutes, 60% to pass. Respond directly and pedagogically. Maximum 3-4 paragraphs per response.`;
 
   try {
@@ -4089,7 +4116,7 @@ function rProgreso(){
   <div style="font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;margin:16px 0 8px">📄 ${es?'Licencia Personal Lines — CDI':'Personal Lines License — CDI'}</div>
   <div style="background:#fff;border:1.5px solid #E2E8F0;border-radius:14px;padding:16px">
     ${cdiTopics.map(tp=>topicRow(tp)).join('')}
-    ${totT===0?`<div class="info">👆 ${es?'Empieza a estudiar para ver tu progreso':'Start studying to see your progress'}</div>`:''}
+    ${cdiT===0?`<div class="info">👆 ${es?'Empieza a estudiar para ver tu progreso':'Start studying to see your progress'}</div>`:''}
   </div>
   <div style="font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;margin:16px 0 8px">✨ ${es?'Módulos Adicionales':'Additional Modules'}</div>
   <div style="background:#fff;border:1.5px solid #E2E8F0;border-radius:14px;padding:16px">
@@ -4311,8 +4338,8 @@ async function sendFloat(){
   tutorHistory.push({role:'user',content:msg});
 
   const systemPrompt = L==='es'
-    ? 'Eres Lic, el tutor de IA de Licenfy para el examen de Personal Lines del CDI de California. Responde de forma breve y directa (máximo 2-3 párrafos). Sin markdown.'
-    : 'You are Lic, the AI tutor for Licenfy\'s California CDI Personal Lines exam. Respond briefly and directly (max 2-3 paragraphs). No markdown.';
+    ? 'Eres Lic, el tutor de IA de Licenfy para el examen de Personal Lines del CDI de California. DATOS OFICIALES DEL EXAMEN (SIEMPRE USA ESTOS): 90 preguntas de opción múltiple, 135 minutos, 60% para aprobar (54/90 correctas). NO es 70%, NO son 75 preguntas, NO son 50 preguntas. Administrado por PSI Services para el CDI. Responde de forma breve y directa (máximo 2-3 párrafos). Sin markdown.'
+    : 'You are Lic, the AI tutor for Licenfy\'s California CDI Personal Lines exam. OFFICIAL EXAM FACTS (ALWAYS USE THESE): 90 multiple choice questions, 135 minutes, 60% to pass (54/90 correct). It is NOT 70%, NOT 75 questions, NOT 50 questions. Administered by PSI Services for CDI. Respond briefly and directly (max 2-3 paragraphs). No markdown.';
 
   fetch('https://qmqianheahkqetrevveh.supabase.co/functions/v1/anthropic-proxy', {
     method:'POST',
