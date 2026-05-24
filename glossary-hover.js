@@ -7,8 +7,7 @@
 
 // ── CSS ──────────────────────────────────────────────────────────
 const css=`
-.ghl{display:inline;border-bottom:2.5px dotted currentColor;cursor:pointer;
-  border-radius:2px;padding:0 2px;transition:background .15s}
+.ghl{display:inline;font-weight:700;text-decoration:underline;text-decoration-color:#008bff;text-decoration-thickness:2px;text-underline-offset:2px;cursor:pointer;border-radius:2px;padding:0 1px;transition:background .15s}
 .ghl:hover,.ghl.ghla{background:rgba(0,139,255,.12)!important;border-bottom-style:solid!important}
 #ghlPopup{
   position:fixed;z-index:9500;
@@ -83,7 +82,8 @@ function hlText(text){
       const e=p+pat.length;
       const b=p===0||WB.test(text[p-1]);
       const a=e>=text.length||WB.test(text[e]);
-      if(b&&a){
+      const inParens=p>0&&text[p-1]==='('&&e<text.length&&text[e]===')';
+      if(b&&a&&!inParens){
         let ov=false;
         for(let i=p;i<e;i++) if(used[i]){ov=true;break;}
         if(!ov){
