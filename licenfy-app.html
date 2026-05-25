@@ -3339,7 +3339,7 @@ function rStudy(){
   ${resumeBanner}
   ${reviewBanner}
   <div class="shdr">
-    <button class="btn-back" onclick="SMode=null;goTo('dash')">← ${L==='es'?'Inicio':'Home'}</button>
+    <button class="btn-back" onclick="saveStudySession();SMode=null;goTo('dash')">← ${L==='es'?'Inicio':'Home'}</button>
     <div style="text-align:center;font-size:.72rem;color:#64748B">${tp[L].n}<br><span class="sctr">${SI+1}/${SQ.length}</span></div>
     <button onclick="toggleBookmark('${q.id}')" id="bmBtn" style="background:${saved?'#fff7ed':'#fff'};border:1.5px solid ${saved?'#f59e0b':'#e2e8f0'};color:${saved?'#f59e0b':'#94a3b8'};border-radius:10px;padding:5px 10px;cursor:pointer;font-size:.75rem;font-weight:600;transition:all .2s;display:flex;align-items:center;gap:4px;font-family:inherit">${saved?(L==='es'?'🔖 Guardada':'🔖 Saved'):(L==='es'?'🔖 Guardar':'🔖 Save')}</button>
   </div>
