@@ -605,13 +605,15 @@ async function authSubmit(){
     } else if(mode==='signup'){
       if(!name){ showAuthError(es?'Por favor ingresa tu nombre.':'Please enter your name.'); btn.disabled=false; return; }
       const {data} = await signUp(email, pass, name);
+      // Notificar a Andres via Resend
+      notifyFounderRequest(email, name);
       if(data && !data.session){
-        showAuthSuccess(es?'¡Cuenta creada! Revisa tu email para confirmar tu cuenta.':'Account created! Check your email to confirm.');
+        showAuthSuccess(es?'Solicitud enviada! Revisa tu email en las proximas 24 horas.':'Request sent! Check your email within 24 hours.');
         btn.disabled=false;
         btn.textContent=es?'Crear cuenta':'Create account';
         return;
       }
-      // Sesion creada de inmediato
+      // Sesion creada de inmediato - mostrar pantalla de espera
       if(data && data.session){
         window.location.reload();
         return;
@@ -808,11 +810,68 @@ function checkAccessAndShow(){
   if(hasAccess){
     hideAuthScreen();
     hidePaywall();
-    render(); // refrescar UI con datos de suscripción actualizados
+    hideFounderPending();
+    render();
   } else {
     hideAuthScreen();
-    showPaywall();
+    const isFounderPending = _user && _user.user_metadata && _user.user_metadata.founder_request === true;
+    if(isFounderPending){
+      hidePaywall();
+      showFounderPending();
+    } else {
+      hideFounderPending();
+      showPaywall();
+    }
   }
+}
+
+function showFounderPending(){
+  let fp = document.getElementById('founderPendingScreen');
+  if(!fp){
+    fp = document.createElement('div');
+    fp.id = 'founderPendingScreen';
+    fp.style.cssText = 'position:fixed;inset:0;background:#f8fafc;z-index:998;display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto;';
+    const name = (_user && _user.user_metadata && _user.user_metadata.full_name) ? _user.user_metadata.full_name.split(' ')[0] : '';
+    const email = _user ? _user.email : '';
+    fp.innerHTML = `
+      <div style="max-width:440px;width:100%;text-align:center;padding:20px 0">
+        <div style="display:flex;justify-content:center;margin-bottom:24px">
+          <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1.6rem;font-weight:800;color:#1a3a6d">Licen<span style="color:#008bff">fy</span></span>
+        </div>
+        <div style="font-size:2.5rem;margin-bottom:16px">&#9989;</div>
+        <h2 style="color:#0f172a;font-size:1.4rem;font-weight:800;margin-bottom:10px;font-family:'Plus Jakarta Sans',sans-serif">
+          ${name ? 'Hola ' + name + '!' : 'Solicitud recibida'}
+        </h2>
+        <p style="color:#374151;font-size:.9rem;margin-bottom:8px;line-height:1.7;font-weight:600">
+          Tu solicitud como Usuario Fundador ha sido recibida.
+        </p>
+        <p style="color:#64748b;font-size:.82rem;margin-bottom:28px;line-height:1.7">
+          Estamos revisando tu solicitud. Te enviaremos un correo a <strong>${email}</strong> con tu acceso en las proximas 24 horas.
+        </p>
+        <div style="background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:14px;padding:18px;margin-bottom:24px;text-align:left">
+          <div style="font-size:.8rem;font-weight:700;color:#0369a1;margin-bottom:10px">Como Usuario Fundador recibiras:</div>
+          <div style="font-size:.8rem;color:#374151;line-height:2">
+            &#9989; 30 dias de acceso completo &mdash; <strong>gratis</strong><br>
+            &#9989; Acceso antes que nadie<br>
+            &#127873; 30% de descuento al finalizar el mes
+          </div>
+        </div>
+        <p style="color:#94a3b8;font-size:.75rem;margin-bottom:20px">
+          Dudas? Escribenos a <a href="mailto:hola@licenfy.com" style="color:#008bff">hola@licenfy.com</a>
+        </p>
+        <button onclick="signOut()" style="background:none;border:none;color:#94a3b8;font-size:.75rem;cursor:pointer;text-decoration:underline;font-family:inherit">
+          Cerrar sesion
+        </button>
+      </div>`;
+    document.body.appendChild(fp);
+  } else {
+    fp.style.display='flex';
+  }
+}
+
+function hideFounderPending(){
+  const fp = document.getElementById('founderPendingScreen');
+  if(fp) fp.style.display='none';
 }
 
 function showPaywall(){
@@ -933,10 +992,28 @@ async function loadUserDataREST(){
 async function signUp(email, password, fullName){
   const { data, error } = await _supa.auth.signUp({
     email, password,
-    options: { data: { full_name: fullName } }
+    options: { data: { full_name: fullName, founder_request: true } }
   });
   if(error) throw error;
   return data;
+}
+
+async function notifyFounderRequest(email, name){
+  try {
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer re_h2im6b5L_8a1aEmdTjjiaYAdijL2fKVUS'
+      },
+      body: JSON.stringify({
+        from: 'Licenfy <hola@licenfy.com>',
+        to: ['hola@licenfy.com'],
+        subject: 'Nuevo Usuario Fundador: ' + name,
+        html: '<div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px;background:#fff"><div style="background:linear-gradient(135deg,#1a3a6d,#008bff);padding:24px;border-radius:12px 12px 0 0;text-align:center"><h1 style="color:#fff;margin:0;font-size:1.3rem">Nuevo Usuario Fundador</h1></div><div style="padding:24px;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 12px 12px"><p style="color:#374151;margin-top:0">Se acabo de registrar un nuevo Usuario Fundador en Licenfy. Activa su acceso desde el panel de administracion.</p><table style="width:100%;border-collapse:collapse;margin:16px 0"><tr style="background:#f8fafc"><td style="padding:10px 12px;font-weight:600;color:#374151;border-bottom:1px solid #e2e8f0">Nombre</td><td style="padding:10px 12px;border-bottom:1px solid #e2e8f0">' + name + '</td></tr><tr><td style="padding:10px 12px;font-weight:600;color:#374151;border-bottom:1px solid #e2e8f0">Email</td><td style="padding:10px 12px;border-bottom:1px solid #e2e8f0">' + email + '</td></tr><tr style="background:#f8fafc"><td style="padding:10px 12px;font-weight:600;color:#374151">Estado</td><td style="padding:10px 12px"><span style="background:#fef3c7;color:#d97706;padding:3px 10px;border-radius:20px;font-size:.8rem;font-weight:600">Pendiente de activacion</span></td></tr></table><div style="text-align:center;margin-top:20px"><a href="https://licenfy.com/admin.html" style="display:inline-block;background:#008bff;color:#fff;padding:13px 28px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.95rem">Activar acceso ahora</a></div><p style="color:#94a3b8;font-size:.75rem;text-align:center;margin-top:20px">Licenfy &mdash; hola@licenfy.com</p></div></div>'
+      })
+    });
+  } catch(e){ console.error('Resend notify error:', e); }
 }
 
 async function signInWithGoogle(){
