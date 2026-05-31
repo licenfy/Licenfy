@@ -605,8 +605,9 @@ async function authSubmit(){
     } else if(mode==='signup'){
       if(!name){ showAuthError(es?'Por favor ingresa tu nombre.':'Please enter your name.'); btn.disabled=false; btn.textContent=es?'Crear cuenta':'Create account'; return; }
       const d = await signUp(email, pass, name);
-      // Notificar a Andres via Resend (sin bloquear)
-      notifyFounderRequest(email, name);
+      // Guardar el registro del fundador en la tabla (para el panel admin)
+      const newUserId = (d && (d.user && d.user.id ? d.user.id : d.id)) || null;
+      recordFounderSignup(newUserId, email, name);
       // Caso 1: sesion inmediata (confirmacion de email desactivada)
       if(d && d.access_token){
         localStorage.setItem('sb-qmqianheahkqetrevveh-auth-token', JSON.stringify({
@@ -1019,22 +1020,25 @@ async function signUp(email, password, fullName){
   return d;
 }
 
-async function notifyFounderRequest(email, name){
+async function recordFounderSignup(userId, email, name){
+  const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFtcWlhbmhlYWhrcWV0cmV2dmVoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0OTY0MzYsImV4cCI6MjA5MjA3MjQzNn0.SCYFX41o1p_rueWIjbmQ4QDdYaY2PVAF_idqiBqB14k';
   try {
-    await fetch('https://api.resend.com/emails', {
+    await fetch('https://qmqianheahkqetrevveh.supabase.co/rest/v1/founder_signups', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer re_h2im6b5L_8a1aEmdTjjiaYAdijL2fKVUS'
+        'apikey': ANON,
+        'Authorization': 'Bearer ' + ANON,
+        'Prefer': 'return=minimal'
       },
       body: JSON.stringify({
-        from: 'Licenfy <hola@licenfy.com>',
-        to: ['hola@licenfy.com'],
-        subject: 'Nuevo Usuario Fundador: ' + name,
-        html: '<div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px;background:#fff"><div style="background:linear-gradient(135deg,#1a3a6d,#008bff);padding:24px;border-radius:12px 12px 0 0;text-align:center"><h1 style="color:#fff;margin:0;font-size:1.3rem">Nuevo Usuario Fundador</h1></div><div style="padding:24px;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 12px 12px"><p style="color:#374151;margin-top:0">Se acabo de registrar un nuevo Usuario Fundador en Licenfy. Activa su acceso desde el panel de administracion.</p><table style="width:100%;border-collapse:collapse;margin:16px 0"><tr style="background:#f8fafc"><td style="padding:10px 12px;font-weight:600;color:#374151;border-bottom:1px solid #e2e8f0">Nombre</td><td style="padding:10px 12px;border-bottom:1px solid #e2e8f0">' + name + '</td></tr><tr><td style="padding:10px 12px;font-weight:600;color:#374151;border-bottom:1px solid #e2e8f0">Email</td><td style="padding:10px 12px;border-bottom:1px solid #e2e8f0">' + email + '</td></tr><tr style="background:#f8fafc"><td style="padding:10px 12px;font-weight:600;color:#374151">Estado</td><td style="padding:10px 12px"><span style="background:#fef3c7;color:#d97706;padding:3px 10px;border-radius:20px;font-size:.8rem;font-weight:600">Pendiente de activacion</span></td></tr></table><div style="text-align:center;margin-top:20px"><a href="https://licenfy.com/admin.html" style="display:inline-block;background:#008bff;color:#fff;padding:13px 28px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.95rem">Activar acceso ahora</a></div><p style="color:#94a3b8;font-size:.75rem;text-align:center;margin-top:20px">Licenfy &mdash; hola@licenfy.com</p></div></div>'
+        user_id: userId || null,
+        full_name: name,
+        email: email,
+        status: 'pending'
       })
     });
-  } catch(e){ console.error('Resend notify error:', e); }
+  } catch(e){ console.error('founder_signups error:', e); }
 }
 
 async function signInWithGoogle(){
