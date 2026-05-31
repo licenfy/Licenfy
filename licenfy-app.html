@@ -4660,6 +4660,8 @@ function getPlanId(){
   // Fallback directo a _activeSub si localStorage aún no tiene el dato
   const pid = (s && s.planId) || (_activeSub && _activeSub.plan_id) || '';
   if(!pid) return null;
+  // Usuarios Fundadores: acceso completo (equivalente al plan más alto)
+  if(pid === 'founder') return 'semestral';
   // Match by Stripe price IDs
   if(pid === 'price_1TTVAu2KlpDAd2ldUcaFaEo5') return 'semestral';
   if(pid === 'price_1TTVAJ2KlpDAd2ldfgbOAPd1') return 'quarterly';
