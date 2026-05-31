@@ -1493,5 +1493,63 @@ function closeMobileMenu(){
 // Cerrar menú al hacer scroll
 window.addEventListener('scroll', ()=>{ if(document.getElementById('mobileMenu').classList.contains('open')) closeMobileMenu(); });
 </script>
+<!-- ════════ POP-UP USUARIOS FUNDADORES ════════ -->
+<div id="founderPopup" class="fp-overlay" style="display:none">
+  <div class="fp-card">
+    <button class="fp-close" onclick="closeFounderPopup()" aria-label="Cerrar">✕</button>
+    <div class="fp-badge">🔑 <span data-es="Solo 10 lugares" data-en="Only 10 spots">Solo 10 lugares</span></div>
+    <h2 class="fp-title" data-es="Programa de Usuarios Fundadores" data-en="Founding Users Program">Programa de Usuarios Fundadores</h2>
+    <p class="fp-text" data-es="Antes de abrir al público, estamos invitando a 10 personas a usar Licenfy gratis por 30 días." data-en="Before opening to the public, we're inviting 10 people to use Licenfy free for 30 days.">Antes de abrir al público, estamos invitando a 10 personas a usar Licenfy gratis por 30 días.</p>
+    <ul class="fp-benefits">
+      <li data-es="✅ 30 días de acceso completo — gratis" data-en="✅ 30 days of full access — free">✅ 30 días de acceso completo — gratis</li>
+      <li data-es="✅ Acceso antes que nadie" data-en="✅ Early access before anyone">✅ Acceso antes que nadie</li>
+      <li data-es="🎁 30% de descuento al finalizar el mes" data-en="🎁 30% discount at the end of the month">🎁 30% de descuento al finalizar el mes</li>
+    </ul>
+    <button class="fp-btn" onclick="founderSignup()" data-es="Registrarme como Fundador" data-en="Sign up as a Founder">Registrarme como Fundador</button>
+    <button class="fp-dismiss" onclick="closeFounderPopup()" data-es="Ahora no, gracias" data-en="Not now, thanks">Ahora no, gracias</button>
+  </div>
+</div>
+
+<style>
+.fp-overlay{position:fixed;inset:0;background:rgba(15,23,42,.6);backdrop-filter:blur(4px);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;animation:fpFade .3s ease}
+@keyframes fpFade{from{opacity:0}to{opacity:1}}
+.fp-card{background:#fff;border-radius:22px;padding:34px 28px 28px;max-width:400px;width:100%;text-align:center;position:relative;box-shadow:0 24px 70px rgba(0,0,0,.3);animation:fpPop .35s cubic-bezier(.18,.89,.32,1.28)}
+@keyframes fpPop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.fp-close{position:absolute;top:14px;right:14px;background:#f1f5f9;border:none;width:32px;height:32px;border-radius:50%;font-size:.85rem;color:#64748b;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.fp-close:hover{background:#e2e8f0}
+.fp-badge{display:inline-block;background:rgba(26,127,232,.12);border:1.5px solid rgba(26,127,232,.3);color:#1a7fe8;font-size:.72rem;font-weight:700;padding:6px 16px;border-radius:30px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px}
+.fp-title{font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:800;color:#1a2f5a;line-height:1.2;margin:0 0 10px}
+.fp-text{font-size:.88rem;color:#64748b;line-height:1.55;margin:0 0 18px}
+.fp-benefits{list-style:none;padding:0;margin:0 0 22px;text-align:left;display:flex;flex-direction:column;gap:9px}
+.fp-benefits li{font-size:.85rem;color:#374151;font-weight:500}
+.fp-btn{width:100%;padding:14px;background:linear-gradient(135deg,#1a3a6d,#1a7fe8);color:#fff;border:none;border-radius:12px;font-family:inherit;font-size:.95rem;font-weight:700;cursor:pointer;transition:opacity .2s;margin-bottom:10px}
+.fp-btn:hover{opacity:.92}
+.fp-dismiss{background:none;border:none;color:#94a3b8;font-size:.8rem;cursor:pointer;font-family:inherit;text-decoration:underline}
+.fp-dismiss:hover{color:#64748b}
+</style>
+
+<script>
+function showFounderPopup(){
+  if(sessionStorage.getItem('founderPopupSeen')) return;
+  var p = document.getElementById('founderPopup');
+  if(p){
+    p.style.display='flex';
+    if(typeof applyLang === 'function'){ try{ applyLang(typeof currentLang !== 'undefined' ? currentLang : 'es'); }catch(e){} }
+  }
+}
+function closeFounderPopup(){
+  var p = document.getElementById('founderPopup');
+  if(p) p.style.display='none';
+  sessionStorage.setItem('founderPopupSeen','1');
+}
+function founderSignup(){
+  sessionStorage.removeItem('selectedPlan');
+  localStorage.removeItem('pendingPlan');
+  sessionStorage.setItem('founderPopupSeen','1');
+  window.location.href = '/licenfy-app.html?registro=1';
+}
+window.addEventListener('load', function(){ setTimeout(showFounderPopup, 1500); });
+</script>
+
 </body>
 </html>

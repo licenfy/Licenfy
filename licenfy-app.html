@@ -734,7 +734,9 @@ async function supaInit(){
   } catch(e){ console.warn('session read error:', e); }
 
   if(!session){
-    showAuthScreen('login');
+    const urlP = new URLSearchParams(window.location.search);
+    const wantSignup = urlP.get('registro') === '1' || urlP.get('signup') === '1';
+    showAuthScreen(wantSignup ? 'signup' : 'login');
     hideGate();
   } else {
     // Sesion valida - verificar suscripcion via REST
