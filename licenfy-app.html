@@ -603,21 +603,29 @@ async function authSubmit(){
       window.location.reload();
       return;
     } else if(mode==='signup'){
-      if(!name){ showAuthError(es?'Por favor ingresa tu nombre.':'Please enter your name.'); btn.disabled=false; return; }
-      const {data} = await signUp(email, pass, name);
-      // Notificar a Andres via Resend
+      if(!name){ showAuthError(es?'Por favor ingresa tu nombre.':'Please enter your name.'); btn.disabled=false; btn.textContent=es?'Crear cuenta':'Create account'; return; }
+      const d = await signUp(email, pass, name);
+      // Notificar a Andres via Resend (sin bloquear)
       notifyFounderRequest(email, name);
-      if(data && !data.session){
-        showAuthSuccess(es?'Solicitud enviada! Revisa tu email en las proximas 24 horas.':'Request sent! Check your email within 24 hours.');
-        btn.disabled=false;
-        btn.textContent=es?'Crear cuenta':'Create account';
-        return;
-      }
-      // Sesion creada de inmediato - mostrar pantalla de espera
-      if(data && data.session){
+      // Caso 1: sesion inmediata (confirmacion de email desactivada)
+      if(d && d.access_token){
+        localStorage.setItem('sb-qmqianheahkqetrevveh-auth-token', JSON.stringify({
+          access_token: d.access_token,
+          refresh_token: d.refresh_token,
+          expires_in: d.expires_in,
+          expires_at: Math.floor(Date.now()/1000) + (d.expires_in||3600),
+          token_type: 'bearer',
+          user: d.user || d
+        }));
+        await new Promise(r => setTimeout(r, 200));
         window.location.reload();
         return;
       }
+      // Caso 2: cuenta creada sin sesion (confirmacion activada) -> solicitud recibida
+      showAuthSuccess(es?'¡Solicitud recibida! Te contactaremos en las próximas 24 horas.':'Request received! We will contact you within 24 hours.');
+      btn.disabled=false;
+      btn.textContent=es?'Crear cuenta':'Create account';
+      return;
     } else if(mode==='trial'){
       if(!name){ showAuthError(es?'Por favor ingresa tu nombre.':'Please enter your name.'); btn.disabled=false; return; }
       await signUp(email, pass, name);
@@ -641,12 +649,12 @@ async function authSubmit(){
     const msg = err.message||'';
     if(msg.includes('Invalid login') || msg.includes('invalid_credentials') || msg.includes('Login fallido')) 
       showAuthError(es?'Email o contraseña incorrectos.':'Invalid email or password.');
-    else if(msg.includes('already registered')) 
+    else if(msg.includes('already registered') || msg.includes('already been registered') || msg.includes('User already')) 
       showAuthError(es?'Este email ya está registrado. Inicia sesión.':'Email already registered. Sign in instead.');
     else 
       showAuthError(msg||'Error desconocido. Intenta de nuevo.');
     btn.disabled=false;
-    btn.textContent=es?'Iniciar sesión':'Sign in';
+    btn.textContent = mode==='signup'?(es?'Crear cuenta':'Create account'):mode==='trial'?(es?'Activar prueba gratuita':'Activate free trial'):mode==='forgot'?(es?'Enviar enlace':'Send link'):(es?'Iniciar sesión':'Sign in');
   }
 }
 
@@ -992,12 +1000,23 @@ async function loadUserDataREST(){
 }
 
 async function signUp(email, password, fullName){
-  const { data, error } = await _supa.auth.signUp({
-    email, password,
-    options: { data: { full_name: fullName, founder_request: true } }
+  const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFtcWlhbmhlYWhrcWV0cmV2dmVoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0OTY0MzYsImV4cCI6MjA5MjA3MjQzNn0.SCYFX41o1p_rueWIjbmQ4QDdYaY2PVAF_idqiBqB14k';
+  const res = await fetch('https://qmqianheahkqetrevveh.supabase.co/auth/v1/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': ANON
+    },
+    body: JSON.stringify({
+      email, password,
+      data: { full_name: fullName, founder_request: true }
+    })
   });
-  if(error) throw error;
-  return data;
+  const d = await res.json();
+  if(!res.ok){
+    throw new Error(d.msg || d.error_description || d.error_code || d.error || 'No se pudo crear la cuenta');
+  }
+  return d;
 }
 
 async function notifyFounderRequest(email, name){
