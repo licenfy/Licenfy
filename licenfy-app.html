@@ -1022,6 +1022,7 @@ async function signUp(email, password, fullName){
 
 async function recordFounderSignup(userId, email, name){
   const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFtcWlhbmhlYWhrcWV0cmV2dmVoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0OTY0MzYsImV4cCI6MjA5MjA3MjQzNn0.SCYFX41o1p_rueWIjbmQ4QDdYaY2PVAF_idqiBqB14k';
+  // 1. Guardar en la tabla (para el panel admin)
   try {
     await fetch('https://qmqianheahkqetrevveh.supabase.co/rest/v1/founder_signups', {
       method: 'POST',
@@ -1039,6 +1040,19 @@ async function recordFounderSignup(userId, email, name){
       })
     });
   } catch(e){ console.error('founder_signups error:', e); }
+  // 2. Avisar a Andres por correo (Formspree)
+  try {
+    await fetch('https://formspree.io/f/xykvqjgw', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: 'Nuevo Usuario Fundador: ' + name,
+        nombre: name,
+        email: email,
+        mensaje: 'Se registro un nuevo Usuario Fundador. Activa su acceso en licenfy.com/admin.html'
+      })
+    });
+  } catch(e){ console.error('formspree notify error:', e); }
 }
 
 async function signInWithGoogle(){
