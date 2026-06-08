@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- SEO Primary -->
-<title>Licenfy — Prepárate para el examen CDI de California en español</title>
-<meta name="description" content="La única plataforma de preparación para el examen Personal Lines del CDI de California en español. Preguntas reales, simulacros cronometrados y tutor IA disponible 24/7. Desde $39.99/mes.">
+<title>Licenfy: Prepárate para el examen CDI de California en español</title>
+<meta name="description" content="Plataforma moderna para preparar el examen Personal Lines del CDI de California, en español e inglés. Preguntas reales, simulacros y Lic, tu tutor IA 24/7. Desde $39.99/mes.">
 <meta name="keywords" content="examen CDI California, licencia de seguros California, Personal Lines, preparación examen seguros, CDI español, PSI Services California">
 <link rel="canonical" href="https://licenfy.com/">
 <meta name="robots" content="index, follow">
@@ -16,8 +16,8 @@
 <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://licenfy.com/">
-<meta property="og:title" content="Licenfy — Prepárate para el examen CDI de California en español">
-<meta property="og:description" content="La única plataforma en español para el examen Personal Lines del CDI de California. Simulacros reales, tutor IA 24/7 y preguntas oficiales. Empieza con 7 días de prueba.">
+<meta property="og:title" content="Licenfy: Prepárate para el examen CDI de California en español">
+<meta property="og:description" content="Entrena para el examen Personal Lines del CDI de California en español e inglés. Simulacros reales, preguntas oficiales y Lic, tu tutor IA 24/7. Empieza con 7 días de prueba.">
 <meta property="og:image" content="https://licenfy.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -26,7 +26,7 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Licenfy — Examen CDI California en español">
+<meta name="twitter:title" content="Licenfy: Examen CDI California en español">
 <meta name="twitter:description" content="Prepárate para el examen de seguros del CDI de California con preguntas reales y tutor IA en español.">
 <meta name="twitter:image" content="https://licenfy.com/og-image.png">
 
@@ -56,7 +56,7 @@
     "@type": "Offer",
     "price": "39.99",
     "priceCurrency": "USD",
-    "description": "Plan Mensual — Preparación para el examen CDI California"
+    "description": "Plan Mensual: Preparación para el examen CDI California"
   }
 }
 </script>
@@ -98,7 +98,7 @@ nav.scrolled{box-shadow:0 2px 20px rgba(26,47,90,.08)}
 .hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(26,47,90,.05) 0%,transparent 70%);pointer-events:none}
 .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:#e8f4fd;border:1px solid #bde3fc;border-radius:100px;padding:6px 14px;font-size:.75rem;font-weight:700;color:var(--blue);letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px}
-.hero-badge span{width:6px;height:6px;background:var(--blue);border-radius:50%;animation:pulse 2s infinite}
+.hero-badge .badge-dot{width:6px;height:6px;background:var(--blue);border-radius:50%;animation:pulse 2s infinite;flex-shrink:0}
 @keyframes licSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
 h1{font-family:'Outfit',sans-serif;font-size:3rem;font-weight:900;line-height:1.1;color:var(--navy);margin-bottom:20px}
@@ -114,6 +114,13 @@ h1 em{font-style:normal;color:var(--blue)}
 .trust-avatars span{width:32px;height:32px;border-radius:50%;border:2px solid #fff;background:linear-gradient(135deg,var(--blue),var(--navy));display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff;margin-left:-8px}
 .trust-avatars span:first-child{margin-left:0}
 .hero-visual{position:relative}
+.hero-photo-wrap{position:relative;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:4/5;background:linear-gradient(150deg,var(--navy),var(--blue))}
+.hero-photo{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.hero-photo-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(26,47,90,.55) 100%);pointer-events:none}
+.hero-photo-wrap.no-photo{aspect-ratio:4/5}
+.hero-photo-wrap.no-photo::before{content:'💪';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:4rem;opacity:.5}
+.hero-visual .app-mockup{position:absolute;bottom:-24px;left:-44px;width:230px;z-index:3}
+@media(max-width:480px){.hero-visual .app-mockup{display:none}}
 .app-mockup{background:#fff;border-radius:24px;box-shadow:var(--shadow-lg);border:1px solid var(--border);overflow:hidden;transform:perspective(1000px) rotateY(-5deg) rotateX(2deg);transition:transform .3s}
 .app-mockup:hover{transform:perspective(1000px) rotateY(-2deg) rotateX(1deg)}
 .mockup-bar{background:var(--navy);padding:12px 16px;display:flex;align-items:center;gap:8px}
@@ -132,7 +139,7 @@ h1 em{font-style:normal;color:var(--blue)}
 .mockup-opt.wrong{background:#fef2f2;border-color:#fca5a5;color:#991b1b}
 .float-badge{position:absolute;background:#fff;border-radius:14px;box-shadow:var(--shadow-lg);padding:12px 16px;display:flex;align-items:center;gap:10px;border:1px solid var(--border);animation:float 3s ease-in-out infinite}
 .float-badge-1{top:-20px;right:-20px;animation-delay:0s}
-.float-badge-2{bottom:40px;left:-30px;animation-delay:1.5s}
+.float-badge-2{top:36px;right:-24px;animation-delay:1.5s}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
 /* STATS */
@@ -284,7 +291,10 @@ footer{background:#0a1628;padding:48px 24px 24px;color:rgba(255,255,255,.6)}
 
   h1{font-size:2.1rem}
   .hero-inner{grid-template-columns:1fr;gap:40px}
-  .hero-visual{display:none}
+  .hero-visual{display:block;margin-top:4px}
+  .hero-visual .app-mockup{display:none}
+  .hero-visual .float-badge{display:none}
+  .hero-photo-wrap{aspect-ratio:16/12;max-height:340px}
   .stats-inner{grid-template-columns:repeat(2,1fr)}
   .features-grid{grid-template-columns:1fr}
   .how-inner{grid-template-columns:1fr}
@@ -361,6 +371,27 @@ footer{background:#0a1628;padding:48px 24px 24px;color:rgba(255,255,255,.6)}
 .btn-white:hover{filter:brightness(.92)}
 .btn-ghost:hover{background:rgba(255,255,255,.1)}
 button:not(.ham-btn):not(.lic-chat-btn):not(.wa-btn):not(.faq-q):not([class*="modal"]):hover{filter:brightness(.9)}
+
+/* GLOSARIO HOVER (demo) */
+.gloss-term{font-weight:700;color:#1a3a6d;border-bottom:2px dotted #008bff;cursor:pointer;white-space:nowrap}
+.gloss-pop{position:fixed;background:#0f172a;color:#fff;padding:12px 14px;border-radius:10px;font-size:.8rem;font-weight:400;line-height:1.55;max-width:260px;z-index:9999;box-shadow:0 12px 34px rgba(0,0,0,.32);opacity:0;transition:opacity .15s;pointer-events:none}
+.gloss-pop.show{opacity:1}
+.gloss-pop .gp-term{font-weight:800;color:#7cc4ff;display:block;margin-bottom:4px;font-size:.72rem;text-transform:uppercase;letter-spacing:.4px}
+
+/* TABLA COMPARATIVA, adaptable en móvil (sin scroll horizontal) */
+@media(max-width:480px){
+  .comp-wrap{overflow-x:visible!important}
+  .comp-table{min-width:0!important;font-size:.74rem!important}
+  .comp-table th,.comp-table td{padding:11px 7px!important}
+  .comp-table th:first-child,.comp-table td:first-child{width:46%}
+}
+
+/* PRECIOS, tabla en desktop, tarjetas en móvil */
+.pricing-cards-mobile{display:none}
+@media(max-width:768px){
+  .pricing-table-desktop{display:none!important}
+  .pricing-cards-mobile{display:flex!important;flex-direction:column;gap:18px;margin-top:32px}
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -400,21 +431,24 @@ button:not(.ham-btn):not(.lic-chat-btn):not(.wa-btn):not(.faq-q):not([class*="mo
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-content fade-up">
-      <div class="hero-badge"><span></span data-es="La única plataforma de práctica para el examen CDI de California en español" data-en="The only CDI prep platform in Spanish">La única plataforma de práctica para el examen CDI de California en español</div>
-      <h1><span data-es="El " data-en=""></span><em data-es="40% reprueba" data-en="40% fail">40% reprueba</em><span data-es=" el examen de seguros en California. Tú no tienes que ser uno de ellos." data-en=" the California insurance exam. You don't have to be one of them."> el examen de seguros en California. Tú no tienes que ser uno de ellos.</span></h1>
-      <p class="hero-sub" data-es="Licenfy te entrena con preguntas reales del CDI, simulacros cronometrados y un tutor IA que te explica cada concepto — en español e inglés. Estudia 15 minutos al día y llega confiado el día del examen." data-en="Licenfy trains you with real CDI questions, timed practice exams and an AI tutor that explains every concept — in Spanish and English. Study 15 minutes a day and arrive confident on exam day.">Licenfy te entrena con preguntas reales del CDI, simulacros cronometrados y un tutor IA que te explica cada concepto — en español e inglés. Estudia 15 minutos al día y llega confiado el día del examen.</p>
+      <div class="hero-badge"><span class="badge-dot"></span><span class="badge-text" data-es="Practica en español · con Lic, tu tutor IA 24/7" data-en="Practice in Spanish · with Lic, your AI tutor 24/7">Practica en español · con Lic, tu tutor IA 24/7</span></div>
+      <h1><span data-es="Tu licencia de " data-en="Your "></span><em data-es="Personal Lines" data-en="Personal Lines">Personal Lines</em><span data-es=" está más cerca de lo que crees." data-en=" license is closer than you think."> está más cerca de lo que crees.</span></h1>
+      <p class="hero-sub" data-es="El examen del CDI asusta, lo sabemos. Practicas a tu ritmo con preguntas reales y simulacros, pero no sola: Lic, tu tutor con IA, te explica cada duda al instante, 24/7. Hasta que llegues lista y segura." data-en="The CDI exam feels scary, we know. You practice at your own pace with real questions and mock exams, but never alone: Lic, your AI tutor, answers every doubt instantly, 24/7. Until you arrive ready and confident.">El examen del CDI asusta, lo sabemos. Practicas a tu ritmo con preguntas reales y simulacros, pero no sola: Lic, tu tutor con IA, te explica cada duda al instante, 24/7. Hasta que llegues lista y segura.</p>
       <div class="hero-btns">
-        <a href="#" class="btn-primary" onclick="event.preventDefault();scrollToPricing()" data-es="🚀 Empezar ahora — 7 días de prueba" data-en="🚀 Start now — 7-day trial">🚀 Empezar ahora — 7 días de prueba</a>
+        <a href="#" class="btn-primary" onclick="event.preventDefault();scrollToPricing()" data-es="Empieza tu prueba de 7 días" data-en="Start your 7-day trial">Empieza tu prueba de 7 días</a>
         <a href="#prueba" class="btn-secondary" data-es="Probar una pregunta →" data-en="Try a question →">Probar una pregunta →</a>
       </div>
       <div class="hero-trust">
         <div class="trust-avatars">
           <span>MR</span><span>AL</span><span>JC</span><span>SP</span>
         </div>
-        <span data-es="Candidatos preparándose con Licenfy en California" data-en="Candidates preparing with Licenfy in California">Candidatos preparándose con Licenfy en California</span>
+        <span data-es="Mujeres preparándose con Licenfy en California" data-en="Women preparing with Licenfy in California">Mujeres preparándose con Licenfy en California</span>
       </div>
     </div>
     <div class="hero-visual fade-up" style="transition-delay:.2s">
+      <div class="hero-photo-wrap">
+        <img src="hero-mujer.jpg" alt="Mujer profesional preparándose con Licenfy" class="hero-photo" onerror="this.closest('.hero-photo-wrap').classList.add('no-photo');this.remove()">
+      </div>
       <div class="app-mockup">
         <div class="mockup-bar">
           <div class="mockup-dots"><span></span><span></span><span></span></div>
@@ -424,7 +458,7 @@ button:not(.ham-btn):not(.lic-chat-btn):not(.wa-btn):not(.faq-q):not([class*="mo
             <div class="score-circle">78%</div>
             <div>
               <div style="font-size:.82rem;font-weight:700;color:#065f46" data-es="¡Buen progreso!" data-en="Great progress!">¡Buen progreso!</div>
-              <div style="font-size:.74rem;color:#059669;margin-top:2px" data-es="Regulaciones CA — 14 preguntas" data-en="CA Regulations — 14 questions">Regulaciones CA — 14 preguntas</div>
+              <div style="font-size:.74rem;color:#059669;margin-top:2px" data-es="Regulaciones CA, 14 preguntas" data-en="CA Regulations, 14 questions">Regulaciones CA, 14 preguntas</div>
             </div>
           </div>
           <div class="mockup-q">¿Cuál es el período de gracia estándar para el pago de primas en una póliza de vida en California?</div>
@@ -436,18 +470,11 @@ button:not(.ham-btn):not(.lic-chat-btn):not(.wa-btn):not(.faq-q):not([class*="mo
           </div>
         </div>
       </div>
-      <div class="float-badge float-badge-1">
-        <span style="font-size:1.2rem">🏆</span>
-        <div>
-          <div style="font-size:.72rem;font-weight:700;color:#1a2f5a" data-es="Simulacro aprobado" data-en="Exam passed">Simulacro aprobado</div>
-          <div style="font-size:.68rem;color:#64748b">Score: 82% · 135 min</div>
-        </div>
-      </div>
       <div class="float-badge float-badge-2">
-        <span style="font-size:1.2rem">🧠</span>
+        <span style="font-size:1.5rem">🧠</span>
         <div>
-          <div style="font-size:.72rem;font-weight:700;color:#1a2f5a" data-es="Tutor IA activo" data-en="AI Tutor active">Tutor IA activo</div>
-          <div style="font-size:.68rem;color:#64748b" data-es="Responde en español" data-en="Responds in Spanish">Responde en español</div>
+          <div style="font-size:.86rem;font-weight:800;color:#1a2f5a" data-es="Lic, tu tutor IA" data-en="Lic, your AI tutor">Lic, tu tutor IA</div>
+          <div style="font-size:.74rem;color:#64748b" data-es="Responde tus dudas 24/7" data-en="Answers your questions 24/7">Responde tus dudas 24/7</div>
         </div>
       </div>
     </div>
@@ -455,30 +482,59 @@ button:not(.ham-btn):not(.lic-chat-btn):not(.wa-btn):not(.faq-q):not([class*="mo
 </section>
 
 <!-- PRUEBA INTERACTIVA -->
-<section id="prueba" style="padding:80px 24px;background:#fff">
+<section id="prueba" style="padding:80px 24px;background:#f8fafc">
   <div style="max-width:700px;margin:0 auto;text-align:center">
-    <div class="section-label" data-es="Pruébalo ahora" data-en="Try it now">Pruébalo ahora</div>
-    <div class="section-title" style="margin-bottom:12px" data-es="¿Estás listo para el examen?" data-en="Are you ready for the exam?">¿Estás listo para el examen?</div>
-    <p style="color:#64748b;font-size:.95rem;margin-bottom:40px;line-height:1.7" data-es="Esta es una pregunta real del examen CDI de California. Intenta responderla:" data-en="This is a real question from the California CDI exam. Try to answer it:">Esta es una pregunta real del examen CDI de California. Intenta responderla:</p>
-    <div id="demoQ" style="background:#f8fafc;border-radius:20px;padding:32px;border:1.5px solid #e2e8f0;text-align:left">
-      <div style="font-size:.95rem;font-weight:600;color:#0f172a;line-height:1.6;margin-bottom:24px" id="demoQText">
-        <span data-es="¿Cuántas preguntas tiene el examen de Personal Lines del CDI de California y cuál es el porcentaje mínimo para aprobar?" data-en="How many questions does the California CDI Personal Lines exam have and what is the minimum passing percentage?">¿Cuántas preguntas tiene el examen de Personal Lines del CDI de California y cuál es el porcentaje mínimo para aprobar?</span>
+    <div class="section-label" data-es="Ponte a prueba" data-en="Test yourself">Ponte a prueba</div>
+    <div class="section-title" style="margin-bottom:12px" data-es="¿Lista para tu primera pregunta?" data-en="Ready for your first question?">¿Lista para tu primera pregunta?</div>
+    <p style="color:#64748b;font-size:.95rem;margin-bottom:16px;line-height:1.7" data-es="Una pregunta real del examen CDI. Elige tu respuesta, y si no conoces una palabra, tócala para ver su significado." data-en="A real CDI exam question. Pick your answer, and if a word is unfamiliar, tap it to see its meaning.">Una pregunta real del examen CDI. Elige tu respuesta, y si no conoces una palabra, tócala para ver su significado.</p>
+    <div id="demoQ" style="background:#fff;border-radius:20px;padding:32px;border:1px solid #e8edf3;text-align:left;box-shadow:0 12px 40px rgba(26,47,90,.08)">
+      <div style="font-size:1rem;font-weight:700;color:#0f172a;line-height:1.6;margin-bottom:24px">
+        <span data-es="Los daños por inundación a una vivienda asegurada:" data-en="Flood damage to an insured home is:">Los daños por inundación a una vivienda asegurada:</span>
       </div>
       <div id="demoOpts" style="display:flex;flex-direction:column;gap:10px">
-        <button onclick="checkDemo(this,'wrong')" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'" data-es="A. 100 preguntas · 70% para aprobar" data-en="A. 100 questions · 70% to pass">A. 100 preguntas · 70% para aprobar</button>
-        <button onclick="checkDemo(this,'wrong')" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'" data-es="B. 80 preguntas · 75% para aprobar" data-en="B. 80 questions · 75% to pass">B. 80 preguntas · 75% para aprobar</button>
-        <button onclick="checkDemo(this,'correct')" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'" data-es="C. 90 preguntas · 60% para aprobar" data-en="C. 90 questions · 60% to pass">C. 90 preguntas · 60% para aprobar</button>
-        <button onclick="checkDemo(this,'wrong')" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'" data-es="D. 120 preguntas · 65% para aprobar" data-en="D. 120 questions · 65% to pass">D. 120 preguntas · 65% para aprobar</button>
+        <button onclick="checkDemo(this,'wrong')" data-html="1" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'" data-es='A. Están cubiertos en todas las pólizas como un <span class="gloss-term" data-term="peril">peril</span> estándar' data-en='A. Covered under all policies as a standard <span class="gloss-term" data-term="peril">peril</span>'>A. Están cubiertos en todas las pólizas como un <span class="gloss-term" data-term="peril">peril</span> estándar</button>
+        <button onclick="checkDemo(this,'correct')" data-html="1" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'" data-es='B. Están excluidos de TODAS las pólizas estándar, se requiere cobertura <span class="gloss-term" data-term="nfip">NFIP</span> o seguro privado aparte' data-en='B. Excluded from ALL standard policies, separate <span class="gloss-term" data-term="nfip">NFIP</span> or private coverage required'>B. Están excluidos de TODAS las pólizas estándar, se requiere cobertura <span class="gloss-term" data-term="nfip">NFIP</span> o seguro privado aparte</button>
+        <button onclick="checkDemo(this,'wrong')" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'" data-es="C. Están cubiertos bajo HO-3 pero excluidos de HO-1 y HO-2" data-en="C. Covered under HO-3 but excluded from HO-1 and HO-2">C. Están cubiertos bajo HO-3 pero excluidos de HO-1 y HO-2</button>
+        <button onclick="checkDemo(this,'wrong')" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;font-family:inherit;font-size:.88rem;color:#374151;transition:all .2s" onmouseover="if(!this.dataset.answered)this.style.borderColor='#008bff'" onmouseout="if(!this.dataset.answered)this.style.borderColor='#e2e8f0'" data-es="D. Están cubiertos automáticamente hasta $50,000" data-en="D. Automatically covered up to $50,000">D. Están cubiertos automáticamente hasta $50,000</button>
       </div>
       <div id="demoFeedback" style="display:none;margin-top:20px;padding:16px 20px;border-radius:12px;font-size:.88rem;line-height:1.6"></div>
       <div id="demoCta" style="display:none;margin-top:20px;text-align:center">
-        <p style="color:#64748b;font-size:.85rem;margin-bottom:12px">¿Quieres practicar más de 300 preguntas del CDI?</p>
-        <a href="#" class="btn-primary" onclick="event.preventDefault();scrollToPricing()" style="display:inline-flex">🚀 Empezar — 7 días de prueba</a>
+        <p style="color:#64748b;font-size:.85rem;margin-bottom:12px" data-es="¿Quieres practicar más de 300 preguntas reales del CDI?" data-en="Want to practice more than 300 real CDI questions?">¿Quieres practicar más de 300 preguntas reales del CDI?</p>
+        <a href="#" class="btn-primary" onclick="event.preventDefault();scrollToPricing()" style="display:inline-flex" data-es="Empieza tu prueba de 7 días" data-en="Start your 7-day trial">Empieza tu prueba de 7 días</a>
       </div>
     </div>
   </div>
 </section>
 <script>
+var GLOSS_DEMO = {
+  peril: {t:'Peril', es:'La causa de una pérdida: incendio, robo, tormenta. Es el evento que provoca el daño.', en:'The cause of a loss: fire, theft, storm. The event that causes the damage.'},
+  nfip: {t:'NFIP', es:'Programa Nacional de Seguro de Inundaciones (FEMA). Ofrece seguro de inundaciones porque las pólizas normales las excluyen.', en:'National Flood Insurance Program (FEMA). Provides flood insurance because standard policies exclude floods.'}
+};
+var glossPop = null;
+function showGlossPop(el){
+  closeGlossPop();
+  var g = GLOSS_DEMO[el.getAttribute('data-term')];
+  if(!g) return;
+  var lang = (typeof currentLang!=='undefined' && currentLang==='en') ? 'en' : 'es';
+  glossPop = document.createElement('div');
+  glossPop.className = 'gloss-pop';
+  glossPop.innerHTML = '<span class="gp-term">'+g.t+'</span>'+g[lang];
+  document.body.appendChild(glossPop);
+  var r = el.getBoundingClientRect(), pr = glossPop.getBoundingClientRect();
+  var top = r.top - pr.height - 8;
+  if(top < 8) top = r.bottom + 8;
+  var left = Math.max(8, Math.min(r.left + r.width/2 - pr.width/2, window.innerWidth - pr.width - 8));
+  glossPop.style.top = top+'px'; glossPop.style.left = left+'px';
+  requestAnimationFrame(function(){ if(glossPop) glossPop.classList.add('show'); });
+}
+function closeGlossPop(){ if(glossPop){ glossPop.remove(); glossPop=null; } }
+document.addEventListener('click', function(e){
+  var term = e.target.closest && e.target.closest('.gloss-term');
+  if(term){ e.stopPropagation(); e.preventDefault(); showGlossPop(term); return; }
+  closeGlossPop();
+}, true);
+window.addEventListener('scroll', closeGlossPop, true);
+
 var demoAnswered = false;
 function checkDemo(btn, result) {
   if(demoAnswered) return;
@@ -487,15 +543,16 @@ function checkDemo(btn, result) {
   opts.forEach(function(b){ b.style.cursor='default'; b.dataset.answered='1'; });
   var fb = document.getElementById('demoFeedback');
   var cta = document.getElementById('demoCta');
+  var isEn = (typeof currentLang!=='undefined' && currentLang==='en');
   if(result === 'correct') {
     btn.style.background='#ecfdf5'; btn.style.borderColor='#6ee7b7'; btn.style.color='#065f46'; btn.style.fontWeight='700';
     fb.style.background='#ecfdf5'; fb.style.border='1px solid #6ee7b7'; fb.style.color='#065f46';
-    fb.innerHTML = currentLang === 'en' ? '✅ <strong>Correct!</strong> The California CDI exam has 90 questions, 135 minutes and you need 60% to pass (54 correct answers). Many candidates think it\'s 70% — that is one of the most common mistakes.' : '✅ <strong>¡Correcto!</strong> El examen CDI de California tiene 90 preguntas, 135 minutos y necesitas el 60% para aprobar (54 preguntas correctas). Muchos candidatos creen que es el 70% — ese es uno de los errores más comunes.';
+    fb.innerHTML = isEn ? '✅ <strong>Correct!</strong> Floods are EXCLUDED from all standard homeowners policies. You need separate coverage through the NFIP or a private insurer. This is one of the most tested facts on the California exam.' : '✅ <strong>¡Correcto!</strong> Las inundaciones están EXCLUIDAS de todas las pólizas estándar de propietarios. Necesitas cobertura aparte del NFIP o una aseguradora privada. Es uno de los datos más evaluados en el examen de California.';
   } else {
     btn.style.background='#fef2f2'; btn.style.borderColor='#fca5a5'; btn.style.color='#991b1b';
-    opts[2].style.background='#ecfdf5'; opts[2].style.borderColor='#6ee7b7'; opts[2].style.color='#065f46'; opts[2].style.fontWeight='700';
+    opts[1].style.background='#ecfdf5'; opts[1].style.borderColor='#6ee7b7'; opts[1].style.color='#065f46'; opts[1].style.fontWeight='700';
     fb.style.background='#fef2f2'; fb.style.border='1px solid #fca5a5'; fb.style.color='#991b1b';
-    fb.innerHTML = currentLang === 'en' ? '❌ <strong>Incorrect.</strong> The answer is C: 90 questions, 60% to pass. This is one of the basic concepts you must master. Licenfy trains you with questions like this until you fully master them.' : '❌ <strong>Incorrecto.</strong> La respuesta es C: 90 preguntas, 60% para aprobar. Este es uno de los conceptos básicos que debes dominar. Licenfy te entrena con preguntas como esta hasta que las domines completamente.';
+    fb.innerHTML = isEn ? '❌ <strong>Almost.</strong> The correct answer is B: floods are excluded from all standard policies, separate NFIP coverage is required. With Licenfy you practice questions like this until you master them, and Lic explains each one.' : '❌ <strong>Casi.</strong> La respuesta correcta es la B: las inundaciones están excluidas de todas las pólizas estándar, se requiere cobertura NFIP aparte. Con Licenfy practicas preguntas como esta hasta dominarlas, y Lic te explica cada una.';
   }
   fb.style.display='block';
   cta.style.display='block';
@@ -507,8 +564,8 @@ function checkDemo(btn, result) {
   <div class="features-inner">
     <div class="features-header fade-up">
       <div class="section-label" data-es="Características" data-en="Features">Características</div>
-      <div class="section-title" data-es="Todo lo que necesitas para aprobar" data-en="Everything you need to pass">Todo lo que necesitas para aprobar</div>
-      <p class="section-sub" data-es="Licenfy está diseñado específicamente para el examen de Personal Lines del CDI de California — en español e inglés." data-en="Licenfy is designed specifically for the California CDI Personal Lines exam — in Spanish and English.">Licenfy está diseñado específicamente para el examen de Personal Lines del CDI de California — en español e inglés.</p>
+      <div class="section-title" data-es="Todo lo que necesitas para llegar lista" data-en="Everything you need to be ready">Todo lo que necesitas para llegar lista</div>
+      <p class="section-sub" data-es="Licenfy está diseñado específicamente para el examen de Personal Lines del CDI de California, en español e inglés." data-en="Licenfy is designed specifically for the California CDI Personal Lines exam, in Spanish and English.">Licenfy está diseñado específicamente para el examen de Personal Lines del CDI de California, en español e inglés.</p>
     </div>
     <div class="features-grid">
       <div class="feat-card fade-up">
@@ -519,12 +576,12 @@ function checkDemo(btn, result) {
       <div class="feat-card fade-up" style="transition-delay:.1s">
         <div class="feat-ico">🏆</div>
         <div class="feat-title" data-es="Simulador de Examen Real" data-en="Real Exam Simulator">Simulador de Examen Real</div>
-        <div class="feat-desc" data-es="90 preguntas, 135 minutos, 60% para aprobar — exactamente como el examen oficial administrado por PSI Services." data-en="90 questions, 135 minutes, 60% to pass — exactly like the official exam administered by PSI Services.">90 preguntas, 135 minutos, 60% para aprobar — exactamente como el examen oficial administrado por PSI Services.</div>
+        <div class="feat-desc" data-es="90 preguntas, 135 minutos, 60% para aprobar, exactamente como el examen oficial administrado por PSI Services." data-en="90 questions, 135 minutes, 60% to pass, exactly like the official exam administered by PSI Services.">90 preguntas, 135 minutos, 60% para aprobar, exactamente como el examen oficial administrado por PSI Services.</div>
       </div>
       <div class="feat-card fade-up" style="transition-delay:.2s">
         <div class="feat-ico">🧠</div>
-        <div class="feat-title" data-es="Tutor IA" data-en="AI Tutor">Tutor IA</div>
-        <div class="feat-desc" data-es="Pregunta lo que no entiendes y obtén explicaciones claras al instante. Disponible 24/7 en español e inglés." data-en="Ask what you don't understand and get clear explanations instantly. Available 24/7 in Spanish and English.">Pregunta lo que no entiendes y obtén explicaciones claras al instante. Disponible 24/7 en español e inglés.</div>
+        <div class="feat-title" data-es="Lic, tu tutor con IA" data-en="Lic, your AI tutor">Lic, tu tutor con IA</div>
+        <div class="feat-desc" data-es="Pregúntale a Lic lo que no entiendas y obtén explicaciones claras al instante. Disponible 24/7 en español e inglés." data-en="Ask Lic what you don't understand and get clear explanations instantly. Available 24/7 in Spanish and English.">Pregúntale a Lic lo que no entiendas y obtén explicaciones claras al instante. Disponible 24/7 en español e inglés.</div>
       </div>
       <div class="feat-card fade-up" style="transition-delay:.1s">
         <div class="feat-ico">📊</div>
@@ -534,12 +591,12 @@ function checkDemo(btn, result) {
       <div class="feat-card fade-up" style="transition-delay:.2s">
         <div class="feat-ico">🃏</div>
         <div class="feat-title" data-es="Flashcards y Glosario" data-en="Flashcards & Glossary">Flashcards y Glosario</div>
-        <div class="feat-desc" data-es="60 términos bilingüe y 20 flashcards de vocabulario clave para dominar la terminología del examen." data-en="60 bilingual terms and 20 key vocabulary flashcards to master exam terminology.">60 términos bilingüe y 20 flashcards de vocabulario clave para dominar la terminología del examen.</div>
+        <div class="feat-desc" data-es="57 términos bilingües y flashcards de vocabulario clave para dominar la terminología del examen." data-en="57 bilingual terms and key vocabulary flashcards to master exam terminology.">57 términos bilingües y flashcards de vocabulario clave para dominar la terminología del examen.</div>
       </div>
       <div class="feat-card fade-up" style="transition-delay:.3s">
         <div class="feat-ico">📱</div>
         <div class="feat-title" data-es="100% Responsive" data-en="100% Responsive">100% Responsive</div>
-        <div class="feat-desc" data-es="Estudia desde tu celular, tablet o computadora. Sin apps que descargar — accede directo desde el navegador." data-en="Study from your phone, tablet, or computer. No apps to download — access directly from the browser.">Estudia desde tu celular, tablet o computadora. Sin apps que descargar — accede directo desde el navegador.</div>
+        <div class="feat-desc" data-es="Estudia desde tu celular, tablet o computadora. Sin apps que descargar, accede directo desde el navegador." data-en="Study from your phone, tablet, or computer. No apps to download, access directly from the browser.">Estudia desde tu celular, tablet o computadora. Sin apps que descargar, accede directo desde el navegador.</div>
       </div>
     </div>
   </div>
@@ -551,12 +608,12 @@ function checkDemo(btn, result) {
     <div class="fade-up">
       <div class="section-label" data-es="El método Licenfy" data-en="The Licenfy method">El método Licenfy</div>
       <div class="section-title" data-es="No memorices. Practica desde el día 1." data-en="Don't memorize. Practice from day 1.">No memorices. Practica desde el día 1.</div>
-      <p class="section-sub" style="margin-bottom:36px" data-es="El 80% de los candidatos estudia leyendo apuntes. Licenfy te hace practicar preguntas reales con feedback inmediato — en sesiones de 15–20 minutos. Tu cerebro aprende más en 20 minutos de práctica activa que en 2 horas de lectura." data-en="80% of candidates study by reading notes. Licenfy makes you practice real questions with immediate feedback — in 15–20 minute sessions. Your brain learns more in 20 minutes of active practice than in 2 hours of reading.">El 80% de los candidatos estudia leyendo apuntes. Licenfy te hace practicar preguntas reales con feedback inmediato — en sesiones de 15–20 minutos. Tu cerebro aprende más en 20 minutos de práctica activa que en 2 horas de lectura.</p>
+      <p class="section-sub" style="margin-bottom:36px" data-es="La mayoría estudia leyendo apuntes. Con Licenfy practicas preguntas reales con feedback inmediato, en sesiones de 15–20 minutos. Tu cerebro aprende más en 20 minutos de práctica activa que en 2 horas de lectura." data-en="Most people study by reading notes. With Licenfy you practice real questions with immediate feedback, in 15–20 minute sessions. Your brain learns more in 20 minutes of active practice than in 2 hours of reading.">La mayoría estudia leyendo apuntes. Con Licenfy practicas preguntas reales con feedback inmediato, en sesiones de 15–20 minutos. Tu cerebro aprende más en 20 minutos de práctica activa que en 2 horas de lectura.</p>
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
           <div>
-            <div class="step-title" data-es="Practica preguntas reales — desde el primer día" data-en="Practice real questions — from day one">Practica preguntas reales — desde el primer día</div>
+            <div class="step-title" data-es="Practica preguntas reales, desde el primer día" data-en="Practice real questions, from day one">Practica preguntas reales, desde el primer día</div>
             <div class="step-desc" data-es="No lees, no memorizas. Haces preguntas reales del CDI y sabes al instante si fallaste y por qué. Aprendes haciendo." data-en="You don't read, you don't memorize. You answer real CDI questions and know instantly if you failed and why. You learn by doing.">No lees, no memorizas. Haces preguntas reales del CDI y sabes al instante si fallaste y por qué. Aprendes haciendo.</div>
           </div>
         </div>
@@ -564,54 +621,54 @@ function checkDemo(btn, result) {
           <div class="step-num">2</div>
           <div>
             <div class="step-title" data-es="El sistema identifica tus áreas débiles" data-en="The system identifies your weak areas">El sistema identifica tus áreas débiles</div>
-            <div class="step-desc" data-es="Licenfy sabe en qué temas necesitas más práctica. No pierdes tiempo repasando lo que ya sabes — te enfocas en lo que importa." data-en="Licenfy knows which topics you need more practice on. You don't waste time reviewing what you already know — you focus on what matters.">Licenfy sabe en qué temas necesitas más práctica. No pierdes tiempo repasando lo que ya sabes — te enfocas en lo que importa.</div>
+            <div class="step-desc" data-es="Licenfy sabe en qué temas necesitas más práctica. No pierdes tiempo repasando lo que ya sabes, te enfocas en lo que importa." data-en="Licenfy knows which topics you need more practice on. You don't waste time reviewing what you already know, you focus on what matters.">Licenfy sabe en qué temas necesitas más práctica. No pierdes tiempo repasando lo que ya sabes, te enfocas en lo que importa.</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
           <div>
-            <div class="step-title" data-es="Tu tutor IA responde en tu idioma, a cualquier hora" data-en="Your AI tutor answers in your language, any time">Tu tutor IA responde en tu idioma, a cualquier hora</div>
-            <div class="step-desc" data-es="¿Son las 11pm y no entiendes qué es el Plan FAIR? Pregúntale al tutor. Disponible 24/7 en español e inglés — sin esperar a nadie." data-en="It's 11pm and you don't understand what the FAIR Plan is? Ask the tutor. Available 24/7 in Spanish and English — no waiting.">¿Son las 11pm y no entiendes qué es el Plan FAIR? Pregúntale al tutor. Disponible 24/7 en español e inglés — sin esperar a nadie.</div>
+            <div class="step-title" data-es="Lic, tu tutor, responde en tu idioma a cualquier hora" data-en="Lic, your tutor, answers in your language, any time">Lic, tu tutor, responde en tu idioma a cualquier hora</div>
+            <div class="step-desc" data-es="¿Son las 11pm y no entiendes qué es el Plan FAIR? Pregúntale a Lic. Disponible 24/7 en español e inglés, sin esperar a nadie." data-en="It's 11pm and you don't understand what the FAIR Plan is? Ask Lic. Available 24/7 in Spanish and English, no waiting.">¿Son las 11pm y no entiendes qué es el Plan FAIR? Pregúntale a Lic. Disponible 24/7 en español e inglés, sin esperar a nadie.</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">4</div>
           <div>
             <div class="step-title" data-es="Simula el examen real hasta dominarlo" data-en="Simulate the real exam until you master it">Simula el examen real hasta dominarlo</div>
-            <div class="step-desc" data-es="90 preguntas, 135 minutos, 60% para aprobar — exactamente como el CDI. Cuando el simulacro ya no te intimida, estás listo." data-en="90 questions, 135 minutes, 60% to pass — exactly like the CDI. When the practice exam no longer intimidates you, you are ready.">90 preguntas, 135 minutos, 60% para aprobar — exactamente como el CDI. Cuando el simulacro ya no te intimida, estás listo.</div>
+            <div class="step-desc" data-es="90 preguntas, 135 minutos, 60% para aprobar, exactamente como el CDI. Cuando el simulacro ya no te intimida, estás lista." data-en="90 questions, 135 minutes, 60% to pass, exactly like the CDI. When the practice exam no longer intimidates you, you are ready.">90 preguntas, 135 minutos, 60% para aprobar, exactamente como el CDI. Cuando el simulacro ya no te intimida, estás lista.</div>
           </div>
         </div>
       </div>
     </div>
     <div class="how-visual fade-up" style="transition-delay:.2s">
-      <div style="font-size:.78rem;font-weight:700;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px">Tu progreso por tema</div>
+      <div style="font-size:.78rem;font-weight:700;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px" data-es="Tu progreso por tema" data-en="Your progress by topic">Tu progreso por tema</div>
       <div class="progress-item">
-        <div class="progress-label"><span>Seguro de Auto</span><span>85%</span></div>
+        <div class="progress-label"><span data-es="Seguro de Auto" data-en="Auto Insurance">Seguro de Auto</span><span>85%</span></div>
         <div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div>
       </div>
       <div class="progress-item">
-        <div class="progress-label"><span>Regulaciones CA</span><span>72%</span></div>
+        <div class="progress-label"><span data-es="Regulaciones CA" data-en="CA Regulations">Regulaciones CA</span><span>72%</span></div>
         <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
       </div>
       <div class="progress-item">
-        <div class="progress-label"><span>Seguro de Propietarios</span><span>91%</span></div>
+        <div class="progress-label"><span data-es="Seguro de Propietarios" data-en="Homeowners Insurance">Seguro de Propietarios</span><span>91%</span></div>
         <div class="progress-bar"><div class="progress-fill" style="width:91%"></div></div>
       </div>
       <div class="progress-item">
-        <div class="progress-label"><span>Conceptos de Seguros</span><span>64%</span></div>
+        <div class="progress-label"><span data-es="Conceptos de Seguros" data-en="Insurance Concepts">Conceptos de Seguros</span><span>64%</span></div>
         <div class="progress-bar"><div class="progress-fill" style="width:64%"></div></div>
       </div>
       <div class="progress-item">
-        <div class="progress-label"><span>Póliza de Vivienda</span><span>78%</span></div>
+        <div class="progress-label"><span data-es="Póliza de Vivienda" data-en="Dwelling Policy">Póliza de Vivienda</span><span>78%</span></div>
         <div class="progress-bar"><div class="progress-fill" style="width:78%"></div></div>
       </div>
       <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-between">
-        <div style="font-size:.78rem;color:rgba(255,255,255,.6)">Promedio general</div>
+        <div style="font-size:.78rem;color:rgba(255,255,255,.6)" data-es="Promedio general" data-en="Overall average">Promedio general</div>
         <div style="font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:800;color:#60a5fa">78%</div>
       </div>
       <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1)">
-        <div style="font-size:.72rem;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">⚡ Área a reforzar</div>
-        <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;font-size:.8rem;color:#fbbf24;font-weight:600">Conceptos de Seguros — necesitas práctica</div>
+        <div style="font-size:.72rem;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px" data-es="⚡ Área a reforzar" data-en="⚡ Area to reinforce">⚡ Área a reforzar</div>
+        <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;font-size:.8rem;color:#fbbf24;font-weight:600" data-es="Conceptos de Seguros, necesitas práctica" data-en="Insurance Concepts, needs practice">Conceptos de Seguros, necesitas práctica</div>
       </div>
     </div>
   </div>
@@ -622,21 +679,21 @@ function checkDemo(btn, result) {
   <div style="max-width:1000px;margin:0 auto">
     <div style="text-align:center;margin-bottom:48px">
       <div class="section-label" data-es="Por qué Licenfy" data-en="Why Licenfy">Por qué Licenfy</div>
-      <div class="section-title" data-es="5 razones por las que candidatos nos eligen" data-en="5 reasons candidates choose us">5 razones por las que candidatos nos eligen</div>
+      <div class="section-title" data-es="5 razones para elegir Licenfy" data-en="5 reasons to choose Licenfy">5 razones para elegir Licenfy</div>
     </div>
     <div class="razones-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
       <div style="background:#f8fafc;border-radius:20px;padding:28px;border:1.5px solid #e2e8f0;display:flex;gap:16px;align-items:flex-start">
-        <div style="width:48px;height:48px;background:linear-gradient(135deg,#008bff,#1a3a6d);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">🇲🇽</div>
+        <div style="width:48px;height:48px;background:linear-gradient(135deg,#008bff,#1a3a6d);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">💬</div>
         <div>
-          <div style="font-weight:700;color:#0f172a;font-size:.95rem;margin-bottom:6px" data-es="La única plataforma de práctica para el examen CDI de California en español" data-en="The only CDI California exam practice platform in Spanish">La única plataforma de práctica para el examen CDI de California en español</div>
-          <div style="font-size:.82rem;color:#64748b;line-height:1.6" data-es="No es una traducción. Licenfy está construido en español desde el inicio. Si piensas en español, estudia en español." data-en="It's not a translation. Licenfy is built in Spanish from the ground up. If you think in Spanish, study in Spanish.">No es una traducción. Licenfy está construido en español desde el inicio. Si piensas en español, estudia en español.</div>
+          <div style="font-weight:700;color:#0f172a;font-size:.95rem;margin-bottom:6px" data-es="100% en español, y en inglés cuando lo necesites" data-en="100% in Spanish, and in English when you need it">100% en español, y en inglés cuando lo necesites</div>
+          <div style="font-size:.82rem;color:#64748b;line-height:1.6" data-es="No es una traducción: Licenfy está construido en español desde el inicio. Y como en el trabajo de los seguros muchos términos se manejan en inglés, también los aprendes aquí, para dominar tu carrera en ambos idiomas." data-en="Not a translation: Licenfy is built in Spanish from the ground up. And since many insurance terms are used in English on the job, you learn those too, to master your career in both languages.">No es una traducción: Licenfy está construido en español desde el inicio. Y como en el trabajo de los seguros muchos términos se manejan en inglés, también los aprendes aquí, para dominar tu carrera en ambos idiomas.</div>
         </div>
       </div>
       <div style="background:#f8fafc;border-radius:20px;padding:28px;border:1.5px solid #e2e8f0;display:flex;gap:16px;align-items:flex-start">
         <div style="width:48px;height:48px;background:linear-gradient(135deg,#008bff,#1a3a6d);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">💰</div>
         <div>
-          <div style="font-weight:700;color:#0f172a;font-size:.95rem;margin-bottom:6px" data-es="50–80% más barato que la competencia" data-en="50–80% cheaper than the competition">50–80% más barato que la competencia</div>
-          <div style="font-size:.82rem;color:#64748b;line-height:1.6" data-es="La competencia cobra hasta $299/mes. Licenfy cuesta $39.99 — porque no deberías endeudarte para prepararte." data-en="The competition charges up to $299/month. Licenfy costs $39.99 — because you shouldn't go into debt to prepare.">La competencia cobra hasta $299/mes. Licenfy cuesta $39.99 — porque no deberías endeudarte para prepararte.</div>
+          <div style="font-weight:700;color:#0f172a;font-size:.95rem;margin-bottom:6px" data-es="Una fracción del precio de la competencia" data-en="A fraction of the competition's price">Una fracción del precio de la competencia</div>
+          <div style="font-size:.82rem;color:#64748b;line-height:1.6" data-es="Otras opciones cuestan mucho más. Licenfy cuesta $39.99, porque no deberías endeudarte para prepararte." data-en="Other options cost much more. Licenfy costs $39.99, because you shouldn't go into debt to prepare.">Otras opciones cuestan mucho más. Licenfy cuesta $39.99, porque no deberías endeudarte para prepararte.</div>
         </div>
       </div>
       <div style="background:#f8fafc;border-radius:20px;padding:28px;border:1.5px solid #e2e8f0;display:flex;gap:16px;align-items:flex-start">
@@ -650,14 +707,14 @@ function checkDemo(btn, result) {
         <div style="width:48px;height:48px;background:linear-gradient(135deg,#008bff,#1a3a6d);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">📱</div>
         <div>
           <div style="font-weight:700;color:#0f172a;font-size:.95rem;margin-bottom:6px" data-es="15 minutos al día, desde donde estés" data-en="15 minutes a day, from anywhere">15 minutos al día, desde donde estés</div>
-          <div style="font-size:.82rem;color:#64748b;line-height:1.6" data-es="Sin videos de 2 horas que ver completos. Estudia en el lunch break, en el carro, antes de dormir — cuando y donde puedas." data-en="No 2-hour videos to watch all the way through. Study on your lunch break, in the car, before bed — whenever and wherever you can.">Sin videos de 2 horas que ver completos. Estudia en el lunch break, en el carro, antes de dormir — cuando y donde puedas.</div>
+          <div style="font-size:.82rem;color:#64748b;line-height:1.6" data-es="Sin videos de 2 horas que ver completos. Estudia en el lunch break, en el carro, antes de dormir, cuando y donde puedas." data-en="No 2-hour videos to watch all the way through. Study on your lunch break, in the car, before bed, whenever and wherever you can.">Sin videos de 2 horas que ver completos. Estudia en el lunch break, en el carro, antes de dormir, cuando y donde puedas.</div>
         </div>
       </div>
       <div style="background:linear-gradient(135deg,#008bff15,#1a3a6d10);border-radius:20px;padding:28px;border:2px solid #008bff40;display:flex;gap:16px;align-items:flex-start;grid-column:1/-1">
         <div style="width:48px;height:48px;background:linear-gradient(135deg,#008bff,#1a3a6d);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">🧠</div>
         <div>
-          <div style="font-weight:700;color:#0f172a;font-size:.95rem;margin-bottom:6px" data-es="Tutor IA en tu idioma — disponible 24/7" data-en="AI Tutor in your language — available 24/7">Tutor IA en tu idioma — disponible 24/7</div>
-          <div style="font-size:.82rem;color:#64748b;line-height:1.6" data-es="Son las 11pm, acabas de terminar el turno y no entiendes qué es la cobertura UM/UIM. Pregúntale al tutor de Licenfy. Nadie más en este mercado tiene esto. Responde en segundos, en español, con ejemplos reales." data-en="It's 11pm, you just finished your shift and don't understand what UM/UIM coverage is. Ask Licenfy's tutor. No one else in this market has this. It responds in seconds, in Spanish, with real examples.">Son las 11pm, acabas de terminar el turno y no entiendes qué es la cobertura UM/UIM. Pregúntale al tutor de Licenfy. Nadie más en este mercado tiene esto. Responde en segundos, en español, con ejemplos reales.</div>
+          <div style="font-weight:700;color:#0f172a;font-size:.95rem;margin-bottom:6px" data-es="Lic, tu tutor IA en tu idioma, disponible 24/7" data-en="Lic, your AI tutor in your language, available 24/7">Lic, tu tutor IA en tu idioma, disponible 24/7</div>
+          <div style="font-size:.82rem;color:#64748b;line-height:1.6" data-es="Son las 11pm, acabas de terminar el turno y no entiendes qué es la cobertura UM/UIM. Pregúntale a Lic. Nadie más en este mercado tiene esto. Responde en segundos, en español, con ejemplos reales." data-en="It's 11pm, you just finished your shift and don't understand what UM/UIM coverage is. Ask Lic. No one else in this market has this. It responds in seconds, in Spanish, with real examples.">Son las 11pm, acabas de terminar el turno y no entiendes qué es la cobertura UM/UIM. Pregúntale a Lic. Nadie más en este mercado tiene esto. Responde en segundos, en español, con ejemplos reales.</div>
         </div>
       </div>
     </div>
@@ -671,55 +728,48 @@ function checkDemo(btn, result) {
   <div style="max-width:900px;margin:0 auto;overflow-x:hidden">
     <div style="text-align:center;margin-bottom:48px">
       <div class="section-label" data-es="¿Por qué Licenfy?" data-en="Why Licenfy?">¿Por qué Licenfy?</div>
-      <div class="section-title" data-es="La única opción diseñada para ti" data-en="The only option designed for you">La única opción diseñada para ti</div>
-      <p style="color:#64748b;font-size:.95rem;max-width:560px;margin:0 auto;line-height:1.7">La competencia cuesta el doble, solo está en inglés y no tiene IA. Licenfy fue construido pensando en el candidato hispano en California.</p>
+      <div class="section-title" data-es="Diseñada para ti, de principio a fin" data-en="Designed for you, start to finish">Diseñada para ti, de principio a fin</div>
+      <p style="color:#64748b;font-size:.95rem;max-width:560px;margin:0 auto;line-height:1.7" data-es="La mayoría de las opciones solo están en inglés y no incluyen un tutor con IA. Licenfy fue construido pensando en ti." data-en="Most options are only in English and don't include an AI tutor. Licenfy was built with you in mind.">La mayoría de las opciones solo están en inglés y no incluyen un tutor con IA. Licenfy fue construido pensando en ti.</p>
     </div>
-    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:20px;border:1.5px solid #e2e8f0;box-shadow:0 4px 24px rgba(0,0,0,.06)">
-      <table style="width:100%;border-collapse:collapse;font-size:.85rem;min-width:520px">
+    <div class="comp-wrap" style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:20px;border:1.5px solid #e2e8f0;box-shadow:0 4px 24px rgba(0,0,0,.06)">
+      <table class="comp-table" style="width:100%;border-collapse:collapse;font-size:.9rem;min-width:440px">
         <thead>
           <tr style="background:#1a3a6d">
-            <th style="padding:16px 20px;text-align:left;color:rgba(255,255,255,.7);font-weight:600;width:30%">Característica</th>
+            <th style="padding:16px 20px;text-align:left;color:rgba(255,255,255,.7);font-weight:600;width:50%" data-es="Característica" data-en="Feature">Característica</th>
             <th style="padding:16px 20px;text-align:center;color:#60a5fa;font-weight:800;font-family:Outfit,sans-serif;font-size:1rem">Licenfy</th>
-            <th style="padding:16px 20px;text-align:center;color:rgba(255,255,255,.7);font-weight:600">Competencia 1</th>
-            <th style="padding:16px 20px;text-align:center;color:rgba(255,255,255,.7);font-weight:600">Competencia 2</th>
+            <th style="padding:16px 20px;text-align:center;color:rgba(255,255,255,.7);font-weight:600" data-es="Otras opciones" data-en="Other options">Otras opciones</th>
           </tr>
         </thead>
         <tbody>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:14px 20px;color:#374151;font-weight:500">Precio</td>
-            <td style="padding:14px 20px;text-align:center;color:#059669;font-weight:800">$39.99/mes</td>
-            <td style="padding:14px 20px;text-align:center;color:#64748b">$59–119/mes</td>
-            <td style="padding:14px 20px;text-align:center;color:#64748b">$99–299</td>
-          </tr>
-          <tr style="border-bottom:1px solid #f1f5f9;background:#fafafa">
-            <td style="padding:14px 20px;color:#374151;font-weight:500" data-es="En español" data-en="In Spanish">En español</td>
+            <td style="padding:14px 20px;color:#374151;font-weight:500" data-es="Lic, tu tutor IA 24/7" data-en="Lic, your AI tutor 24/7">Lic, tu tutor IA 24/7</td>
             <td style="padding:14px 20px;text-align:center;font-size:1.1rem">✅</td>
             <td style="padding:14px 20px;text-align:center;font-size:1.1rem">❌</td>
-            <td style="padding:14px 20px;text-align:center;font-size:1.1rem">❌</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f1f5f9;background:#fafafa">
+            <td style="padding:14px 20px;color:#374151;font-weight:500" data-es="Práctica en español y en inglés" data-en="Practice in Spanish and English">Práctica en español y en inglés</td>
+            <td style="padding:14px 20px;text-align:center;font-size:1.1rem">✅</td>
+            <td style="padding:14px 20px;text-align:center;font-size:.95rem;color:#64748b" data-es="Solo uno" data-en="Only one">Solo uno</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:14px 20px;color:#374151;font-weight:500" data-es="Tutor IA 24/7" data-en="AI Tutor 24/7">Tutor IA 24/7</td>
+            <td style="padding:14px 20px;color:#374151;font-weight:500" data-es="Experiencia moderna tipo app" data-en="Modern app-like experience">Experiencia moderna tipo app</td>
             <td style="padding:14px 20px;text-align:center;font-size:1.1rem">✅</td>
-            <td style="padding:14px 20px;text-align:center;font-size:1.1rem">❌</td>
             <td style="padding:14px 20px;text-align:center;font-size:1.1rem">❌</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9;background:#fafafa">
-            <td style="padding:14px 20px;color:#374151;font-weight:500" data-es="Simulacro real CDI" data-en="Real CDI Exam Simulator">Simulacro real CDI</td>
-            <td style="padding:14px 20px;text-align:center;font-size:1.1rem">✅</td>
+            <td style="padding:14px 20px;color:#374151;font-weight:500" data-es="Simulacro real del examen" data-en="Real exam simulator">Simulacro real del examen</td>
             <td style="padding:14px 20px;text-align:center;font-size:1.1rem">✅</td>
             <td style="padding:14px 20px;text-align:center;font-size:1.1rem">✅</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:14px 20px;color:#374151;font-weight:500" data-es="Identificación de áreas débiles" data-en="Weak area identification">Identificación de áreas débiles</td>
+            <td style="padding:14px 20px;color:#374151;font-weight:500" data-es="Te muestra qué reforzar" data-en="Shows you what to reinforce">Te muestra qué reforzar</td>
             <td style="padding:14px 20px;text-align:center;font-size:1.1rem">✅</td>
-            <td style="padding:14px 20px;text-align:center;font-size:1.1rem">⚠️ Básico</td>
-            <td style="padding:14px 20px;text-align:center;font-size:1.1rem">❌</td>
+            <td style="padding:14px 20px;text-align:center;font-size:1.1rem">⚠️</td>
           </tr>
           <tr style="background:#fafafa">
-            <td style="padding:14px 20px;color:#374151;font-weight:500" data-es="Acceso móvil sin app" data-en="Mobile access, no app needed">Acceso móvil sin app</td>
-            <td style="padding:14px 20px;text-align:center;font-size:1.1rem">✅</td>
-            <td style="padding:14px 20px;text-align:center;font-size:1.1rem">⚠️</td>
-            <td style="padding:14px 20px;text-align:center;font-size:1.1rem">⚠️</td>
+            <td style="padding:14px 20px;color:#374151;font-weight:500" data-es="Precio" data-en="Price">Precio</td>
+            <td style="padding:14px 20px;text-align:center;color:#059669;font-weight:800">$39.99/mes</td>
+            <td style="padding:14px 20px;text-align:center;color:#64748b" data-es="Más costoso" data-en="More expensive">Más costoso</td>
           </tr>
         </tbody>
       </table>
@@ -727,47 +777,20 @@ function checkDemo(btn, result) {
   </div>
 </section>
 
-<!-- TESTIMONIOS -->
-<section style="padding:80px 24px;background:#fff">
-  <div style="max-width:1000px;margin:0 auto;text-align:center">
-    <div class="section-label" data-es="Testimonios" data-en="Testimonials">Testimonios</div>
-    <div class="section-title" style="margin-bottom:48px" data-es="Lo que dicen nuestros usuarios" data-en="What our users say">Lo que dicen nuestros usuarios</div>
-    <div class="testimonios-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
-      <div style="background:#f8fafc;border-radius:20px;padding:28px;border:1.5px solid #e2e8f0;text-align:left">
-        <div style="font-size:1.1rem;color:#f59e0b;margin-bottom:12px">★★★★★</div>
-        <p style="font-size:.88rem;color:#374151;line-height:1.7;margin-bottom:16px" data-es="&quot;Estudié 3 semanas con Licenfy y aprobé en el primer intento. El tutor IA me explicó los conceptos de responsabilidad que nunca entendí bien.&quot;" data-en="&quot;I studied 3 weeks with Licenfy and passed on my first try. The AI tutor explained liability concepts I had never understood before.&quot;">"Estudié 3 semanas con Licenfy y aprobé en el primer intento. El tutor IA me explicó los conceptos de responsabilidad que nunca entendí bien."</p>
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#008bff,#1a3a6d);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff;flex-shrink:0">VG</div>
-          <div>
-            <div style="font-size:.82rem;font-weight:700;color:#0f172a">Verónica G.</div>
-            <div style="font-size:.74rem;color:#64748b">Los Ángeles, CA</div>
-          </div>
-        </div>
-      </div>
-      <div style="background:#f8fafc;border-radius:20px;padding:28px;border:1.5px solid #e2e8f0;text-align:left">
-        <div style="font-size:1.1rem;color:#f59e0b;margin-bottom:12px">★★★★★</div>
-        <p style="font-size:.88rem;color:#374151;line-height:1.7;margin-bottom:16px" data-es="&quot;Reprobé el examen 3 veces con otras plataformas. Con el Plan Semestral de Licenfy pude practicar sin límite hasta que realmente entendí los temas. A la cuarta vez aprobé. Los módulos adicionales me ayudaron a reforzar todo lo que me fallaba.&quot;" data-en="&quot;I failed the exam 3 times with other platforms. With Licenfy's Semestral Plan I could practice without limits until I truly understood the topics. On my fourth try I passed. The additional modules helped me reinforce everything I was missing.&quot;">"Reprobé el examen 3 veces con otras plataformas. Con el Plan Semestral de Licenfy pude practicar sin límite hasta que realmente entendí los temas. A la cuarta vez aprobé. Los módulos adicionales me ayudaron a reforzar todo lo que me fallaba."</p>
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#008bff,#1a3a6d);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff;flex-shrink:0">KA</div>
-          <div>
-            <div style="font-size:.82rem;font-weight:700;color:#0f172a">Kata A.</div>
-            <div style="font-size:.74rem;color:#64748b">Riverside, CA</div>
-          </div>
-        </div>
-      </div>
-      <div style="background:#f8fafc;border-radius:20px;padding:28px;border:1.5px solid #e2e8f0;text-align:left">
-        <div style="font-size:1.1rem;color:#f59e0b;margin-bottom:12px">★★★★★</div>
-        <p style="font-size:.88rem;color:#374151;line-height:1.7;margin-bottom:16px" data-es="&quot;Los simulacros me dieron mucha confianza. Cuando llegué al examen real sentí que ya lo había hecho antes. 68% en el examen real.&quot;" data-en="&quot;The practice exams gave me a lot of confidence. When I got to the real exam, I felt like I had already done it before. 68% on the real exam.&quot;">"Los simulacros me dieron mucha confianza. Cuando llegué al examen real sentí que ya lo había hecho antes. 68% en el examen real."</p>
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#008bff,#1a3a6d);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff;flex-shrink:0">DF</div>
-          <div>
-            <div style="font-size:.82rem;font-weight:700;color:#0f172a">Daniel F.</div>
-            <div style="font-size:.74rem;color:#64748b">San Diego, CA</div>
-          </div>
-        </div>
-      </div>
+<!-- NUESTRA HISTORIA -->
+<section style="padding:88px 24px;background:linear-gradient(160deg,#1a2f5a 0%,#142244 100%)">
+  <div style="max-width:720px;margin:0 auto;text-align:center">
+    <div style="font-size:4.5rem;line-height:.6;color:#1a7fe8;font-family:Georgia,serif;height:42px">“</div>
+    <div class="section-label" style="color:#60a5fa" data-es="Nuestra historia" data-en="Our story">Nuestra historia</div>
+    <div class="section-title" style="color:#fff;margin-bottom:36px" data-es="De dónde nace Licenfy" data-en="Where Licenfy comes from">De dónde nace Licenfy</div>
+    <div style="text-align:left;display:flex;flex-direction:column;gap:20px">
+      <p style="color:rgba(255,255,255,.88);font-size:1.02rem;line-height:1.8;margin:0" data-es="Somos una familia migrante. Llegamos a Estados Unidos a empezar desde cero, con más preguntas que certezas, y con el idioma como una de las barreras más grandes." data-en="We are a migrant family. We came to the United States to start from scratch, with more questions than certainties, and language as one of the biggest barriers.">Somos una familia migrante. Llegamos a Estados Unidos a empezar desde cero, con más preguntas que certezas, y con el idioma como una de las barreras más grandes.</p>
+      <p style="color:rgba(255,255,255,.88);font-size:1.02rem;line-height:1.8;margin:0" data-es="Mi esposa encontró en el mundo de los seguros una oportunidad para crecer, ganar confianza y demostrar su potencial en ventas y servicio. Pero el camino incluía un muro: el examen de licencia. El material era largo y aburrido, las explicaciones &quot;en español&quot; eran confusas, y cada intento costaba $100." data-en="My wife found in the insurance world an opportunity to grow, gain confidence, and show her potential in sales and service. But the path included a wall: the licensing exam. The material was long and boring, the &quot;Spanish&quot; explanations were confusing, and each attempt cost $100.">Mi esposa encontró en el mundo de los seguros una oportunidad para crecer, ganar confianza y demostrar su potencial en ventas y servicio. Pero el camino incluía un muro: el examen de licencia. El material era largo y aburrido, las explicaciones "en español" eran confusas, y cada intento costaba $100.</p>
+      <p style="color:rgba(255,255,255,.88);font-size:1.02rem;line-height:1.8;margin:0" data-es="Vivimos de cerca lo difícil que es ese camino, sobre todo cuando el idioma se interpone. Y supimos que no tenía por qué ser así." data-en="We saw up close how hard that path is, especially when language gets in the way. And we knew it didn't have to be that way.">Vivimos de cerca lo difícil que es ese camino, sobre todo cuando el idioma se interpone. Y supimos que no tenía por qué ser así.</p>
+      <p style="color:rgba(255,255,255,.88);font-size:1.02rem;line-height:1.8;margin:0" data-es="Creamos Licenfy para hacer ese camino más claro para ti. Para que ninguna mujer, ni ningún hombre, tenga que rendirse por culpa del idioma o de un material confuso." data-en="We created Licenfy to make that path clearer for you. So that no woman, and no man, has to give up because of language or confusing material.">Creamos Licenfy para hacer ese camino más claro para ti. Para que ninguna mujer, ni ningún hombre, tenga que rendirse por culpa del idioma o de un material confuso.</p>
+      <p style="color:#7cc4ff;font-size:1.12rem;line-height:1.7;margin:8px 0 0;font-weight:600" data-es="Porque tú también mereces elegir una carrera que te haga sentir orgullosa." data-en="Because you also deserve to choose a career that makes you proud.">Porque tú también mereces elegir una carrera que te haga sentir orgullosa.</p>
     </div>
-    <p style="color:#94a3b8;font-size:.74rem;margin-top:24px">* Los testimonios representan experiencias de usuarios reales en versión beta.</p>
+    <div style="margin-top:32px;color:rgba(255,255,255,.5);font-size:.85rem;font-weight:600" data-es="Con cariño, el equipo de Licenfy" data-en="With care, the Licenfy team">Con cariño, el equipo de Licenfy</div>
   </div>
 </section>
 
@@ -781,7 +804,7 @@ function checkDemo(btn, result) {
     </div>
 
     <!-- TABLA COMPARATIVA -->
-    <div class="fade-up" style="margin-top:48px;overflow-x:auto;border-radius:20px;box-shadow:0 8px 40px rgba(0,0,0,.10);border:1.5px solid #e2e8f0;background:#fff">
+    <div class="fade-up pricing-table-desktop" style="margin-top:48px;overflow-x:auto;border-radius:20px;box-shadow:0 8px 40px rgba(0,0,0,.10);border:1.5px solid #e2e8f0;background:#fff">
       <table style="width:100%;border-collapse:collapse;font-size:.88rem;min-width:580px">
         <!-- HEADER -->
         <thead style="background:#f8fafc">
@@ -811,13 +834,13 @@ function checkDemo(btn, result) {
             <td colspan="4" style="padding:10px 24px 6px;font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;background:#fafbfc;border-top:1px solid #e2e8f0" data-es="Contenido CDI" data-en="CDI Content">Contenido CDI</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="8 temas CDI — +300 preguntas con explicaciones" data-en="8 CDI topics — 300+ questions with explanations">8 temas CDI — +300 preguntas con explicaciones</td>
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="8 temas CDI, +300 preguntas con explicaciones" data-en="8 CDI topics, 300+ questions with explanations">8 temas CDI, +300 preguntas con explicaciones</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;background:#f8fafc">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="Glosario bilingüe — 57 términos clave" data-en="Bilingual glossary — 57 key terms">Glosario bilingüe — 57 términos clave</td>
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="Glosario bilingüe, 57 términos clave" data-en="Bilingual glossary, 57 key terms">Glosario bilingüe, 57 términos clave</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;background:#f8fafc">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
@@ -847,7 +870,7 @@ function checkDemo(btn, result) {
             <td colspan="4" style="padding:10px 24px 6px;font-size:.68rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;background:#fafbfc;border-top:1px solid #e2e8f0" data-es="Herramientas de estudio" data-en="Study Tools">Herramientas de estudio</td>
           </tr>
           <tr style="border-bottom:1px solid #f1f5f9">
-            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="Tutor IA 24/7 en español e inglés" data-en="AI Tutor 24/7 in Spanish and English">Tutor IA 24/7 en español e inglés</td>
+            <td style="padding:12px 24px;color:#374151;font-size:.85rem" data-es="Lic, tu tutor IA 24/7 en español e inglés" data-en="Lic, your AI tutor 24/7 in Spanish and English">Lic, tu tutor IA 24/7 en español e inglés</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem;background:#f8fafc">✅</td>
             <td style="padding:10px 12px;text-align:center;font-size:1.1rem">✅</td>
@@ -916,6 +939,53 @@ function checkDemo(btn, result) {
         </tbody>
       </table>
     </div>
+        <!-- TARJETAS PRECIO (solo móvil) -->
+    <div class="pricing-cards-mobile">
+      <!-- MENSUAL -->
+      <div style="background:#fff;border:1.5px solid #e2e8f0;border-radius:18px;padding:24px">
+        <div style="font-size:.82rem;color:#64748b;font-weight:600;margin-bottom:2px">📅 <span data-es="Mensual" data-en="Monthly">Mensual</span></div>
+        <div style="font-family:'Outfit',sans-serif;font-size:2rem;font-weight:800;color:#0f172a;line-height:1.1">$39.99<span style="font-size:.85rem;color:#94a3b8;font-weight:600">/mes</span></div>
+        <button onclick="selectPlan('mensual')" style="margin:16px 0 20px;background:#1a3a6d;color:#fff;border:none;padding:13px;border-radius:11px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:inherit;width:100%" data-es="Comenzar" data-en="Get started">Comenzar</button>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:.85rem;color:#374151">
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span data-es="8 temas CDI, +300 preguntas con explicaciones" data-en="8 CDI topics, 300+ questions with explanations">8 temas CDI, +300 preguntas con explicaciones</span></div>
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span data-es="Glosario bilingüe, 57 términos clave" data-en="Bilingual glossary, 57 key terms">Glosario bilingüe, 57 términos clave</span></div>
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span data-es="Flashcards de vocabulario" data-en="Vocabulary flashcards">Flashcards de vocabulario</span></div>
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span data-es="1 simulacro del examen por semana" data-en="1 exam practice test per week">1 simulacro del examen por semana</span></div>
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span data-es="Historial y análisis de errores" data-en="Error history and analysis">Historial y análisis de errores</span></div>
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span data-es="Lic, tu tutor IA 24/7" data-en="Lic, your AI tutor 24/7">Lic, tu tutor IA 24/7</span></div>
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span data-es="Calendario de estudio y racha diaria" data-en="Study calendar and daily streak">Calendario de estudio y racha diaria</span></div>
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span data-es="Dashboard de progreso por tema" data-en="Topic-based progress dashboard">Dashboard de progreso por tema</span></div>
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span data-es="Soporte por WhatsApp" data-en="WhatsApp support">Soporte por WhatsApp</span></div>
+        </div>
+      </div>
+      <!-- TRIMESTRAL (destacado) -->
+      <div style="background:linear-gradient(180deg,#f0f9ff,#fff);border:2px solid #008bff;border-radius:18px;padding:24px;position:relative">
+        <div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#008bff,#1a3a6d);color:#fff;font-size:.6rem;font-weight:700;padding:4px 14px;border-radius:20px;white-space:nowrap">⭐ <span data-es="MÁS POPULAR" data-en="MOST POPULAR">MÁS POPULAR</span></div>
+        <div style="font-size:.82rem;color:#008bff;font-weight:700;margin-bottom:2px">🗓️ <span data-es="Trimestral" data-en="Quarterly">Trimestral</span></div>
+        <div style="font-family:'Outfit',sans-serif;font-size:2rem;font-weight:800;color:#008bff;line-height:1.1">$69.99<span style="font-size:.85rem;color:#94a3b8;font-weight:600">/3 meses</span></div>
+        <div style="font-size:.72rem;color:#94a3b8;margin-top:2px">≈ $23/mes</div>
+        <button onclick="selectPlan('trimestral')" style="margin:16px 0 20px;background:linear-gradient(135deg,#008bff,#1a3a6d);color:#fff;border:none;padding:13px;border-radius:11px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:inherit;width:100%;box-shadow:0 4px 14px rgba(0,139,255,.35)" data-es="Comenzar →" data-en="Get started →">Comenzar →</button>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:.85rem;color:#374151">
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span style="font-weight:700" data-es="Todo lo del plan Mensual" data-en="Everything in the Monthly plan">Todo lo del plan Mensual</span></div>
+          <div style="display:flex;gap:9px"><span style="color:#008bff;flex-shrink:0;font-weight:700">★</span><span style="font-weight:700;color:#008bff" data-es="Simulacros ILIMITADOS" data-en="UNLIMITED practice tests">Simulacros ILIMITADOS</span></div>
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span data-es="Practica las preguntas que fallaste" data-en="Practice the questions you failed">Practica las preguntas que fallaste</span></div>
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span data-es="Módulo: Servicio al cliente en seguros" data-en="Module: Customer service in insurance">Módulo: Servicio al cliente en seguros</span></div>
+        </div>
+      </div>
+      <!-- SEMESTRAL -->
+      <div style="background:#fff;border:1.5px solid #e2e8f0;border-radius:18px;padding:24px">
+        <div style="font-size:.82rem;color:#64748b;font-weight:600;margin-bottom:2px">🏆 <span data-es="Semestral" data-en="Biannual">Semestral</span></div>
+        <div style="font-family:'Outfit',sans-serif;font-size:2rem;font-weight:800;color:#0f172a;line-height:1.1">$89.99<span style="font-size:.85rem;color:#94a3b8;font-weight:600">/6 meses</span></div>
+        <div style="font-size:.72rem;color:#94a3b8;margin-top:2px">≈ $15/mes</div>
+        <button onclick="selectPlan('semestral')" style="margin:16px 0 20px;background:#1a3a6d;color:#fff;border:none;padding:13px;border-radius:11px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:inherit;width:100%" data-es="Comenzar" data-en="Get started">Comenzar</button>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:.85rem;color:#374151">
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span style="font-weight:700" data-es="Todo lo del plan Trimestral" data-en="Everything in the Quarterly plan">Todo lo del plan Trimestral</span></div>
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span data-es="Módulo: Técnicas de ventas en seguros" data-en="Module: Sales techniques in insurance">Módulo: Técnicas de ventas en seguros</span></div>
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span data-es="Simulacro de entrevista con IA" data-en="AI interview practice simulator">Simulacro de entrevista con IA</span></div>
+          <div style="display:flex;gap:9px"><span style="color:#10b981;flex-shrink:0;font-weight:700">✓</span><span data-es="Soporte por WhatsApp prioritario" data-en="Priority WhatsApp support">Soporte por WhatsApp prioritario</span></div>
+        </div>
+      </div>
+    </div>
     <div style="text-align:center;margin-top:20px;font-size:.78rem;color:#94a3b8">
       <span data-es="🔒 7 días de prueba · Requiere tarjeta · Cancela cuando quieras" data-en="🔒 7-day trial · Card required · Cancel anytime">🔒 7 días de prueba · Requiere tarjeta · Cancela cuando quieras</span>
     </div>
@@ -940,10 +1010,10 @@ function checkDemo(btn, result) {
 <!-- CTA -->
 <section class="cta-section">
   <div class="fade-up">
-    <h2 data-es="Tu licencia está a 7 días de distancia." data-en="Your license is 7 days away." data-html="1">Tu licencia está a <span style="color:#60a5fa">7 días</span> de distancia.</h2>
-    <p data-es="Empieza hoy. Sin compromiso. Cancela cuando quieras. La pregunta no es si puedes — es si vas a empezar hoy o seguir posponiendo." data-en="Start today. No commitment. Cancel anytime. The question isn't whether you can — it's whether you'll start today or keep putting it off.">Empieza hoy. Sin compromiso. Cancela cuando quieras. La pregunta no es si puedes — es si vas a empezar hoy o seguir posponiendo.</p>
+    <h2 data-es="Tu nueva carrera empieza hoy." data-en="Your new career starts today." data-html="1">Tu nueva carrera empieza <span style="color:#60a5fa">hoy</span>.</h2>
+    <p data-es="Da el primer paso con tu prueba de 7 días. Cancela cuando quieras. La pregunta no es si puedes, es si empiezas hoy o sigues posponiendo." data-en="Take the first step with your 7-day trial. Cancel anytime. The question isn't whether you can, it's whether you start today or keep putting it off.">Da el primer paso con tu prueba de 7 días. Cancela cuando quieras. La pregunta no es si puedes, es si empiezas hoy o sigues posponiendo.</p>
     <div class="cta-btns">
-      <button class="btn-white" onclick="scrollToPricing()" data-es="🚀 Empezar ahora — 7 días de prueba" data-en="🚀 Start now — 7-day trial">🚀 Empezar ahora — 7 días de prueba</button>
+      <button class="btn-white" onclick="scrollToPricing()" data-es="Empieza tu prueba de 7 días" data-en="Start your 7-day trial">Empieza tu prueba de 7 días</button>
       <a href="https://wa.me/19515390241" class="btn-ghost" target="_blank">
         <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.555 4.116 1.526 5.847L.057 23.492a.75.75 0 00.914.914l5.645-1.469A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22.5a10.45 10.45 0 01-5.344-1.465l-.383-.228-3.951 1.028 1.028-3.951-.228-.383A10.45 10.45 0 011.5 12C1.5 6.201 6.201 1.5 12 1.5S22.5 6.201 22.5 12 17.799 22.5 12 22.5z"/></svg>
         <span data-es="Hablar por WhatsApp" data-en="Chat on WhatsApp">Hablar por WhatsApp</span>
@@ -980,7 +1050,7 @@ function checkDemo(btn, result) {
     </div>
     <div class="footer-bottom">
       <span>© 2026 Licenfy · Todos los derechos reservados</span>
-      <span style="font-size:.7rem;color:rgba(255,255,255,.3);max-width:600px;text-align:right">Licenfy es una plataforma educativa de práctica — no garantiza resultados en el examen. Los resultados dependen del esfuerzo individual de cada estudiante. No afiliada al CDI ni a PSI Services.</span>
+      <span style="font-size:.7rem;color:rgba(255,255,255,.3);max-width:600px;text-align:right">Licenfy es una plataforma educativa de práctica, no garantiza resultados en el examen. Los resultados dependen del esfuerzo individual de cada estudiante. No afiliada al CDI ni a PSI Services.</span>
     </div>
   </div>
 </footer>
@@ -994,7 +1064,7 @@ function checkDemo(btn, result) {
   <div class="lic-chat-hdr">
     <img src="/Isotipo_fondo_blanco.png" alt="Lic" style="width:36px;height:36px;border-radius:50%">
     <div class="lic-chat-hdr-txt">
-      <h4>Lic — Tu tutor CDI</h4>
+      <h4>Lic · Tu tutor CDI</h4>
       <p>Pregúntame sobre el examen de seguros</p>
     </div>
     <button class="lic-chat-close" onclick="toggleLicChat()">✕</button>
@@ -1107,14 +1177,14 @@ document.querySelectorAll('.fade-up').forEach(function(el){ observer.observe(el)
 const faqs = [
   {q:'¿Qué examen cubre Licenfy?', a:'Licenfy está diseñado para el examen de licencia de seguros de California Personal Lines, administrado por PSI Services para el CDI (California Department of Insurance). Cubre: Auto, Propietarios, Vivienda, Regulaciones CA, Conceptos, Incendios, Marina Interior y Paraguas Personal.',
    qe:'What exam does Licenfy cover?', ae:'Licenfy is designed for the California Personal Lines insurance license exam, administered by PSI Services for the CDI (California Department of Insurance). It covers: Auto, Homeowners, Dwelling, CA Regulations, Concepts, Fire, Marine, and Personal Umbrella.'},
-  {q:'¿En qué idioma está la plataforma?', a:'Licenfy es completamente bilingüe — puedes cambiar entre español e inglés con un solo clic en cualquier momento. Las preguntas, el glosario, el tutor IA y toda la interfaz están disponibles en ambos idiomas.',
-   qe:'What language is the platform in?', ae:'Licenfy is fully bilingual — you can switch between Spanish and English with a single click at any time. Questions, the glossary, the AI tutor, and the entire interface are available in both languages.'},
-  {q:'¿Cómo funciona la prueba gratuita?', a:'Al registrarte elige tu plan e ingresa tu tarjeta. Tienes 7 días de acceso completo sin costo. Si cancelas antes del día 8, no se te cobra nada.',
-   qe:'How does the free trial work?', ae:'When you sign up, choose your plan and enter your card. You get 7 days of full access at no cost. If you cancel before day 8, you will not be charged.'},
+  {q:'¿En qué idioma está la plataforma?', a:'Licenfy es completamente bilingüe, puedes cambiar entre español e inglés con un solo clic en cualquier momento. Las preguntas, el glosario, Lic (tu tutor IA) y toda la interfaz están disponibles en ambos idiomas.',
+   qe:'What language is the platform in?', ae:'Licenfy is fully bilingual, you can switch between Spanish and English with a single click at any time. Questions, the glossary, Lic (your AI tutor), and the entire interface are available in both languages.'},
+  {q:'¿Cómo funciona la prueba de 7 días?', a:'Al registrarte elige tu plan e ingresa tu tarjeta. Tienes 7 días de acceso completo sin costo. Si cancelas antes del día 8, no se te cobra nada.',
+   qe:'How does the 7-day trial work?', ae:'When you sign up, choose your plan and enter your card. You get 7 days of full access at no cost. If you cancel before day 8, you will not be charged.'},
   {q:'¿Las preguntas son las mismas del examen real?', a:'Licenfy es una plataforma educativa de práctica. Las preguntas están basadas en los contenidos oficiales del CDI y cubren todos los temas del examen, pero Licenfy no está afiliada al CDI ni a PSI Services. El examen oficial puede diferir del contenido de práctica.',
    qe:'Are the questions the same as the real exam?', ae:'Licenfy is an educational practice platform. Questions are based on official CDI content and cover all exam topics, but Licenfy is not affiliated with the CDI or PSI Services. The official exam may differ from practice content.'},
-  {q:'¿Puedo acceder desde mi celular?', a:'Sí, Licenfy es 100% responsive. Funciona perfectamente en celulares, tablets y computadoras. No necesitas descargar ninguna app — accedes directamente desde el navegador.',
-   qe:'Can I access from my phone?', ae:'Yes, Licenfy is 100% responsive. It works perfectly on phones, tablets, and computers. No app to download — access directly from the browser.'},
+  {q:'¿Puedo acceder desde mi celular?', a:'Sí, Licenfy es 100% responsive. Funciona perfectamente en celulares, tablets y computadoras. No necesitas descargar ninguna app, accedes directamente desde el navegador.',
+   qe:'Can I access from my phone?', ae:'Yes, Licenfy is 100% responsive. It works perfectly on phones, tablets, and computers. No app to download, access directly from the browser.'},
   {q:'¿Qué pasa si cancelo mi suscripción?', a:'Puedes cancelar en cualquier momento. Una vez cancelado, conservas tu acceso hasta que venza el período pagado. No hay cargos adicionales ni penalizaciones. Ten en cuenta que no realizamos reembolsos una vez activado el acceso.',
    qe:'What happens if I cancel my subscription?', ae:'You can cancel at any time. Once canceled, you keep access until your paid period ends. No additional charges or penalties. Note that we do not issue refunds once access has been activated.'},
 ];
@@ -1501,7 +1571,7 @@ window.addEventListener('scroll', ()=>{ if(document.getElementById('mobileMenu')
     <h2 class="fp-title" data-es="Programa de Usuarios Fundadores" data-en="Founding Users Program">Programa de Usuarios Fundadores</h2>
     <p class="fp-text" data-es="Antes de abrir al público, estamos invitando a 10 personas a usar Licenfy gratis por 30 días." data-en="Before opening to the public, we're inviting 10 people to use Licenfy free for 30 days.">Antes de abrir al público, estamos invitando a 10 personas a usar Licenfy gratis por 30 días.</p>
     <ul class="fp-benefits">
-      <li data-es="✅ 30 días de acceso completo — gratis" data-en="✅ 30 days of full access — free">✅ 30 días de acceso completo — gratis</li>
+      <li data-es="✅ 30 días de acceso completo, gratis" data-en="✅ 30 days of full access, free">✅ 30 días de acceso completo, gratis</li>
       <li data-es="✅ Acceso antes que nadie" data-en="✅ Early access before anyone">✅ Acceso antes que nadie</li>
       <li data-es="🎁 30% de descuento al finalizar el mes" data-en="🎁 30% discount at the end of the month">🎁 30% de descuento al finalizar el mes</li>
     </ul>
