@@ -245,20 +245,25 @@ async function activate(signupId, userId, name, email){
   }
 }
 
-function offerWelcomeEmail(email, name, expiresDate){
-  const first = (name||'').split(' ')[0] || 'hola';
-  const subject = 'Bienvenido a Licenfy - Tu acceso esta listo';
-  const body = 'Hola ' + first + ',\n\n' +
-    'Tu acceso como Usuario Fundador de Licenfy ya esta activo. Tienes 30 dias completos para prepararte para el examen CDI de California.\n\n' +
-    'Tu acceso incluye:\n' +
-    '- +300 preguntas reales del examen CDI\n' +
-    '- Simulacros cronometrados ilimitados\n' +
-    '- Tutor IA disponible 24/7\n' +
-    '- Acceso hasta: ' + expiresDate + '\n\n' +
-    'Entra aqui para empezar: https://licenfy.com/licenfy-app.html\n\n' +
-    'Al terminar el mes te enviaremos un breve formulario de feedback. Al completarlo recibiras un 30% de descuento en cualquier plan.\n\n' +
-    'Un saludo,\nEquipo Licenfy\nhola@licenfy.com';
-  window.open('mailto:' + email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body), '_blank');
+async function offerWelcomeEmail(email, name, expiresDate){
+  const first = (name||'').split(' ')[0] || '';
+  try {
+    const res = await fetch(SUPA + '/functions/v1/send-welcome-email', {
+      method: 'POST',
+      headers: H(),
+      body: JSON.stringify({ email: email, nombre: first, fechaExpira: expiresDate })
+    });
+    if(res.ok){
+      showToast('Correo de bienvenida enviado a ' + email, 'ok');
+    } else {
+      const t = await res.text();
+      console.error('Error al enviar correo:', t);
+      showToast('Activado, pero el correo no se envió (revisa consola)', 'bad');
+    }
+  } catch(e){
+    console.error('Error al enviar correo:', e);
+    showToast('Activado, pero el correo no se envió', 'bad');
+  }
 }
 
 function sessionExpired(){
