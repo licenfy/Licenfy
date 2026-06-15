@@ -248,7 +248,7 @@ async function activate(signupId, userId, name, email){
 async function offerWelcomeEmail(email, name, expiresDate){
   const first = (name||'').split(' ')[0] || '';
   try {
-    const res = await fetch(SUPA + '/functions/v1/send-welcome-email', {
+    const res = await fetch(SUPA + '/functions/v1/bright-api', {
       method: 'POST',
       headers: H(),
       body: JSON.stringify({ email: email, nombre: first, fechaExpira: expiresDate })
