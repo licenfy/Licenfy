@@ -423,6 +423,9 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #F59E
 .lic-spinner{display:inline-flex;align-items:center;justify-content:center;animation:licSpin 1s linear infinite;width:28px;height:28px;flex-shrink:0}
 .lic-spinner svg{width:28px;height:28px}
 .lic-loading{display:flex;align-items:center;gap:10px;color:#374151;font-size:.82rem;padding:10px 14px}
+
+/* FIX: evita el zoom automático de iOS al tocar un campo de texto en móvil (lo dispara cualquier font-size menor a 16px) */
+@media(max-width:768px){input,textarea,select{font-size:16px!important}}
 </style>
 </head>
 <body>
