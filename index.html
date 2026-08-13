@@ -1428,6 +1428,7 @@ let currentLang = 'es';
 
 function toggleLang(){
   currentLang = currentLang === 'es' ? 'en' : 'es';
+  try{ localStorage.setItem('licenfy_lang', JSON.stringify(currentLang)); }catch(e){}
   applyLang(currentLang);
   updateMobileLang();
 }
@@ -1618,7 +1619,47 @@ function founderSignup(){
   sessionStorage.setItem('founderPopupSeen','1');
   window.location.href = '/licenfy-app.html?registro=1';
 }
-window.addEventListener('load', function(){ setTimeout(showFounderPopup, 1500); });
+// ── SELECTOR DE IDIOMA (primer ingreso; compartido con la app) ──
+function pickLangHome(lang){
+  currentLang = (lang==='en') ? 'en' : 'es';
+  try{ localStorage.setItem('licenfy_lang', JSON.stringify(currentLang)); }catch(e){}
+  if(typeof applyLang === 'function') applyLang(currentLang);
+  if(typeof updateMobileLang === 'function') updateMobileLang();
+  var ov=document.getElementById('langPicker'); if(ov) ov.remove();
+  setTimeout(showFounderPopup, 800);
+}
+function showLangPicker(){
+  if(document.getElementById('langPicker')) return;
+  var nav=(navigator.language||'es').toLowerCase();
+  var suggest = nav.indexOf('en')===0 ? 'en' : 'es';
+  var other = suggest==='es' ? 'en' : 'es';
+  var primaryTxt = suggest==='es' ? 'Continuar en Español' : 'Continue in English';
+  var otherTxt   = suggest==='es' ? 'Switch to English'    : 'Cambiar a Español';
+  var ov=document.createElement('div');
+  ov.id='langPicker';
+  ov.style.cssText='position:fixed;inset:0;z-index:100000;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(4px)';
+  ov.innerHTML='<div style="background:#fff;border-radius:20px;padding:28px 24px;max-width:360px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);font-family:inherit">'
+    +'<div style="font-size:1.15rem;font-weight:800;color:#1a3a6d;margin-bottom:2px">Elige tu idioma</div>'
+    +'<div style="font-size:1.02rem;font-weight:800;color:#1a7fe8;margin-bottom:12px">Choose your language</div>'
+    +'<div style="font-size:.8rem;color:#64748b;margin:0 0 20px;line-height:1.5">Preparaci\u00f3n biling\u00fce: aprende el concepto claro y domina los t\u00e9rminos en ingl\u00e9s que usar\u00e1s en el trabajo.<br><span style="opacity:.85">Bilingual prep: learn the concept clearly and master the English terms you\'ll use on the job.</span></div>'
+    +'<button onclick="pickLangHome(\''+suggest+'\')" style="background:linear-gradient(135deg,#1a3a6d,#1a7fe8);color:#fff;border:none;width:100%;padding:14px;border-radius:14px;font-weight:800;font-size:1rem;cursor:pointer;margin-bottom:10px;font-family:inherit">'+primaryTxt+'</button>'
+    +'<button onclick="pickLangHome(\''+other+'\')" style="background:#fff;color:#1a3a6d;border:2px solid #e2e8f0;width:100%;padding:13px;border-radius:14px;font-weight:700;font-size:.95rem;cursor:pointer;font-family:inherit">'+otherTxt+'</button>'
+    +'</div>';
+  document.body.appendChild(ov);
+}
+function initLangGate(){
+  var saved=null;
+  try{ saved=JSON.parse(localStorage.getItem('licenfy_lang')); }catch(e){}
+  if(saved==='es'||saved==='en'){
+    currentLang=saved;
+    if(typeof applyLang==='function') applyLang(saved);
+    if(typeof updateMobileLang==='function') updateMobileLang();
+    setTimeout(showFounderPopup, 1500);
+  } else {
+    showLangPicker();
+  }
+}
+window.addEventListener('load', function(){ initLangGate(); });
 </script>
 
 </body>
