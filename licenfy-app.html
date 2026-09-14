@@ -682,6 +682,43 @@ let _user = null;
 let _profile = null;
 let _activeSub = null;
 
+function showSetNewPassword(token){
+  const es = (typeof L!=='undefined' && L==='es');
+  if(document.getElementById('setPassModal')) return;
+  const ov=document.createElement('div');
+  ov.id='setPassModal';
+  ov.style.cssText='position:fixed;inset:0;z-index:100000;background:rgba(15,23,42,.75);display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(4px)';
+  ov.innerHTML='<div style="background:#fff;border-radius:20px;padding:28px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3);font-family:inherit">'
+    +'<div style="font-size:1.15rem;font-weight:800;color:#1a3a6d;margin-bottom:6px;text-align:center">'+(es?'Crea tu nueva contraseña':'Set your new password')+'</div>'
+    +'<div style="font-size:.82rem;color:#64748b;margin-bottom:18px;text-align:center;line-height:1.5">'+(es?'Escribe una contraseña nueva para tu cuenta.':'Enter a new password for your account.')+'</div>'
+    +'<input id="npass1" type="password" placeholder="'+(es?'Nueva contraseña (mín. 6)':'New password (min. 6)')+'" style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:12px;font-size:.95rem;margin-bottom:10px;box-sizing:border-box;font-family:inherit" />'
+    +'<input id="npass2" type="password" placeholder="'+(es?'Repite la contraseña':'Repeat password')+'" style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:12px;font-size:.95rem;margin-bottom:6px;box-sizing:border-box;font-family:inherit" />'
+    +'<div id="npassErr" style="font-size:.78rem;min-height:16px;margin-bottom:8px;color:#dc2626"></div>'
+    +'<button id="npassBtn" style="background:linear-gradient(135deg,#008bff,#1a3a6d);color:#fff;border:none;width:100%;padding:14px;border-radius:14px;font-weight:800;font-size:1rem;cursor:pointer;font-family:inherit">'+(es?'Guardar contraseña':'Save password')+'</button>'
+    +'</div>';
+  document.body.appendChild(ov);
+  document.getElementById('npassBtn').onclick=async function(){
+    const p1=document.getElementById('npass1').value, p2=document.getElementById('npass2').value;
+    const err=document.getElementById('npassErr');
+    if(p1.length<6){ err.style.color='#dc2626'; err.textContent=es?'Mínimo 6 caracteres.':'Minimum 6 characters.'; return; }
+    if(p1!==p2){ err.style.color='#dc2626'; err.textContent=es?'Las contraseñas no coinciden.':'Passwords do not match.'; return; }
+    const btn=document.getElementById('npassBtn'); btn.disabled=true; btn.textContent=es?'Guardando...':'Saving...';
+    try{
+      const ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFtcWlhbmhlYWhrcWV0cmV2dmVoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0OTY0MzYsImV4cCI6MjA5MjA3MjQzNn0.SCYFX41o1p_rueWIjbmQ4QDdYaY2PVAF_idqiBqB14k';
+      const r=await fetch('https://qmqianheahkqetrevveh.supabase.co/auth/v1/user',{
+        method:'PUT',
+        headers:{'Content-Type':'application/json','apikey':ANON,'Authorization':'Bearer '+token},
+        body:JSON.stringify({password:p1})
+      });
+      if(!r.ok){ const e=await r.json().catch(()=>({})); throw new Error(e.msg||e.error_description||'Error'); }
+      err.style.color='#16a34a'; err.textContent=es?'¡Listo! Contraseña actualizada.':'Done! Password updated.';
+      setTimeout(()=>{ const m=document.getElementById('setPassModal'); if(m)m.remove(); if(typeof render==='function') render(); },1200);
+    }catch(ex){
+      err.style.color='#dc2626'; err.textContent=(es?'No se pudo guardar: ':'Could not save: ')+(ex.message||'');
+      btn.disabled=false; btn.textContent=es?'Guardar contraseña':'Save password';
+    }
+  };
+}
 async function supaInit(){
   // Capturar tokens de la URL si vienen de confirmacion de email
   const hash = window.location.hash;
@@ -689,6 +726,7 @@ async function supaInit(){
     const params = new URLSearchParams(hash.substring(1));
     const accessToken = params.get('access_token');
     const refreshToken = params.get('refresh_token');
+    const recoveryType = params.get('type');
     const expiresIn = parseInt(params.get('expires_in') || '3600');
     if(accessToken){
       // Obtener datos del usuario con el token
@@ -711,6 +749,7 @@ async function supaInit(){
           _user = userData;
           // Limpiar hash de la URL
           history.replaceState(null, '', window.location.pathname);
+          if(recoveryType === 'recovery'){ showSetNewPassword(accessToken); }
         }
       } catch(e){ console.warn('token capture error:', e); }
     }
