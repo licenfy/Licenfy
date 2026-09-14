@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<script>
+/* Recuperación de contraseña: si el enlace de Supabase cae aquí (index) con un token de recuperación,
+   reenviarlo de inmediato a la app, que sí tiene la pantalla de nueva contraseña. */
+(function(){
+  try{
+    var h = window.location.hash || '';
+    if(h.indexOf('access_token') !== -1 && h.indexOf('recovery') !== -1){
+      window.location.replace('/licenfy-app.html' + h);
+    }
+  }catch(e){}
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
