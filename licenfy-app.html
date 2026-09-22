@@ -800,9 +800,9 @@ async function supaInit(){
     // Si viene de confirmación de email con plan seleccionado → redirigir a Stripe
     if(pendingPlan && !comingFromPayment){
       const stripeLinks = {
-        mensual:    'https://buy.stripe.com/test_8x2bIU3n09pIeIQ7qkf7i0c',
-        trimestral: 'https://buy.stripe.com/test_bJe5kw7Dg45obwE7qkf7i0a',
-        semestral:  'https://buy.stripe.com/test_9B6aEQf5I31kcAI5icf7i09',
+        mensual:    'https://buy.stripe.com/5kQeVf79p4YAgxTdQm6oo00',
+        trimestral: 'https://buy.stripe.com/cNi6oJ1P5bmYchD5jQ6oo02',
+        semestral:  'https://buy.stripe.com/5kQaEZ2T9fDe6XjdQm6oo01',
       };
       const stripeUrl = stripeLinks[pendingPlan];
       if(stripeUrl){
@@ -946,7 +946,7 @@ function showPaywall(){
           ${isExpired ? (es?'Renueva tu plan para continuar estudiando.':'Renew your plan to continue studying.') : (es?'Accede a todo el contenido para prepararte para el examen CDI de California.':'Access all content to prepare for the California CDI exam.')}
         </p>
 
-        <a href="https://buy.stripe.com/test_8x2bIU3n09pIeIQ7qkf7i0c" style="display:block;background:#ffffff;border:1.5px solid #e2e8f0;border-radius:16px;padding:18px 20px;margin-bottom:10px;text-decoration:none;text-align:left;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.06)" onmouseover="this.style.borderColor='#008bff';this.style.boxShadow='0 4px 16px rgba(0,139,255,.15)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='0 2px 8px rgba(0,0,0,.06)'">
+        <a href="https://buy.stripe.com/5kQeVf79p4YAgxTdQm6oo00" style="display:block;background:#ffffff;border:1.5px solid #e2e8f0;border-radius:16px;padding:18px 20px;margin-bottom:10px;text-decoration:none;text-align:left;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.06)" onmouseover="this.style.borderColor='#008bff';this.style.boxShadow='0 4px 16px rgba(0,139,255,.15)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='0 2px 8px rgba(0,0,0,.06)'">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
             <span style="color:#0f172a;font-weight:700;font-size:.95rem">📅 ${es?'Plan Mensual':'Monthly Plan'}</span>
             <span style="color:#008bff;font-weight:800;font-size:1.1rem;font-family:'Outfit',sans-serif">$39.99<span style="font-size:.72rem;color:#94a3b8;font-weight:500">/mes</span></span>
@@ -954,7 +954,7 @@ function showPaywall(){
           <div style="color:#64748b;font-size:.78rem">${es?'Acceso completo · Tutor IA · 1 simulacro/semana':'Full access · AI tutor · 1 exam/week'}</div>
         </a>
 
-        <a href="https://buy.stripe.com/test_bJe5kw7Dg45obwE7qkf7i0a" style="display:block;background:#ffffff;border:2px solid #008bff;border-radius:16px;padding:18px 20px;margin-bottom:10px;text-decoration:none;text-align:left;position:relative;box-shadow:0 4px 16px rgba(0,139,255,.15)">
+        <a href="https://buy.stripe.com/cNi6oJ1P5bmYchD5jQ6oo02" style="display:block;background:#ffffff;border:2px solid #008bff;border-radius:16px;padding:18px 20px;margin-bottom:10px;text-decoration:none;text-align:left;position:relative;box-shadow:0 4px 16px rgba(0,139,255,.15)">
           <div style="position:absolute;top:-1px;right:16px;background:linear-gradient(135deg,#008bff,#1a3a6d);color:#fff;font-size:.62rem;font-weight:700;padding:3px 10px;border-radius:0 0 8px 8px">⭐ ${es?'MÁS POPULAR':'MOST POPULAR'}</div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
             <span style="color:#0f172a;font-weight:700;font-size:.95rem">🗓️ ${es?'Plan Trimestral':'Quarterly Plan'}</span>
@@ -963,7 +963,7 @@ function showPaywall(){
           <div style="color:#64748b;font-size:.78rem">${es?'Todo lo anterior · Simulacros ilimitados · Módulo Servicio al Cliente':'Everything above · Unlimited exams · Customer Service module'}</div>
         </a>
 
-        <a href="https://buy.stripe.com/test_9B6aEQf5I31kcAI5icf7i09" style="display:block;background:#ffffff;border:1.5px solid #e2e8f0;border-radius:16px;padding:18px 20px;margin-bottom:24px;text-decoration:none;text-align:left;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.06)" onmouseover="this.style.borderColor='#1a3a6d';this.style.boxShadow='0 4px 16px rgba(26,58,109,.15)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='0 2px 8px rgba(0,0,0,.06)'">
+        <a href="https://buy.stripe.com/5kQaEZ2T9fDe6XjdQm6oo01" style="display:block;background:#ffffff;border:1.5px solid #e2e8f0;border-radius:16px;padding:18px 20px;margin-bottom:24px;text-decoration:none;text-align:left;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.06)" onmouseover="this.style.borderColor='#1a3a6d';this.style.boxShadow='0 4px 16px rgba(26,58,109,.15)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='0 2px 8px rgba(0,0,0,.06)'">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
             <span style="color:#0f172a;font-weight:700;font-size:.95rem">🏆 ${es?'Plan Semestral':'Semestral Plan'}</span>
             <span style="color:#008bff;font-weight:800;font-size:1.1rem;font-family:'Outfit',sans-serif">$89.99<span style="font-size:.72rem;color:#94a3b8;font-weight:500">/6 ${es?'meses':'months'}</span></span>
@@ -1450,11 +1450,11 @@ function hasEmailUsedTrial(email){
 }
 
 const wStripeLinks = {
-  monthly:  'https://buy.stripe.com/test_8x2bIU3n09pIeIQ7qkf7i0c',
-  quarterly:'https://buy.stripe.com/test_bJe5kw7Dg45obwE7qkf7i0a',
-  annual:   'https://buy.stripe.com/test_9B6aEQf5I31kcAI5icf7i09',
+  monthly:  'https://buy.stripe.com/5kQeVf79p4YAgxTdQm6oo00',
+  quarterly:'https://buy.stripe.com/cNi6oJ1P5bmYchD5jQ6oo02',
+  annual:   'https://buy.stripe.com/5kQaEZ2T9fDe6XjdQm6oo01',
 };
-function wGoStripe(plan){ window.open({monthly:"https://buy.stripe.com/test_8x2bIU3n09pIeIQ7qkf7i0c",quarterly:"https://buy.stripe.com/test_bJe5kw7Dg45obwE7qkf7i0a",annual:"https://buy.stripe.com/test_9B6aEQf5I31kcAI5icf7i09"}[plan],"_blank"); }
+function wGoStripe(plan){ window.open({monthly:"https://buy.stripe.com/5kQeVf79p4YAgxTdQm6oo00",quarterly:"https://buy.stripe.com/cNi6oJ1P5bmYchD5jQ6oo02",annual:"https://buy.stripe.com/5kQaEZ2T9fDe6XjdQm6oo01"}[plan],"_blank"); }
 function wHide(){ var ws=document.getElementById('welcomeScreen'); if(ws) ws.style.display='none'; }
 function wStartFree(){ showAuthScreen("signup"); }
 function wActivate(){
@@ -3434,9 +3434,9 @@ function dashUpgrade(){
   closeDashboard();
   // Show plan selection
   const plans = [
-    {name:'Plan Mensual — $39.99/mes', url:'https://buy.stripe.com/test_8x2bIU3n09pIeIQ7qkf7i0c'},
-    {name:'Plan Trimestral — $69.99/3 meses', url:'https://buy.stripe.com/test_bJe5kw7Dg45obwE7qkf7i0a'},
-    {name:'Plan Semestral — $89.99/6 meses', url:'https://buy.stripe.com/test_9B6aEQf5I31kcAI5icf7i09'},
+    {name:'Plan Mensual — $39.99/mes', url:'https://buy.stripe.com/5kQeVf79p4YAgxTdQm6oo00'},
+    {name:'Plan Trimestral — $69.99/3 meses', url:'https://buy.stripe.com/cNi6oJ1P5bmYchD5jQ6oo02'},
+    {name:'Plan Semestral — $89.99/6 meses', url:'https://buy.stripe.com/5kQaEZ2T9fDe6XjdQm6oo01'},
   ];
   const choice = prompt(L==='es'?'Elige tu plan:\n1. Plan Mensual — $39.99\n2. Plan Trimestral — $69.99\n3. Plan Semestral — $89.99\n\nEscribe 1, 2 o 3:':'Choose your plan:\n1. Monthly — $39.99\n2. Quarterly — $69.99\n3. Annual — $99.99\n\nType 1, 2 or 3:');
   const idx = parseInt(choice) - 1;
@@ -3684,7 +3684,7 @@ const PLANS = [
     id: 'monthly',
     days: 30,
     examLimit: 999,
-    stripeUrl: 'https://buy.stripe.com/test_8x2bIU3n09pIeIQ7qkf7i0c',
+    stripeUrl: 'https://buy.stripe.com/5kQeVf79p4YAgxTdQm6oo00',
     es: { name: 'Plan Mensual', desc: '30 días de acceso completo', price: '$39.99', period: '/mes' },
     en: { name: 'Monthly Plan', desc: '30 days full access', price: '$39.99', period: '/month' }
   },
@@ -3692,7 +3692,7 @@ const PLANS = [
     id: 'quarterly',
     days: 90,
     examLimit: 999,
-    stripeUrl: 'https://buy.stripe.com/test_bJe5kw7Dg45obwE7qkf7i0a',
+    stripeUrl: 'https://buy.stripe.com/cNi6oJ1P5bmYchD5jQ6oo02',
     badge: true,
     es: { name: 'Plan Trimestral', desc: '90 días · Solo $23/mes', price: '$69.99', period: '/3 meses' },
     en: { name: 'Quarterly Plan', desc: '90 days · Only $23/month', price: '$69.99', period: '/3 months' }
@@ -3701,7 +3701,7 @@ const PLANS = [
     id: 'semestral',
     days: 180,
     examLimit: 999,
-    stripeUrl: 'https://buy.stripe.com/test_9B6aEQf5I31kcAI5icf7i09',
+    stripeUrl: 'https://buy.stripe.com/5kQaEZ2T9fDe6XjdQm6oo01',
     es: { name: 'Plan Semestral', desc: '180 días · Solo $15/mes', price: '$89.99', period: '/6 meses' },
     en: { name: 'Semestral Plan', desc: '180 days · Only $15/month', price: '$89.99', period: '/6 months' }
   }

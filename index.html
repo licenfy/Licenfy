@@ -1239,9 +1239,9 @@ function selectPlan(plan){
 function redirectToPlan(){
   const plan = sessionStorage.getItem('selectedPlan') || 'mensual';
   const links = {
-    mensual: 'https://buy.stripe.com/test_8x2bIU3n09pIeIQ7qkf7i0c',
-    trimestral: 'https://buy.stripe.com/test_bJe5kw7Dg45obwE7qkf7i0a',
-    semestral: 'https://buy.stripe.com/test_9B6aEQf5I31kcAI5icf7i09'
+    mensual: 'https://buy.stripe.com/5kQeVf79p4YAgxTdQm6oo00',
+    trimestral: 'https://buy.stripe.com/cNi6oJ1P5bmYchD5jQ6oo02',
+    semestral: 'https://buy.stripe.com/5kQaEZ2T9fDe6XjdQm6oo01'
   };
   window.location.href = links[plan] || links.mensual;
 }
