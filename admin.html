@@ -318,9 +318,10 @@ function renderAgencies(ags){
     return '<div class="card" style="display:block">'
       + '<div class="u-name">' + a.name + '</div>'
       + '<div class="u-email">' + (a.manager_email || 'sin manager') + ' · límite ' + a.agent_limit + ' agentes · ' + a.status + '</div>'
-      + '<div style="margin-top:12px;display:flex;gap:8px">'
-      +   '<input class="inp" id="agent_' + a.id + '" placeholder="Correo del agente a agregar" style="margin-bottom:0;flex:1">'
-      +   '<button class="btn-act" onclick="addAgent(\'' + a.id + '\')">Agregar</button>'
+      + '<div style="margin-top:12px">'
+      +   '<textarea class="inp" id="agent_' + a.id + '" placeholder="Pega los correos de los agentes (uno por línea o separados por coma)" style="margin-bottom:8px;min-height:68px;resize:vertical"></textarea>'
+      +   '<button class="btn-act" onclick="addAgents(\'' + a.id + '\')" style="width:100%">Agregar agentes</button>'
+      +   '<div id="bulkResult_' + a.id + '" style="font-size:.76rem;margin-top:6px"></div>'
       + '</div>'
       + '<div id="agentsOf_' + a.id + '" style="margin-top:10px"></div>'
       + '</div>';
@@ -345,24 +346,40 @@ async function loadAgents(agencyId){
   }catch(e){ console.error(e); }
 }
 
-async function addAgent(agencyId){
-  const email = (document.getElementById('agent_' + agencyId).value || '').trim().toLowerCase();
-  if(!email){ showToast('Pon el correo del agente', 'bad'); return; }
+async function addAgents(agencyId){
+  const raw = (document.getElementById('agent_' + agencyId).value || '');
+  // separar por coma, salto de línea, punto y coma o espacio
+  let emails = raw.split(/[\s,;]+/).map(function(e){ return e.trim().toLowerCase(); }).filter(function(e){ return e.indexOf('@') > 0; });
+  emails = emails.filter(function(e, i){ return emails.indexOf(e) === i; }); // quitar repetidos
+  const resEl = document.getElementById('bulkResult_' + agencyId);
+  if(!emails.length){ showToast('Pega al menos un correo válido', 'bad'); return; }
   try{
-    const find = await fetch(SUPA + '/rest/v1/profiles?select=id,email&email=eq.' + encodeURIComponent(email), { headers: H() });
+    // buscar todos de un golpe
+    const inList = emails.map(function(e){ return '"' + e + '"'; }).join(',');
+    const find = await fetch(SUPA + '/rest/v1/profiles?select=id,email&email=in.(' + encodeURIComponent(inList) + ')', { headers: H() });
     const users = find.ok ? await find.json() : [];
-    if(!users.length){ showToast('No existe un usuario con ese correo. El agente debe registrarse primero en Licenfy.', 'bad'); return; }
-    const uid = users[0].id;
-    const upd = await fetch(SUPA + '/rest/v1/profiles?id=eq.' + uid, {
-      method: 'PATCH',
-      headers: Object.assign({}, H(), { 'Prefer': 'return=minimal' }),
-      body: JSON.stringify({ agency_id: agencyId })
-    });
-    if(!upd.ok){ throw new Error(await upd.text()); }
+    const foundEmails = users.map(function(u){ return (u.email || '').toLowerCase(); });
+    const notFound = emails.filter(function(e){ return foundEmails.indexOf(e) < 0; });
+
+    if(users.length){
+      const ids = users.map(function(u){ return u.id; }).join(',');
+      const upd = await fetch(SUPA + '/rest/v1/profiles?id=in.(' + ids + ')', {
+        method: 'PATCH',
+        headers: Object.assign({}, H(), { 'Prefer': 'return=minimal' }),
+        body: JSON.stringify({ agency_id: agencyId })
+      });
+      if(!upd.ok){ throw new Error(await upd.text()); }
+    }
+
     document.getElementById('agent_' + agencyId).value = '';
-    showToast('Agente agregado', 'ok');
+    let html = '<span style="color:#16a34a">✓ ' + users.length + ' agregado(s).</span>';
+    if(notFound.length){
+      html += '<div style="color:#dc2626;margin-top:4px">✗ ' + notFound.length + ' no encontrado(s) (deben registrarse primero en Licenfy):<br>' + notFound.join(', ') + '</div>';
+    }
+    if(resEl) resEl.innerHTML = html;
+    showToast(users.length + ' agregado(s)' + (notFound.length ? ', ' + notFound.length + ' sin cuenta' : ''), notFound.length ? 'bad' : 'ok');
     loadAgents(agencyId);
-  }catch(e){ console.error(e); showToast('Error al agregar el agente', 'bad'); }
+  }catch(e){ console.error(e); showToast('Error al agregar agentes', 'bad'); if(resEl) resEl.innerHTML = '<span style="color:#dc2626">Error al procesar.</span>'; }
 }
 
 async function removeAgent(userId, agencyId){
