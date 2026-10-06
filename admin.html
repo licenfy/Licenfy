@@ -318,6 +318,10 @@ function renderAgencies(ags){
     return '<div class="card" style="display:block">'
       + '<div class="u-name">' + a.name + '</div>'
       + '<div class="u-email">' + (a.manager_email || 'sin manager') + ' · límite ' + a.agent_limit + ' agentes · ' + a.status + '</div>'
+      + '<div style="margin-top:10px;display:flex;gap:8px">'
+      +   '<input class="inp" id="mgr_' + a.id + '" placeholder="Correo del manager" value="' + (a.manager_email || '') + '" style="margin-bottom:0;flex:1">'
+      +   '<button class="btn-act" onclick="setManager(\'' + a.id + '\')">Asignar manager</button>'
+      + '</div>'
       + '<div style="margin-top:12px">'
       +   '<textarea class="inp" id="agent_' + a.id + '" placeholder="Pega los correos de los agentes (uno por línea o separados por coma)" style="margin-bottom:8px;min-height:68px;resize:vertical"></textarea>'
       +   '<button class="btn-act" onclick="addAgents(\'' + a.id + '\')" style="width:100%">Agregar agentes</button>'
@@ -344,6 +348,25 @@ async function loadAgents(agencyId){
           + '</div>';
       }).join('');
   }catch(e){ console.error(e); }
+}
+
+async function setManager(agencyId){
+  const email = (document.getElementById('mgr_' + agencyId).value || '').trim().toLowerCase();
+  if(!email){ showToast('Pon el correo del manager', 'bad'); return; }
+  try{
+    const find = await fetch(SUPA + '/rest/v1/profiles?select=id,email&email=eq.' + encodeURIComponent(email), { headers: H() });
+    const users = find.ok ? await find.json() : [];
+    if(!users.length){ showToast('No existe un usuario con ese correo. El manager debe registrarse primero en Licenfy.', 'bad'); return; }
+    const uid = users[0].id;
+    const upd = await fetch(SUPA + '/rest/v1/agencies?id=eq.' + agencyId, {
+      method: 'PATCH',
+      headers: Object.assign({}, H(), { 'Prefer': 'return=minimal' }),
+      body: JSON.stringify({ manager_user_id: uid, manager_email: email })
+    });
+    if(!upd.ok){ throw new Error(await upd.text()); }
+    showToast('Manager asignado', 'ok');
+    loadAgencies();
+  }catch(e){ console.error(e); showToast('Error al asignar manager', 'bad'); }
 }
 
 async function addAgents(agencyId){
