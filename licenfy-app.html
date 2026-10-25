@@ -1273,19 +1273,29 @@ async function loadManagerTeam(){
       return;
     }
     const inList = '(' + agents.map(a=>a.id).join(',') + ')';
-    const [spRes, ehRes, upRes] = await Promise.all([
-      fetch(`${B}/study_progress?user_id=in.${inList}&select=user_id,correct,total`, { headers }),
+    // El progreso por tema de cada agente vive en user_progress.stats (JSON),
+    // que es donde la app realmente lo guarda (no en la tabla study_progress).
+    const [ehRes, upRes] = await Promise.all([
       fetch(`${B}/exam_history?user_id=in.${inList}&select=user_id,score,passed,taken_at`, { headers }),
-      fetch(`${B}/user_progress?user_id=in.${inList}&select=user_id,studied_days`, { headers })
+      fetch(`${B}/user_progress?user_id=in.${inList}&select=user_id,stats,studied_days`, { headers })
     ]);
-    const sp = spRes.ok ? await spRes.json() : [];
     const eh = ehRes.ok ? await ehRes.json() : [];
     const up = upRes.ok ? await upRes.json() : [];
     const byId = {};
     agents.forEach(a=>{ byId[a.id] = { name:a.full_name||(a.email?a.email.split('@')[0]:'—'), email:a.email||'', correct:0, total:0, exams:0, best:0, passed:false, days:0 }; });
-    sp.forEach(r=>{ const o=byId[r.user_id]; if(o){ o.correct+=r.correct||0; o.total+=r.total||0; } });
     eh.forEach(r=>{ const o=byId[r.user_id]; if(o){ o.exams++; if((r.score||0)>o.best)o.best=r.score||0; if(r.passed)o.passed=true; } });
-    up.forEach(r=>{ const o=byId[r.user_id]; if(o){ const d=r.studied_days; o.days = Array.isArray(d)?d.length:(d&&typeof d==='object'?Object.keys(d).length:0); } });
+    up.forEach(r=>{
+      const o=byId[r.user_id]; if(!o) return;
+      // Sumar preguntas practicadas (t) y aciertos (c) de todos los temas en stats
+      try {
+        const st = r.stats;
+        if(st && typeof st==='object'){
+          Object.keys(st).forEach(tid=>{ const s=st[tid]||{}; o.correct += (s.c||0); o.total += (s.t||0); });
+        }
+      } catch(e){}
+      const d=r.studied_days;
+      o.days = Array.isArray(d)?d.length:(d&&typeof d==='object'?Object.keys(d).length:0);
+    });
     const list = Object.values(byId);
     const activos = list.filter(o=>o.total>0 || o.exams>0).length;
     const aprobados = list.filter(o=>o.passed).length;
