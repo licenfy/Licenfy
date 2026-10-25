@@ -1299,29 +1299,41 @@ async function loadManagerTeam(){
     const list = Object.values(byId);
     const activos = list.filter(o=>o.total>0 || o.exams>0).length;
     const aprobados = list.filter(o=>o.passed).length;
+    const totC = list.reduce((a,o)=>a+o.correct,0);
+    const totT = list.reduce((a,o)=>a+o.total,0);
+    const avgAcc = totT>0 ? Math.round(100*totC/totT) : null;
     if(sub) sub.textContent = L==='es'
-      ? `${agents.length} agentes · ${activos} activos · ${aprobados} aprobaron un simulacro`
-      : `${agents.length} agents · ${activos} active · ${aprobados} passed a mock`;
-    const rows = list.map(o=>{
+      ? `${agents.length} ${agents.length===1?'agente':'agentes'} · ${activos} ${activos===1?'activo':'activos'}`
+      : `${agents.length} ${agents.length===1?'agent':'agents'} · ${activos} active`;
+    const AVPAL=['#1a3a6d','#0284c7','#059669','#7c3aed','#d97706','#db2777','#0891b2','#4f46e5'];
+    const initials=(n)=>{const p=(n||'').trim().split(/\s+/);return ((p[0]||'?')[0]+((p[1]||'')[0]||'')).toUpperCase();};
+    const accColor=(a)=> a>=70?'#059669':(a>=50?'#d97706':'#dc2626');
+    const kpis = `<div class="mgr-kpis">
+      <div class="mgr-kpi"><div class="mgr-kpi-val">${agents.length}</div><div class="mgr-kpi-lbl">👥 ${L==='es'?'Agentes':'Agents'}</div></div>
+      <div class="mgr-kpi"><div class="mgr-kpi-val">${activos}</div><div class="mgr-kpi-lbl">🔥 ${L==='es'?'Activos':'Active'}</div></div>
+      <div class="mgr-kpi"><div class="mgr-kpi-val">${avgAcc!==null?avgAcc+'%':'—'}</div><div class="mgr-kpi-lbl">🎯 ${L==='es'?'Acierto prom.':'Avg accuracy'}</div></div>
+      <div class="mgr-kpi"><div class="mgr-kpi-val">${aprobados}</div><div class="mgr-kpi-lbl">✅ ${L==='es'?'Aprobados':'Passed'}</div></div>
+    </div>`;
+    const rows = list.map((o,ix)=>{
       const acc = o.total>0 ? Math.round(100*o.correct/o.total) : null;
       const estado = o.exams>0
         ? (o.passed?`<span class="mgr-badge ok">${L==='es'?'Aprobó':'Passed'}</span>`:`<span class="mgr-badge warn">${L==='es'?'En progreso':'In progress'}</span>`)
         : (o.total>0?`<span class="mgr-badge warn">${L==='es'?'Estudiando':'Studying'}</span>`:`<span class="mgr-badge off">${L==='es'?'Sin iniciar':'Not started'}</span>`);
       return `<tr>
-        <td><div class="mgr-name">${o.name}</div><div class="mgr-email">${o.email}</div></td>
+        <td><div class="mgr-agentcell"><div class="mgr-avatar" style="background:${AVPAL[ix%AVPAL.length]}">${initials(o.name)}</div><div class="mgr-agentinfo"><div class="mgr-name">${o.name}</div><div class="mgr-email">${o.email}</div></div></div></td>
         <td class="c">${o.total>0?o.total:'—'}</td>
-        <td class="c">${acc!==null?acc+'%':'—'}</td>
+        <td>${acc!==null?`<div class="mgr-acc"><div class="mgr-bar"><div class="mgr-bar-fill" style="width:${acc}%;background:${accColor(acc)}"></div></div><span class="mgr-acc-val">${acc}%</span></div>`:'<div style="text-align:center">—</div>'}</td>
         <td class="c">${o.exams>0?o.exams:'—'}</td>
         <td class="c">${o.best>0?o.best+'%':'—'}</td>
         <td class="c">${o.days>0?o.days:'—'}</td>
         <td class="c">${estado}</td>
       </tr>`;
     }).join('');
-    body.innerHTML = `<div class="mgr-tablewrap"><table class="mgr-table">
+    body.innerHTML = kpis + `<div class="mgr-tablewrap"><table class="mgr-table">
       <thead><tr>
         <th>${L==='es'?'Agente':'Agent'}</th>
         <th class="c">${L==='es'?'Preg.':'Qs'}</th>
-        <th class="c">${L==='es'?'Acierto':'Accuracy'}</th>
+        <th>${L==='es'?'Acierto':'Accuracy'}</th>
         <th class="c">${L==='es'?'Simul.':'Mocks'}</th>
         <th class="c">${L==='es'?'Mejor':'Best'}</th>
         <th class="c">${L==='es'?'Días':'Days'}</th>
@@ -1641,7 +1653,18 @@ function wActivate(){
 .mgr-badge.warn{background:#fef3c7;color:#92400e}
 .mgr-badge.off{background:#f1f5f9;color:#94a3b8}
 .mgr-note{font-size:.66rem;color:#94a3b8;margin-top:12px;line-height:1.6}
-@media(max-width:520px){.mgr-title{font-size:.95rem}.mgr-body{padding:12px 10px 16px}}
+.mgr-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.mgr-kpi{background:linear-gradient(135deg,#f8fafc,#eef2f7);border:1px solid #e2e8f0;border-radius:14px;padding:13px 10px;text-align:center}
+.mgr-kpi-val{font-size:1.5rem;font-weight:800;color:#1a3a6d;line-height:1}
+.mgr-kpi-lbl{font-size:.62rem;font-weight:700;color:#64748b;margin-top:6px;text-transform:uppercase;letter-spacing:.02em}
+.mgr-agentcell{display:flex;align-items:center;gap:10px}
+.mgr-avatar{width:36px;height:36px;border-radius:50%;color:#fff;font-size:.76rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mgr-agentinfo{min-width:0}
+.mgr-acc{display:flex;align-items:center;gap:8px;min-width:120px}
+.mgr-bar{flex:1;height:7px;background:#e2e8f0;border-radius:99px;overflow:hidden}
+.mgr-bar-fill{height:100%;border-radius:99px;transition:width .45s ease}
+.mgr-acc-val{font-size:.74rem;font-weight:700;color:#334155;min-width:34px;text-align:right}
+@media(max-width:520px){.mgr-title{font-size:.95rem}.mgr-body{padding:12px 10px 16px}.mgr-kpis{grid-template-columns:repeat(2,1fr)}.mgr-kpi-val{font-size:1.3rem}}
 </style>
 <div class="main" id="app" role="main" id="main-content"></div>
 <div class="bnav" id="bnav">
